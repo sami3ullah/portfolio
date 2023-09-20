@@ -1,0 +1,28 @@
+---
+import SocialIcon from "./SocialIcon.astro"
+---
+
+<section class="bg-hero-image bg-cover bg-no-repeat bg-top">
+  <div class="flex flex-col h-screen px-[70px] backdrop-brightness-[.40]">
+    <header class="w-full h-[10rem]">
+      <!-- logo here -->
+      <div class="text-white flex h-full w-[65px]">
+        <img src="./logo.svg" alt="logo" />
+      </div>
+      <!-- menu here -->
+    </header>
+    <!-- main content -->
+    <main class="flex justify-between text-textLight h-[calc(100vh-10rem)] mb-14">
+      <!-- Main heading -->
+      <h1 class="flex flex-col justify-end uppercase text-[8.75rem] font-bold leading-none">
+        Making <div class="text-primary">Epic Shit</div><div>Since</div><div>
+          2019
+        </div>
+      </h1>
+      <!-- social links -->
+      <div class="self-end">
+        <SocialIcon />
+      </div>
+    </main>
+  </div>
+</section>

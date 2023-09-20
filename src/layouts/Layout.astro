@@ -22,13 +22,13 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="mx-[70px]">
+  <body class=" bg-background">
     <slot />
   </body>
 </html>
 <style is:global>
-  html {
+  *, body, html {
     font-family: Roboto;
-    background: #111;
+    box-sizing: border-box;
   }
 </style>

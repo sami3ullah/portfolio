@@ -4,9 +4,16 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"primary": "#DB6344",
-				"textDull": "#B5AB9A",
-				"textLight": "#AAAAAA"
+				"primary": "#B1FC00",
+				"otherColor": "#DB6344",
+				"textDull": "#FFFFFFCC",
+				"textLight": "#FFFFFF",
+				"darkBackground": "#292929",
+				"darkBackground2": "#303427",
+				"background": "#000000",
+			},
+			backgroundImage: {
+				"hero-image": "url('./hero-image.png')",
 			}
 		}
 	},
