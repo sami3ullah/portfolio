@@ -5,7 +5,9 @@ module.exports = {
 		extend: {
 			colors: {
 				"primary": "#B1FC00",
-				"otherColor": "#DB6344",
+				"secondary": "#AAAAAA",
+				"secondaryOpacity": "#131313",
+				// "otherColor": "#DB6344",
 				"textDull": "#FFFFFFCC",
 				"textLight": "#FFFFFF",
 				"darkBackground": "#292929",
