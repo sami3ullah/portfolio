@@ -2,14 +2,17 @@
 import SocialIcon from "./SocialIcon.astro";
 ---
 
-<main class="flex justify-between text-textLight h-[calc(100vh-10rem)] mb-14">
+<main class="flex justify-between text-textLight h-[calc(100vh-10rem)] mb-pageBottom">
   <!-- Main heading -->
   <h1
-    class="flex flex-col justify-end uppercase text-[8.75rem] font-black leading-none"
+    class="flex flex-col justify-end uppercase text-[8.75rem] font-black leading-[130px]"
   >
-    Making <div class="text-primary">Epic Shit</div><div>Since</div><div>
-      2019
-    </div>
+    <div class="relative leading-[110px]">Making</div>
+    <div class="bg-primary -rotate-2 p-4">
+      <div class="text-secondaryOpacity text-[8rem] leading-[110px] relative">
+        Epic Shit
+      </div>
+    </div><div class="leading-[110px]">Since</div><div>2019</div>
   </h1>
   <!-- social links -->
   <div class="self-end">

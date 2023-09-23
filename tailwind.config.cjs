@@ -5,17 +5,26 @@ module.exports = {
 		extend: {
 			colors: {
 				"primary": "#B1FC00",
-				"secondary": "#AAAAAA",
+				"secondary": "#4F27E9",
+				"tertiary": "#AAAAAA",
 				"secondaryOpacity": "#131313",
 				// "otherColor": "#DB6344",
 				"textDull": "#FFFFFFCC",
 				"textLight": "#FFFFFF",
+				"hr": "#2F2F2FB2",
 				"darkBackground": "#292929",
 				"darkBackground2": "#303427",
 				"background": "#000000",
 			},
 			backgroundImage: {
-				"hero-image": "url('./hero-image.png')",
+				"hero-image": "url('./hero-image.webp')",
+			},
+			margin: {
+				"pageBottom": "3.5rem",
+				"aboutPageBottom": "110px"
+			},
+			padding: {
+				"pageX": "70px"
 			}
 		}
 	},

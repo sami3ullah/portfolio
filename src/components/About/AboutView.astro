@@ -1,0 +1,35 @@
+<section class="h-[100vh] bg-[#0D0D0D] px-pageX relative">
+  <hr class="w-[1px] border-0 h-[350px] bg-hr absolute" />
+  <div class="flex items-end h-full">
+    <div>
+      <div
+        class="text-textDull text-[2rem] font-[300] mb-[20px] tracking-[5px] uppercase"
+      >
+        Story
+      </div>
+      <slot>
+        <slot />
+      </slot>
+    </div>
+  </div>
+</section>
+
+<script>
+  //     import gsap from "gsap";
+  //     import ScrollTrigger from "gsap/ScrollTrigger";
+
+  //   // ======== gsap initialization =======
+  //   gsap.registerPlugin(ScrollTrigger);
+
+  //   // trigger an animation on about page
+  //   gsap.to(".about", {
+  //     yPercent: 100,
+  //     ease: "none",
+  //     scrollTrigger: {
+  //       trigger: ".about",
+  //       start: "top top",
+  //       end: "bottom top",
+  //       scrub: true
+  //     }
+  //   })
+</script>

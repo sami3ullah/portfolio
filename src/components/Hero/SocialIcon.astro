@@ -1,22 +1,29 @@
 ---
-import {Icon} from "astro-icon"
+import { Icon } from "astro-icon";
 ---
 
-<section class="px-3 py-2 border border-[#242424] rounded-[16px] flex items-center gap-3">
-    <!-- Linkedin -->
-    <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
-        <Icon name="bi:linkedin" class="text-secondary"/>
-    </div>
-    <!-- Github -->
-    <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
-        <Icon name="bi:github" class="text-secondary"/>
-    </div>
-    <!-- Email -->
-    <!-- <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-full">
-        <Icon name="ic:round-email" class="text-secondary"/>
-    </div> -->
-    <!-- Stackoverflow -->
-    <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
-        <Icon name="jam:stackoverflow" class="text-secondary"/>
-    </div>
+<section
+  class="px-3 py-2 border border-[#242424] rounded-[16px] flex items-center gap-3"
+>
+  <!-- Linkedin -->
+  <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
+    <a target="_blank" href="https://www.linkedin.com/in/sami3ullah/">
+      <Icon name="bi:linkedin" class="text-tertiary hover:text-primary" />
+    </a>
+  </div>
+  <!-- Github -->
+  <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
+    <a target="_blank" href="https://github.com/sami3ullah">
+      <Icon name="bi:github" class="text-tertiary hover:text-primary" />
+    </a>
+  </div>
+  <!-- Stackoverflow -->
+  <div class="w-[45px] h-[45px] p-[10px] bg-secondaryOpacity rounded-[8px]">
+    <a target="_blank" href="https://stackoverflow.com/users/6900808/sami">
+      <Icon
+        name="jam:stackoverflow"
+        class="text-tertiary hover:text-primary"
+      />
+    </a>
+  </div>
 </section>
