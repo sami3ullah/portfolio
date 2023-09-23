@@ -1,0 +1,16 @@
+---
+import HeaderSideText from './HeaderSideText.astro';
+import { Image } from 'astro:assets';
+---
+
+<header class="w-full h-[10rem] relative flex justify-between">
+  <!-- logo -->
+  <Image
+    src="./logo.svg"
+    class="self-start mt-[70px]"
+    alt="Muhammad Samiullah Website Logo"
+    width="72"
+    height="72"
+  />
+  <HeaderSideText />
+</header>
