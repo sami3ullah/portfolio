@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         primary: '#B1FC00',
-        secondary: '#4F27E9',
+        // secondary: '#4F27E9',
+        secondary: '#C084FC',
         tertiary: '#AAAAAA',
         secondaryOpacity: '#131313',
         // "otherColor": "#DB6344",
@@ -21,10 +22,12 @@ module.exports = {
       },
       margin: {
         pageBottom: '3.5rem',
+        pageBottomTab: '5.5rem',
         aboutPageBottom: '110px',
       },
       padding: {
         pageX: '70px',
+        pageXMobile: '20px',
       },
     },
   },

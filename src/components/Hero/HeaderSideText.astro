@@ -1,14 +1,20 @@
 <div class="flex flex-col relative flex-1">
   <div class="absolute right-0 mt-[65px]">
     <div class="">
-      <h2 class="text-[36px] font-bold text-textLight">Software Engineer</h2>
-      <p class="text-lg text-right text-tertiary">
+      <h2
+        class="text-[18px] md:text-[36px] text-right font-bold text-textLight"
+      >
+        Software Engineer
+      </h2>
+      <p class="text-xs md:text-lg text-right text-tertiary">
         <span id="experience">4</span>+ Years of development experience
       </p>
     </div>
-    <hr class="my-[16px] w-[100%] border-0 h-[1px] ml-auto bg-[#4F27E9]" />
+    <hr
+      class="my-[16px] w-16 md:w-20 lg:w-[100%] border-0 h-[1px] ml-auto bg-[#4F27E9]"
+    />
     <!-- contact info -->
-    <div class="text-tertiary font-bold text-right text-lg">
+    <div class="text-tertiary font-bold text-right text-xs md:text-lg">
       <div>msami398@gmail.com</div>
       <div>+923441262697</div>
     </div>
@@ -16,9 +22,9 @@
 </div>
 
 <script>
-  import { getTotalExperience } from "../../utils/index.ts";
+  import { getTotalExperience } from '../../utils/index.ts';
 
-  const experience = document.getElementById("experience");
+  const experience = document.getElementById('experience');
   if (experience) {
     const totalExperience = getTotalExperience();
     experience.innerText = totalExperience.toString();
