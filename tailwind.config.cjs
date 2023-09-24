@@ -14,7 +14,7 @@ module.exports = {
         hr: '#2F2F2FB2',
         darkBackground: '#292929',
         darkBackground2: '#303427',
-        background: '#000000',
+        background: '#0D0D0D',
       },
       backgroundImage: {
         'hero-image': "url('./hero-image.webp')",
