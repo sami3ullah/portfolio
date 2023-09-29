@@ -1,5 +1,22 @@
 ---
 import ProjectsView from './ProjectsView.astro';
+
+import { useSanityClient, groq } from 'astro-sanity';
+
+export async function getAllProject() {
+  const query = groq`*[_type == "project"] {
+  _id,
+  name,
+  category,
+  description,
+  "videoUrl": video.asset->url, // Access the URL of the file
+}`;
+  const projects = await useSanityClient().fetch(query);
+  return projects;
+}
+
+const projects = await getAllProject();
+console.log(projects)
 ---
 
 <section>
