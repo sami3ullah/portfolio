@@ -21,6 +21,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'url',
+      title: 'Project Url',
+      type: 'url',
+    }),
+    defineField({
       name: 'video',
       title: 'Project Video',
       type: 'file',

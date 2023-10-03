@@ -1,5 +1,19 @@
 ---
 import Icon from 'astro-icon';
+
+type Project = {
+  _id: string;
+  name: string;
+  category: string;
+  description: string;
+  videoUrl: string;
+};
+
+interface ProjectsProps {
+  project: Project;
+}
+
+const {project} = Astro.props;
 ---
 
 <section class="bg-background px-pageXMobile md:px-pageX relative">
@@ -22,19 +36,17 @@ import Icon from 'astro-icon';
             class="text-textDull text-[35px] md:text-[50px] lg:text-[4rem]
              font-bold uppercase leading-[40px] md:leading-[65px] mb-0 mb:mb-[10px]"
           >
-            Laam
+            {project.name}
           </div>
           <div
             class="text-textDull text-[16px] capitalize mb-[30px] md:mb-[20px] lg:mb-8"
           >
-            E-Commerce web app
+            {project.category}
           </div>
           <div
             class="md:text-[20px] hidden md:block lg:text-[22px] md:leading[30px] lg:leading-[27px] mb-8 text-tertiary"
           >
-            As a lead developer at Laam, I spearheaded the development of it
-            from scratch, a dynamic e-commerce platform revolutionizing online
-            shopping in Pakistan.
+            {project.description}
           </div>
           <div
             class="text-primary text-[16px] font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 hover:gap-3 transition-all"
@@ -47,7 +59,7 @@ import Icon from 'astro-icon';
         <!-- project video -->
         <div>
           <video class="w-full h-[auto]" loop muted autoplay playsinline>
-            <source src="./laam.mp4" type="video/mp4" />
+            <source src={project.videoUrl} type="video/mp4" />
              Your browser does not support the video tag.
           </video>
         </div>

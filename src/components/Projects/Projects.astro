@@ -1,24 +1,34 @@
 ---
 import ProjectsView from './ProjectsView.astro';
+import {sanityClient} from "sanity:client";
 
-import { useSanityClient, groq } from 'astro-sanity';
+type Project = {
+  _id: string;
+  name: string;
+  category: string;
+  description: string;
+  videoUrl: string;
+}
 
-export async function getAllProject() {
-  const query = groq`*[_type == "project"] {
+export async function getAllProject(): Promise<Project[]> {
+  const query = `*[_type == "project"] {
   _id,
   name,
   category,
   description,
-  "videoUrl": video.asset->url, // Access the URL of the file
+  "videoUrl": video.asset->url
 }`;
-  const projects = await useSanityClient().fetch(query);
+  const projects = await sanityClient.fetch(query);
   return projects;
 }
 
-const projects = await getAllProject();
-console.log(projects)
+const projects:Project[] = await getAllProject();
 ---
 
 <section>
-  <ProjectsView />
+  {
+    projects.map((project:Project) => (
+      <ProjectsView project={project} />
+    ))
+  }
 </section>
