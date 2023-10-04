@@ -1,6 +1,6 @@
 ---
 import ProjectsView from './ProjectsView.astro';
-import {sanityClient} from "sanity:client";
+import { sanityClient } from 'sanity:client';
 
 type Project = {
   _id: string;
@@ -8,27 +8,28 @@ type Project = {
   category: string;
   description: string;
   videoUrl: string;
-}
+};
 
 export async function getAllProject(): Promise<Project[]> {
-  const query = `*[_type == "project"] {
+  const query = `*[_type == "projects"] {
   _id,
   name,
   category,
   description,
+  url,
   "videoUrl": video.asset->url
 }`;
   const projects = await sanityClient.fetch(query);
   return projects;
 }
 
-const projects:Project[] = await getAllProject();
+const projects: Project[] = await getAllProject();
 ---
 
-<section>
+<section class="w-full">
   {
-    projects.map((project:Project) => (
-      <ProjectsView project={project} />
+    projects.map((project: Project, index: number) => (
+      <ProjectsView project={project} index={index} />
     ))
   }
 </section>

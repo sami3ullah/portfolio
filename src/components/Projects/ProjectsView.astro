@@ -6,19 +6,21 @@ type Project = {
   name: string;
   category: string;
   description: string;
+  url: string;
   videoUrl: string;
 };
 
 interface ProjectsProps {
   project: Project;
+  index: number;
 }
 
-const {project} = Astro.props;
+const { project, index } = Astro.props;
 ---
 
 <section class="bg-background px-pageXMobile md:px-pageX relative">
   <div
-    class="flex flex-col lg:flex-row items-center h-full border-t-4 py-[80px] border-b border-darkBackground"
+    class=`flex flex-col lg:flex-row items-center h-full py-[80px] border-b border-darkBackground ${index === 0 ? "border-t-4" : "border-t"}`
   >
     <div>
       <!-- project section -->
@@ -48,13 +50,18 @@ const {project} = Astro.props;
           >
             {project.description}
           </div>
-          <div
-            class="text-primary text-[16px] font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 hover:gap-3 transition-all"
-          >
-            See it in action <span
-              ><Icon name="gg:arrow-right" class="w-[30px]" /></span
+          <a href={project.url} target="_blank">
+            <div
+              class="text-primary text-[16px] group font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 transition-all"
             >
-          </div>
+              See it in action <span
+                ><Icon
+                  name="gg:arrow-right"
+                  class="w-[30px] group-hover:-rotate-45 transition-all"
+                /></span
+              >
+            </div>
+          </a>
         </div>
         <!-- project video -->
         <div>

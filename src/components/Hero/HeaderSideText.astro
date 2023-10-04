@@ -24,9 +24,15 @@
 <script>
   import { getTotalExperience } from '../../utils/index.ts';
 
-  const experience = document.getElementById('experience');
-  if (experience) {
-    const totalExperience = getTotalExperience();
-    experience.innerText = totalExperience.toString();
-  }
+  const experiences = document.querySelectorAll<HTMLElement>('#experience');
+  experiences.forEach((experience) => {
+    if (experience) {
+      const totalExperience = getTotalExperience();
+      experience.innerText = totalExperience.toString();
+    }
+  });
+  // if (experience) {
+  //   const totalExperience = getTotalExperience();
+  //   experience.innerText = totalExperience.toString();
+  // }
 </script>
