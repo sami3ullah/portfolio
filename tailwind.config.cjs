@@ -6,11 +6,12 @@ module.exports = {
       colors: {
         primary: '#B1FC00',
         // secondary: '#4F27E9',
-        secondary: '#C084FC',
+        secondary: '#EBF5CF',
         tertiary: '#AAAAAA',
         secondaryOpacity: '#131313',
         // "otherColor": "#DB6344",
         textDull: '#FFFFFFCC',
+        textDullest: '#999999',
         textLight: '#FFFFFF',
         hr: '#2F2F2FB2',
         darkBackground: '#292929',
