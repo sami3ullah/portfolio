@@ -3,7 +3,7 @@ import { Icon } from 'astro-icon';
 ---
 
 <section
-  class="px-3 py-2 border border-[#242424] rounded-[16px] flex items-center gap-3"
+  class="header-social-icons interactable px-3 py-2 border border-[#242424] rounded-[16px] flex items-center gap-3"
 >
   <!-- Linkedin -->
   <div
@@ -30,3 +30,17 @@ import { Icon } from 'astro-icon';
     </a>
   </div>
 </section>
+
+<script>
+  import gsap from 'gsap';
+
+  gsap.from('.header-social-icons', 1.3, {
+    x: 50,
+    opacity: 0,
+    ease: 'power4.inOut',
+    delay: 1,
+    stagger: {
+      amount: 0.5,
+    },
+  });
+</script>

@@ -1,0 +1,61 @@
+---
+import Icon from 'astro-icon';
+---
+
+<div id="mouse-trailer" class="hidden lg:block">
+  <Icon
+    name="icon-park-outline:arrow-right-up"
+    id="mouse-trailer-icon"
+    class="text-black p-1"
+  />
+</div>
+
+<style>
+  div#mouse-trailer {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    position: fixed;
+    border-radius: 50%;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  body:hover > div#mouse-trailer {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const mouseTrailer = document.getElementById('mouse-trailer');
+  const mouseTrailerIcon = document.getElementById('mouse-trailer-icon');
+  const animateMouseTrailer = (e: MouseEvent, interacting: boolean) => {
+    if (!mouseTrailer) return;
+    const x = e.clientX - mouseTrailer.offsetWidth / 2 + 'px';
+    const y = e.clientY - mouseTrailer.offsetHeight / 2 + 'px';
+
+    const keyFrames = {
+      transform: `translate(${x}, ${y}) scale(${interacting ? 3 : 1})`,
+      backgroundColor: interacting ? '#B1FC00' : 'white',
+    };
+
+    mouseTrailer.animate(keyFrames, {
+      duration: 800,
+      fill: 'forwards',
+    });
+  };
+  document.addEventListener('mousemove', (e) => {
+    const interactable = e?.target?.closest('.interactable'),
+      interacting = interactable !== null;
+    animateMouseTrailer(e, interacting);
+    if (!interacting) {
+      mouseTrailerIcon?.style.setProperty('display', 'none');
+    } else {
+      mouseTrailerIcon?.style.setProperty('display', 'block');
+    }
+  });
+</script>

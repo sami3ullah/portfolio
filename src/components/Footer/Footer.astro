@@ -1,9 +1,9 @@
 ---
-import MovingText from './MovingText.astro';
+import CopyRights from './CopyRights.astro';
 ---
 
 <section
-  class="bg-black px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px]"
+  class="fixed_footer bg-black px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full"
 >
   <h2
     class="text-textLight text-center md:text-left mb-[50px] text-[30px] md:text-[50px] lg:text-[65px] leading-[1.133em] lg:leading-[1.33em] font-bold"
@@ -35,6 +35,41 @@ import MovingText from './MovingText.astro';
   </div>
   <!-- Moving Text -->
   <div class="flex justify-center md:block">
-    <MovingText text="©Muhammad. All Rights Reserved" />
+    <CopyRights text="©Muhammad. All Rights Reserved" />
   </div>
 </section>
+
+<style>
+  .fixed_footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -100;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.fixed_footer', 1.3, {
+    y: 50,
+    opacity: 0,
+    ease: 'power4.inOut',
+    delay: 1,
+    stagger: {
+      amount: 0.5,
+    },
+  });
+
+  gsap.from('.fixed_footer', {
+    scrollTrigger: {
+      trigger: '.summary',
+      start: 'bottom bottom',
+      scrub: true,
+    },
+    y: -500,
+  });
+</script>

@@ -1,17 +1,34 @@
 ---
 import HeaderSideText from './HeaderSideText.astro';
-import Logo from "../../../public/logo.svg"
+import Logo from '../../../public/logo.svg';
 import { Image } from 'astro:assets';
 ---
 
 <header class="w-full h-[10rem] relative flex justify-between">
   <!-- logo -->
-  <Image
-    src={Logo}
-    class="self-start mt-[70px] w-[50px] h-[50px] md:w-[72px] md:h-[72px]"
-    alt="Muhammad Samiullah Website Logo"
-    width="72"
-    height="72"
-  />
+  <a href="/">
+    <Image
+      src={Logo}
+      class="header-logo self-start mt-[70px] w-[50px] h-[50px] md:w-[72px] md:h-[72px]"
+      alt="Muhammad Samiullah Website Logo"
+      width="72"
+      height="72"
+    />
+  </a>
   <HeaderSideText />
 </header>
+
+<script>
+  import gsap from 'gsap';
+
+  gsap.from('.header-logo', 1.3, {
+    scale: 2.5,
+    rotate: 360,
+    opacity: 0,
+    ease: 'power4.inOut',
+    delay: 2.5,
+    stagger: {
+      amount: 0.5,
+    },
+  });
+</script>

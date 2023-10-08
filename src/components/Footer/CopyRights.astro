@@ -6,12 +6,10 @@ interface Props {
 const { text } = Astro.props;
 ---
 
-<!-- left: calc(-1 * (200px - 160px));
-    bottom: 40px; -->
 <button
   class="button button--surtur relative left-0 md:left-[calc(-1*(200px-160px))] md:bottom-[40px]"
 >
-  <svg class="textcircle" viewBox="0 0 500 500">
+  <svg class="textcircle w-[200px] md:w-[250px]" viewBox="0 0 500 500">
     <defs
       ><path
         id="textcircle"
@@ -73,10 +71,10 @@ const { text } = Astro.props;
   .textcircle {
     position: relative;
     display: block;
-    width: 250px;
   }
 
-  .textcircle text {
+  .textcircle text,
+  .eye {
     font-size: 32px;
     text-transform: uppercase;
     fill: #888;

@@ -10,3 +10,15 @@ export const getTotalExperience = () => {
 
   return years;
 };
+
+export const isMobileViewport = () => {
+  return window.innerWidth < 768;
+};
+
+export const isTabletViewport = () => {
+  return window.innerWidth >= 768 && window.innerWidth < 992;
+};
+
+export const isDesktopViewport = () => {
+  return window.innerWidth >= 992;
+};
