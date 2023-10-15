@@ -1,4 +1,5 @@
 ---
+import StarsText from '../StarsText.astro';
 import StoryView from './StoryView.astro';
 ---
 
@@ -7,36 +8,56 @@ import StoryView from './StoryView.astro';
   id="main__story"
   class="relative w-full min-h-auto md:min-h-[120vh] bg-black px-pageXMobile lg:px-pageX min-w-full"
 >
+  <div
+    class="story-heading text-white absolute top-[30%] translate-y-[-30%] text-[5rem] font-[500] uppercase"
+  >
+    My <StarsText>Journey</StarsText> So Far
+  </div>
   <StoryView id="card-one">
     <h2
-      class="text-[#F1F1EF] w-full lg:w-[80%] font-[600] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[500] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
     >
       I was born in a small, tech deprived town, with a dream of becoming a
-      software engineer!
+      <span><StarsText>Software Engineer!</StarsText></span>
     </h2>
   </StoryView>
   <StoryView id="card-two">
     <h2
       class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
     >
-      Growing up, I wanted to move to a big city to fulfil my dream, but my
-      parents thought I was too young to move out.
+      After school, I wanted to move to a big city for college to fulfil <StarsText
+      >
+        my dream
+      </StarsText>, but my parents thought I was too young to move out 🙁
     </h2>
   </StoryView>
   <StoryView id="card-three">
     <h2
-      class="text-[#F1F1EF] w-full md:italic lg:w-[80%] font-[600] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[00] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
     >
       Despite that, I still moved out, Reaching there I felt lost among tech
-      savvy folks. I didn't even know what a PlayStation was
+      savvy folks. I didn't even know what a <StarsText>PlayStation</StarsText>
+       was 🤯
     </h2>
   </StoryView>
   <StoryView id="card-four">
     <h2
-      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[600] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[600] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] text-left lg:text-left md:leading-[85px]"
     >
-      I failed countless times. But, I never stopped trying, my hard-work &
-      determination has lead me a successful engineer.
+      College was a whirlwind, with everything going over my head. I was feeling
+
+
+      <StarsText>lost</StarsText>. But then I taught myself coding and
+      everything started making sense bit by bit ✨
+    </h2>
+  </StoryView>
+  <StoryView id="card-five">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+    >
+      <StarsText>I failed countless times</StarsText>. But, I never stopped
+      trying. My hard work and determination have brought me this far, and I'm
+      excited about what lies ahead 😌
     </h2>
   </StoryView>
 </section>
@@ -51,6 +72,7 @@ import StoryView from './StoryView.astro';
   // don't animate if it's a mobile device
   if (!isMobileView) {
     var tl = gsap.timeline({
+      ease: 'ease-in-out',
       scrollTrigger: {
         trigger: '#main__story',
         start: 'top top',
@@ -76,6 +98,9 @@ import StoryView from './StoryView.astro';
         },
         'first'
       )
+      .to('.story-heading', {
+        x: '10%',
+      })
       .to(
         '#card-two',
         {
@@ -96,7 +121,7 @@ import StoryView from './StoryView.astro';
         '#card-one',
         {
           width: '70%',
-          height: '65vh',
+          height: '75vh',
         },
         'second'
       )
@@ -112,7 +137,7 @@ import StoryView from './StoryView.astro';
       .to(
         '#card-three',
         {
-          top: '50%',
+          top: '49%',
         },
         'third'
       )
@@ -120,7 +145,7 @@ import StoryView from './StoryView.astro';
         '#card-two',
         {
           width: '75%',
-          height: '70vh',
+          height: '75vh',
         },
         'third'
       )
@@ -136,9 +161,7 @@ import StoryView from './StoryView.astro';
       .to(
         '#card-four',
         {
-          top: '58%',
-          width: '85%',
-          height: '75vh',
+          top: '56%',
         },
         'fourth'
       )
@@ -149,6 +172,32 @@ import StoryView from './StoryView.astro';
           height: '75vh',
         },
         'fourth'
+      )
+      .to(
+        '#card-five',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'fourth'
+      )
+      .to(
+        '#card-five',
+        {
+          top: '63%',
+          width: '90%',
+          height: '75vh',
+        },
+        'fifth'
+      )
+      .to(
+        '#card-four',
+        {
+          width: '85%',
+          height: '75vh',
+        },
+        'fifth'
       );
   }
 </script>

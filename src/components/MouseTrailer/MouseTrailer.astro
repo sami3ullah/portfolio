@@ -2,11 +2,23 @@
 import Icon from 'astro-icon';
 ---
 
-<div id="mouse-trailer" class="hidden lg:block">
+<div
+  id="mouse-trailer"
+  class="hidden relative lg:flex items-center justify-center"
+>
   <Icon
     name="icon-park-outline:arrow-right-up"
-    id="mouse-trailer-icon"
-    class="text-black p-1"
+    id="mouse-trailer__icon"
+    class="hidden text-black p-1"
+  />
+  <span
+    id="mouse-trailer__copy"
+    class="hidden absolute z-2 bg-primary text-[6px] font-[500]">Copy</span
+  >
+  <Icon
+    name="mdi:tick"
+    id="mouse-trailer__copy-success-icon"
+    class="opacity-0 -z-10 absolute text-black p-1"
   />
 </div>
 
@@ -32,15 +44,40 @@ import Icon from 'astro-icon';
 
 <script>
   const mouseTrailer = document.getElementById('mouse-trailer');
-  const mouseTrailerIcon = document.getElementById('mouse-trailer-icon');
-  const animateMouseTrailer = (e: MouseEvent, interacting: boolean) => {
+  const mouseTrailerIcon = document.getElementById('mouse-trailer__icon');
+  const mouseTrailerCopy = document.getElementById('mouse-trailer__copy');
+  const mouseTrailerCopySuccessIcon = document.getElementById(
+    'mouse-trailer__copy-success-icon'
+  );
+
+  /**
+   * @param e MouseEvent, typical mouse event
+   * @param interacting boolean, true if mouse is interacting with an element
+   * @param simpleInteraction boolean, make it true if it's just a simple hover interaction
+   */
+  const animateMouseTrailer = (
+    e: MouseEvent,
+    interacting: boolean,
+    simpleInteraction = true,
+    darkTrailer = false
+  ) => {
+    // TODO: cater interactions which are simple
+    // TODO: cater for interactions which are links, copy
     if (!mouseTrailer) return;
     const x = e.clientX - mouseTrailer.offsetWidth / 2 + 'px';
     const y = e.clientY - mouseTrailer.offsetHeight / 2 + 'px';
 
     const keyFrames = {
-      transform: `translate(${x}, ${y}) scale(${interacting ? 3 : 1})`,
-      backgroundColor: interacting ? '#B1FC00' : 'white',
+      transform: `translate(${x}, ${y}) scale(${
+        interacting ? (simpleInteraction ? 3 : 10) : 1
+      })`,
+      backgroundColor:
+        interacting && simpleInteraction
+          ? '#B1FC00'
+          : darkTrailer
+          ? 'black'
+          : 'white',
+      mixBlendMode: interacting && !simpleInteraction ? 'difference' : 'normal',
     };
 
     mouseTrailer.animate(keyFrames, {
@@ -49,13 +86,53 @@ import Icon from 'astro-icon';
     });
   };
   document.addEventListener('mousemove', (e) => {
+    // get all interactive classes that are defined in HTML
+    const interactableLink = e?.target?.closest('.interactable-link'),
+      interactingLink = interactableLink !== null;
+    const interactableCopy = e?.target?.closest('.interactable-copy'),
+      interactingCopy = interactableCopy !== null;
     const interactable = e?.target?.closest('.interactable'),
       interacting = interactable !== null;
-    animateMouseTrailer(e, interacting);
+    const lightBackground = e?.target?.closest('.dark-trailer'),
+      darkTrailer = lightBackground !== null;
+
+    // call mouse trailer function to animate trailer
+    animateMouseTrailer(
+      e,
+      interacting,
+      !!interacting && (interactingLink || interactingCopy),
+      darkTrailer
+    );
+
     if (!interacting) {
       mouseTrailerIcon?.style.setProperty('display', 'none');
+      mouseTrailerCopy?.style.setProperty('display', 'none');
+      return;
     } else {
-      mouseTrailerIcon?.style.setProperty('display', 'block');
+      // check if element has link class
+      if (interactingLink) {
+        mouseTrailerIcon?.style.setProperty('display', 'block');
+        mouseTrailerCopy?.style.setProperty('display', 'none');
+        return;
+      }
+      // check if element has copy class
+      if (interactingCopy) {
+        mouseTrailerIcon?.style.setProperty('display', 'none');
+        mouseTrailerCopy?.style.setProperty('display', 'block');
+        // copy the text to clipboard on mouse click
+        interactableCopy.addEventListener('click', () => {
+          const text = interactableCopy.textContent;
+          navigator.clipboard.writeText(text);
+          mouseTrailerCopy?.style.setProperty('display', 'none');
+          mouseTrailerCopySuccessIcon?.style.setProperty('opacity', '1');
+          setTimeout(() => {
+            mouseTrailerCopySuccessIcon?.style.setProperty('opacity', '0');
+            mouseTrailerCopy?.style.setProperty('display', 'block');
+          }, 2000);
+        });
+        //
+        return;
+      }
     }
   });
 </script>

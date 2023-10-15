@@ -9,9 +9,9 @@ import SocialIcon from './SocialIcon.astro';
 >
   <!-- Main heading -->
   <h1
-    class="main-title flex flex-col md:items-start self-center md:self-end
+    class="main-title interactable flex flex-col md:items-start self-center md:self-end
     text-center justify-center md:justify-end uppercase
-    text-[4rem] md:text-[6.75rem] lg:text-[8.75rem] font-black
+    text-[4rem] md:text-[6.75rem] lg:text-[8.75rem] font-[800]
     leading-[50px] md:leading-[90px] lg:leading-[110px]"
   >
     <div class="relative">Making</div>
@@ -32,21 +32,23 @@ import SocialIcon from './SocialIcon.astro';
 <script>
   import gsap from 'gsap';
 
-  gsap.from('h1.main-title', 1.3, {
+  gsap.from('h1.main-title', {
     y: 50,
     opacity: 0,
     ease: 'power4.inOut',
     delay: 1.5,
+    duration: 1.3,
     stagger: {
       amount: 0.5,
     },
   });
 
-  gsap.from('h1.main-title .tagline', 1.3, {
+  gsap.from('h1.main-title .tagline', {
     x: -100,
     opacity: 0,
     ease: 'power3.inOut',
     delay: 2,
+    duration: 1.3,
     stagger: {
       amount: 0.3,
     },

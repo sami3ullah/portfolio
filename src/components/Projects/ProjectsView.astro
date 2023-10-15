@@ -50,7 +50,11 @@ const { project, index } = Astro.props;
           >
             {project.description}
           </div>
-          <a href={project.url} target="_blank">
+          <a
+            href={project.url}
+            class="interactable interactable-link"
+            target="_blank"
+          >
             <div
               class="text-tertiary text-[16px] group font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 transition-all"
             >
@@ -65,17 +69,23 @@ const { project, index } = Astro.props;
         </div>
         <!-- project video -->
         <div>
-          <video
-            class="w-full h-[auto]"
-            loop
-            muted
-            autoplay
-            playsinline
-            preload="none"
+          <a
+            href={project.url}
+            class="interactable interactable-link"
+            target="_blank"
           >
-            <source src={project.videoUrl} type="video/mp4" />
-             Your browser does not support the video tag.
-          </video>
+            <video
+              class="w-full h-[auto]"
+              loop
+              muted
+              autoplay
+              playsinline
+              preload="none"
+            >
+              <source src={project.videoUrl} type="video/mp4" />
+               Your browser does not support the video tag.
+            </video>
+          </a>
         </div>
       </div>
     </div>
