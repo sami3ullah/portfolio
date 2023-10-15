@@ -2,32 +2,153 @@
 import StoryView from './StoryView.astro';
 ---
 
-<section class="about-me">
-  <!-- 1st paragraph -->
-  <StoryView>
+<!-- 1st paragraph -->
+<section
+  id="main__story"
+  class="relative w-full min-h-auto md:min-h-[120vh] bg-black px-pageXMobile lg:px-pageX min-w-full"
+>
+  <StoryView id="card-one">
     <h2
-      class="text-textDull w-full lg:w-[70%] font-[700] mb-aboutPageBottom text-[2.5rem] md:text-[5rem] text-left lg:text-left leading-none"
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[600] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
     >
-      I come from a small, tech-deprived town, but I always dreamt big to become
-      a software engineer!
+      I was born in a small, tech deprived town, with a dream of becoming a
+      software engineer!
     </h2>
   </StoryView>
-  <!-- 2nd paragraph -->
-  <StoryView>
+  <StoryView id="card-two">
     <h2
-      class="text-textDull w-full lg:w-[70%] font-[700] mb-aboutPageBottom text-[2.5rem] md:text-[5rem] text-left lg:text-left leading-none"
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
     >
-      When I moved to a bustling tech city for education, I felt lost among all
-      the tech-savvy folks
+      Growing up, I wanted to move to a big city to fulfil my dream, but my
+      parents thought I was too young to move out.
     </h2>
   </StoryView>
-  <!-- 3rd paragraph -->
-  <StoryView>
+  <StoryView id="card-three">
     <h2
-      class="text-textDull w-full lg:w-[70%] font-[700] mb-aboutPageBottom text-[2.5rem] md:text-[5rem] text-left lg:text-left leading-none"
+      class="text-[#F1F1EF] w-full md:italic lg:w-[80%] font-[600] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
     >
-      But I didn't give up. Through hard work and self-teaching, I made my dream
-      a reality, becoming a successful software engineer!
+      Despite that, I still moved out, Reaching there I felt lost among tech
+      savvy folks. I didn't even know what a PlayStation was
+    </h2>
+  </StoryView>
+  <StoryView id="card-four">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[600] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+    >
+      I failed countless times. But, I never stopped trying, my hard-work &
+      determination has lead me a successful engineer.
     </h2>
   </StoryView>
 </section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+  import { isMobileViewport } from '../../utils';
+
+  const isMobileView = isMobileViewport();
+  // don't animate if it's a mobile device
+  if (!isMobileView) {
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#main__story',
+        start: 'top top',
+        end: '100% 50%',
+        scrub: 2,
+        pin: true,
+      },
+    });
+
+    tl.to(
+      '.text',
+      {
+        top: '-7%',
+      },
+      'first'
+    )
+      .to(
+        '#card-one',
+        {
+          background: '#101010',
+          borderRadius: '1.25rem',
+          top: '35%',
+        },
+        'first'
+      )
+      .to(
+        '#card-two',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'first'
+      )
+      .to(
+        '#card-two',
+        {
+          top: '42%',
+        },
+        'second'
+      )
+      .to(
+        '#card-one',
+        {
+          width: '70%',
+          height: '65vh',
+        },
+        'second'
+      )
+      .to(
+        '#card-three',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'second'
+      )
+      .to(
+        '#card-three',
+        {
+          top: '50%',
+        },
+        'third'
+      )
+      .to(
+        '#card-two',
+        {
+          width: '75%',
+          height: '70vh',
+        },
+        'third'
+      )
+      .to(
+        '#card-four',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'third'
+      )
+      .to(
+        '#card-four',
+        {
+          top: '58%',
+          width: '85%',
+          height: '75vh',
+        },
+        'fourth'
+      )
+      .to(
+        '#card-three',
+        {
+          width: '80%',
+          height: '75vh',
+        },
+        'fourth'
+      );
+  }
+</script>

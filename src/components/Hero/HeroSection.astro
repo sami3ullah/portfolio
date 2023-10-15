@@ -3,7 +3,9 @@ import HeaderSection from './HeaderSection.astro';
 import MainTitle from './MainTitle.astro';
 ---
 
-<section class="hero-section bg-hero-image bg-cover bg-no-repeat bg-top w-full">
+<section
+  class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-1 relative"
+>
   <div class="bg-overlay-2">
     <div class="flex flex-col h-screen px-pageXMobile md:px-pageX bg-overlay-1">
       <HeaderSection />

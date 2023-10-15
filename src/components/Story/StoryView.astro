@@ -1,16 +1,41 @@
-<section
-  class="h-[60vh] lg:h-[100vh] bg-black px-pageXMobile lg:px-pageX relative"
+---
+interface StoryProps {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div
+  id={id}
+  class="cards static h-[30vh] translate-x-0 translate-y-0 md:absolute top-1/2 left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:h-[70vh] lg:h-[80vh] z-1"
 >
-  <div class="flex items-center lg:items-end h-full">
+  <div class="p-0 md:p-16 h-full flex items-center">
     <div>
       <div
-        class="text-textDull text-left lg:text-left text-[1rem] md:text-[1.5rem] lg:text-[2rem] font-[300] mb-[20px] tracking-[5px] uppercase"
+        class="text-textDullest text-left text-[12px] md:text-[1rem] font-[700] mb-[20px] tracking-[3px] md:tracking-[5px] uppercase"
       >
         Story
       </div>
-      <slot>
-        <slot />
-      </slot>
+      <slot />
     </div>
   </div>
-</section>
+</div>
+
+<style>
+  #card-one {
+    top: 130%;
+  }
+
+  #card-two {
+    top: 230%;
+  }
+
+  #card-three {
+    top: 250%;
+  }
+
+  #card-four {
+    top: 270%;
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+interface MarqueProps {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="marquee bg-purple">
+  <div class="marquee__group">
+    <span>{text} ➺</span>
+    <span>{text} ➺</span>
+    <span>{text} ➺</span>
+  </div>
+  <div class="marquee__group" aria-hidden="true">
+    <span>{text} ➺</span>
+    <span>{text} ➺</span>
+    <span>{text} ➺</span>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    height: 15vh;
+    user-select: none;
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /*background-color: green;*/
+    /*transform: skewY(-3deg); */
+    /*transform: rotate(-5deg) translateY(-30px) translateX(50px);*/
+  }
+
+  .marquee:hover {
+    -webkit-text-stroke: 1.5px #fff;
+    text-stroke: 1.5px #fff;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    color: transparent;
+    transition: all 0.5s ease;
+    -webkit-font-smoothing: antialiased;
+    /*-moz-osx-font-smoothing: grayscale;*/
+  }
+
+  .marquee__group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-width: 100%;
+    animation: scroll 15s linear infinite reverse;
+  }
+
+  .marquee__group span {
+    color: white;
+    font-size: 5vw;
+    font-weight: 800;
+    white-space: nowrap;
+    font-family: 'Syne', sans-serif !important;
+    /*text-transform: uppercase;*/
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - 2rem));
+    }
+  }
+
+  @media only screen and (min-width: 360px) {
+    .marquee__group span {
+      font-size: 6.5vw;
+    }
+  }
+</style>
