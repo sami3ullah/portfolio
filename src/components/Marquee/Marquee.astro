@@ -6,7 +6,7 @@ interface MarqueProps {
 const { text } = Astro.props;
 ---
 
-<div class="marquee bg-purple">
+<div class="marquee bg-primary">
   <div class="marquee__group">
     <span>{text} ➺</span>
     <span>{text} ➺</span>
@@ -26,16 +26,16 @@ const { text } = Astro.props;
     height: 15vh;
     user-select: none;
     gap: 2rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     /*background-color: green;*/
     /*transform: skewY(-3deg); */
     /*transform: rotate(-5deg) translateY(-30px) translateX(50px);*/
   }
 
   .marquee:hover {
-    -webkit-text-stroke: 1.5px #fff;
-    text-stroke: 1.5px #fff;
+    -webkit-text-stroke: 1.5px #000;
+    text-stroke: 1.5px #000;
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
     color: transparent;
@@ -55,11 +55,11 @@ const { text } = Astro.props;
   }
 
   .marquee__group span {
-    color: white;
+    color: #000;
     font-size: 5vw;
-    font-weight: 800;
+    font-weight: 600;
     white-space: nowrap;
-    font-family: 'Syne', sans-serif !important;
+    /* font-family: 'Syne', sans-serif !important; */
     /*text-transform: uppercase;*/
   }
 

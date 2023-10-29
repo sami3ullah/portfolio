@@ -1,0 +1,193 @@
+---
+// import StarsText from '../StarsText.astro';
+// import WorkView from './WorkView.astro';
+---
+
+<!-- 1st paragraph -->
+<!-- <section
+  id="why-work-with-me"
+  class="relative w-full min-h-auto md:min-h-[120vh] bg-black px-pageXMobile lg:px-pageX min-w-full"
+>
+  <div
+    class="hidden md:block why-work-with-me-heading text-white absolute top-[30%] translate-y-[-30%] md:text-[3rem] lg:text-[5rem] font-[500] uppercase"
+  >
+    Why <StarsText showStars={true}>Work</StarsText> With Me?
+  </div>
+  <WorkView id="workwith-card-one" title="Diverse Experience " emoji=" ✨">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[2rem] lg:text-[3rem] text-left md:leading-[85px]"
+    >
+      I have worked with startups, software houses, and service-based companies, providing me with a well-rounded skillset.
+    </h2>
+  </WorkView>
+  <WorkView id="workwith-card-two" title="Framework Independent " emoji=" 🕺">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[2rem] lg:text-[3rem] text-left lg:text-left md:leading-[85px]"
+    >
+      I consider myself a Software Engineer, which means I don't limit myself to specific languages or frameworks. Instead, I focus on what suits the project best.
+    </h2>
+  </WorkView>
+  <WorkView id="workwith-card-three" title="Future Ready " emoji=" 🔮">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[400] text-[1.5rem] leading-[30px] md:text-[2rem] lg:text-[3rem] text-left lg:text-left md:leading-[85px]"
+    >
+      I stay updated with the latest tech trends, ensuring you and your projects benefit from cutting edge solutions.
+    </h2>
+  </WorkView>
+  <WorkView id="workwith-card-four" title="Result Driven " emoji=" 🙌">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[2rem] text-left lg:text-left md:leading-[85px]"
+    >
+      I am always committed to delivering high quality results, going the extra mile for your success.
+    </h2>
+  </WorkView>
+  <WorkView id="workwith-card-five" title="Team Player " emoji=" 🤝">
+    <h2
+      class="text-[#F1F1EF] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[2rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+    >
+       I'm a team player and thrive on collaboration.Your input matters, and together, we can make your projects flourish.
+    </h2>
+  </WorkView>
+</section> -->
+
+<!-- <script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+  import { isMobileViewport } from '../../utils';
+
+  const isMobileView = isMobileViewport();
+  // don't animate if it's a mobile device
+  if (!isMobileView) {
+    var workWithMeTimeline = gsap.timeline({
+      ease: 'ease-in-out',
+      scrollTrigger: {
+        trigger: '#why-work-with-me',
+        start: 'top top',
+        end: '100% 50%',
+        scrub: 2,
+        pin: true,
+      },
+    });
+
+    workWithMeTimeline.to(
+      '.text',
+      {
+        top: '-7%',
+      },
+      'first'
+    )
+      .to(
+        '#workwith-card-one',
+        {
+          background: '#101010',
+          borderRadius: '1.25rem',
+          top: '35%',
+        },
+        'first'
+      )
+      .to('.why-work-with-me-heading', {
+        x: '10%',
+        opacity: 0,
+      })
+      .to(
+        '#workwith-card-two',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'first'
+      )
+      .to(
+        '#workwith-card-two',
+        {
+          top: '42%',
+        },
+        'second'
+      )
+      .to(
+        '#workwith-card-one',
+        {
+          width: '70%',
+          height: '75vh',
+        },
+        'second'
+      )
+      .to(
+        '#workwith-card-three',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'second'
+      )
+      .to(
+        '#workwith-card-three',
+        {
+          top: '49%',
+        },
+        'third'
+      )
+      .to(
+        '#workwith-card-two',
+        {
+          width: '75%',
+          height: '75vh',
+        },
+        'third'
+      )
+      .to(
+        '#workwith-card-four',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'third'
+      )
+      .to(
+        '#workwith-card-four',
+        {
+          top: '56%',
+        },
+        'fourth'
+      )
+      .to(
+        '#workwith-card-three',
+        {
+          width: '80%',
+          height: '75vh',
+        },
+        'fourth'
+      )
+      .to(
+        '#workwith-card-five',
+        {
+          top: '130%',
+          background: '#101010',
+          borderRadius: '1.25rem',
+        },
+        'fourth'
+      )
+      .to(
+        '#workwith-card-five',
+        {
+          top: '63%',
+          width: '90%',
+          height: '75vh',
+        },
+        'fifth'
+      )
+      .to(
+        '#workwith-card-four',
+        {
+          width: '85%',
+          height: '75vh',
+        },
+        'fifth'
+      );
+  }
+</script> -->
+

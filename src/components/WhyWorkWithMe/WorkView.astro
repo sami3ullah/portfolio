@@ -1,0 +1,49 @@
+---
+import StarsText from "../StarsText.astro";
+
+interface WorkWithProps {
+  id?: string;
+  title?: string;
+  emoji?: string;
+}
+
+const { id, title, emoji } = Astro.props;
+---
+
+<div
+  id={id}
+  class="cards static h-[30vh] translate-x-0 translate-y-0 md:absolute top-1/2 left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:h-[70vh] lg:h-[80vh] z-1"
+>
+  <div class="p-0 md:p-16 h-full flex items-center">
+    <div>
+      <div
+        class="text-textDullest text-left text-[12px] md:text-[2rem] lg:text-[3rem] font-[700] mb-[20px] tracking-[3px] md:tracking-[5px] uppercase"
+      >
+        <StarsText>{title}</StarsText>{emoji}
+      </div>
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  #workwith-card-one {
+    top: 130%;
+  }
+
+  #workwith-card-two {
+    top: 230%;
+  }
+
+  #workwith-card-three {
+    top: 250%;
+  }
+
+  #workwith-card-four {
+    top: 270%;
+  }
+
+  #workwith-card-five {
+    top: 290%;
+  }
+</style>

@@ -9,9 +9,9 @@ import StoryView from './StoryView.astro';
   class="relative w-full min-h-auto md:min-h-[120vh] bg-black px-pageXMobile lg:px-pageX min-w-full"
 >
   <div
-    class="story-heading text-white absolute top-[30%] translate-y-[-30%] text-[5rem] font-[500] uppercase"
+    class="hidden md:block story-heading text-white absolute top-[30%] translate-y-[-30%] text-[5rem] font-[500] uppercase"
   >
-    My <StarsText>Journey</StarsText> So Far
+    My <StarsText showStars={true}>Story</StarsText> So Far
   </div>
   <StoryView id="card-one">
     <h2
@@ -100,6 +100,7 @@ import StoryView from './StoryView.astro';
       )
       .to('.story-heading', {
         x: '10%',
+        opacity: 0,
       })
       .to(
         '#card-two',
