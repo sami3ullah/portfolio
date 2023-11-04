@@ -8,14 +8,14 @@ const { text } = Astro.props;
 
 <div class="marquee bg-primary">
   <div class="marquee__group">
-    <span>{text} ➺</span>
-    <span>{text} ➺</span>
-    <span>{text} ➺</span>
+    <span>{text}<span> ✦</span></span>
+    <span>{text}<span> ✦</span></span>
+    <span>{text}<span> ✦</span></span>
   </div>
   <div class="marquee__group" aria-hidden="true">
-    <span>{text} ➺</span>
-    <span>{text} ➺</span>
-    <span>{text} ➺</span>
+    <span>{text}<span> ✦</span></span>
+    <span>{text}<span> ✦</span></span>
+    <span>{text}<span> ✦</span></span>
   </div>
 </div>
 
@@ -61,6 +61,11 @@ const { text } = Astro.props;
     white-space: nowrap;
     /* font-family: 'Syne', sans-serif !important; */
     /*text-transform: uppercase;*/
+  }
+
+  .marquee__group span span {
+    font-size: 4.5vw;
+    font-weight: 300;
   }
 
   @keyframes scroll {
