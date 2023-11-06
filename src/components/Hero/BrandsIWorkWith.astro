@@ -1,0 +1,110 @@
+<div class="b--marque-a js--marque-a">
+  <div class="b--marque-a__content">
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x201"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x202"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x203"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x204"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x205"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x206"
+      alt=""
+    />
+    <img
+      class="b--marque-a__content__media"
+      src="https://source.unsplash.com/featured/300x207"
+      alt=""
+    />
+  </div>
+</div>
+
+<style>
+  .b--marque-a {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 400px;
+    width: 10%;
+    gap: 70px;
+    column-gap: 0rem;
+    text-decoration: none;
+  }
+
+  .b--marque-a__content {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    min-width: 100%;
+    flex: 0 0 auto;
+    column-gap: 0rem;
+    justify-content: space-around;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  function initInfiniteMarque(payload) {
+    payload.element.forEach((marque) => {
+      const marqueContent = marque.childNodes[1];
+      const contentCloned = marqueContent.cloneNode(true);
+      marque.append(contentCloned);
+      playMarque({ marque, content: marqueContent });
+      window.addEventListener('resize', (e) => {
+        playMarque({ marque, content: marqueContent });
+      });
+    });
+  }
+
+  function playMarque(payload) {
+    console.log('test');
+    // calculate gap + total distance
+    // ! it's 0, but if it needs to be just in case.
+    const gap = parseInt(
+      getComputedStyle(payload.marque).getPropertyValue('column-gap'),
+      10
+    );
+    const width = parseInt(
+      getComputedStyle(payload.content).getPropertyValue('width'),
+      10
+    );
+
+    const distanceToTranslate = -10 * (width + gap);
+
+    gsap.fromTo(
+      payload.marque.children,
+      { y: 0 },
+      {
+        y: distanceToTranslate,
+        duration: 15,
+        ease: 'linear',
+        repeat: -1,
+      }
+    );
+  }
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    initInfiniteMarque({ element: document.querySelectorAll('.js--marque-a') });
+  });
+</script>

@@ -1,4 +1,5 @@
 ---
+import BrandsIWorkWith from './BrandsIWorkWith.astro';
 import SocialIcon from './SocialIcon.astro';
 ---
 
@@ -17,7 +18,7 @@ import SocialIcon from './SocialIcon.astro';
     <div class="relative">Making</div>
     <div class="tagline bg-primary -rotate-2 p-[8px] md:p-4">
       <div
-        class="text-secondaryOpacity text-[4rem] md:text-[5.3rem] lg:text-[8rem] relative"
+        class="text-background text-[4rem] md:text-[5.3rem] lg:text-[8rem] relative"
       >
         Epic Shit
       </div>
@@ -25,6 +26,7 @@ import SocialIcon from './SocialIcon.astro';
   </h1>
   <!-- social links -->
   <div class="self-center md:self-end">
+    <BrandsIWorkWith />
     <SocialIcon />
   </div>
 </main>
