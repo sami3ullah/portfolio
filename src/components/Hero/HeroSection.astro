@@ -35,8 +35,10 @@ import MainTitle from './MainTitle.astro';
 
 <script>
   import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/all';
   import { isMobileViewport } from '../../utils';
   const isMobileView = isMobileViewport();
+  gsap.registerPlugin(ScrollTrigger);
 
   if (!isMobileView) {
     gsap.from('.hero-section', {
@@ -51,4 +53,18 @@ import MainTitle from './MainTitle.astro';
       },
     });
   }
+
+  // add parralex effect through gsap
+  gsap.to(".hero-section", {
+    yPercent: 80,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".hero-section",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+      markers: true,
+    },
+  });
+
 </script>

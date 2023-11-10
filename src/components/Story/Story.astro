@@ -6,60 +6,67 @@ import StoryView from './StoryView.astro';
 <!-- 1st paragraph -->
 <section
   id="main__story"
-  class="relative w-full min-h-auto md:min-h-[120vh] bg-black px-pageXMobile lg:px-pageX min-w-full"
+  class="relative w-full min-h-auto md:min-h-[120vh] bg-black min-w-full"
 >
-  <div
-    class="hidden md:block story-heading text-textLightPrimary absolute top-[30%] translate-y-[-30%] text-[5rem] font-[500] uppercase"
-  >
-    The <StarsText showStars={true}>Story</StarsText> So Far
+  <div class="ml-8 absolute top-1/2 left-0 -translate-x-1/2 rotate-90">
+    <a href="#why-work-with-me" class="text-white">Skip story</a>
   </div>
-  <StoryView id="card-one">
-    <h2
-      class="text-[#b9bcad] w-full lg:w-[80%] font-[500] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
+  <div class="px-pageXMobile lg:px-pageX">
+    <div
+      class="hidden md:block story-heading text-textLightPrimary absolute top-[30%] translate-y-[-30%] text-[5rem] font-[500] uppercase"
     >
-      I was born in a small, tech deprived town, with a dream of becoming a
-      <span><StarsText>Software Engineer!</StarsText></span>
-    </h2>
-  </StoryView>
-  <StoryView id="card-two">
-    <h2
-      class="text-[#b9bcad] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
-    >
-      After school, I wanted to move to a big city for college to fulfil <StarsText
+      The <StarsText showStars={true}>Story</StarsText> So Far
+    </div>
+    <StoryView id="card-one">
+      <h2
+        class="text-[#b9bcad] w-full lg:w-[80%] font-[500] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
       >
-        my dream
-      </StarsText>, but my parents thought I was too young to move out 🙁
-    </h2>
-  </StoryView>
-  <StoryView id="card-three">
-    <h2
-      class="text-[#b9bcad] w-full lg:w-[80%] font-[00] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
-    >
-      Despite that, I still moved out, Reaching there I felt lost among tech
-      savvy folks. I didn't even know what a <StarsText>PlayStation</StarsText>
-       was 🤯
-    </h2>
-  </StoryView>
-  <StoryView id="card-four">
-    <h2
-      class="text-[#b9bcad] w-full lg:w-[80%] font-[600] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] text-left lg:text-left md:leading-[85px]"
-    >
-      College was a whirlwind, with everything going over my head. I was feeling
+        I was born in a small, tech deprived town, with a dream of becoming a
+        <span><StarsText>Software Engineer!</StarsText></span>
+      </h2>
+    </StoryView>
+    <StoryView id="card-two">
+      <h2
+        class="text-[#b9bcad] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
+      >
+        After school, I wanted to move to a big city for college to fulfil <StarsText
+        >
+          my dream
+        </StarsText>, but my parents thought I was too young to move out 🙁
+      </h2>
+    </StoryView>
+    <StoryView id="card-three">
+      <h2
+        class="text-[#b9bcad] w-full lg:w-[80%] font-[00] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
+      >
+        Despite that, I still moved out, Reaching there I felt lost among tech
+        savvy folks. I didn't even know what a <StarsText>
+          PlayStation
+        </StarsText>
+         was 🤯
+      </h2>
+    </StoryView>
+    <StoryView id="card-four">
+      <h2
+        class="text-[#b9bcad] w-full lg:w-[80%] font-[600] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] text-left lg:text-left md:leading-[85px]"
+      >
+        College was a whirlwind, with everything going over my head. I was
+        feeling
 
-
-      <StarsText>lost</StarsText>. But then I taught myself coding and
-      everything started making sense bit by bit ✨
-    </h2>
-  </StoryView>
-  <StoryView id="card-five">
-    <h2
-      class="text-[#b9bcad] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
-    >
-      <StarsText>I failed countless times</StarsText>. But, I never stopped
-      trying. My hard work and determination have brought me this far, and I'm
-      excited about what lies ahead 😌
-    </h2>
-  </StoryView>
+        <StarsText>lost</StarsText>. But then I taught myself coding and
+        everything started making sense bit by bit ✨
+      </h2>
+    </StoryView>
+    <StoryView id="card-five">
+      <h2
+        class="text-[#b9bcad] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+      >
+        <StarsText>I failed countless times</StarsText>. But, I never stopped
+        trying. My hard work and determination have brought me this far, and I'm
+        excited about what lies ahead 😌
+      </h2>
+    </StoryView>
+  </div>
 </section>
 
 <script>
