@@ -25,8 +25,11 @@ import SocialIcon from './SocialIcon.astro';
     </div><div>Since</div><div>2019</div>
   </h1>
   <!-- social links -->
-  <div class="self-center md:self-end flex flex-col items-end gap-14">
-    <BrandsIWorkWith />
+  <div class="self-center md:self-end flex flex-col items-center md:items-end gap-14">
+    <!-- hidden on mobile -->
+    <div class="hidden md:block">
+      <BrandsIWorkWith />
+    </div>
     <SocialIcon />
   </div>
 </main>

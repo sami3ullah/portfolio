@@ -6,10 +6,11 @@ import StoryView from './StoryView.astro';
 <!-- 1st paragraph -->
 <section
   id="main__story"
-  class="relative w-full min-h-auto md:min-h-[120vh] bg-black min-w-full"
+  class="relative w-full min-h-auto md:min-h-[120vh] bg-darkBackground md:bg-black min-w-full"
 >
-  <div class="ml-8 absolute top-1/2 left-0 -translate-x-1/2 rotate-90">
-    <a href="#why-work-with-me" class="text-white">Skip story</a>
+  <div class="ml-8 absolute bottom-1/2 left-0 -translate-x-1/2 rotate-90">
+    <a href="#why-work-with-me" class="text-textDullest underline">Skip Story</a
+    >
   </div>
   <div class="px-pageXMobile lg:px-pageX">
     <div
@@ -90,21 +91,14 @@ import StoryView from './StoryView.astro';
     });
 
     tl.to(
-      '.text',
+      '#card-one',
       {
-        top: '-7%',
+        background: '#101010',
+        borderRadius: '1.25rem',
+        top: '35%',
       },
       'first'
     )
-      .to(
-        '#card-one',
-        {
-          background: '#101010',
-          borderRadius: '1.25rem',
-          top: '35%',
-        },
-        'first'
-      )
       .to('.story-heading', {
         x: '10%',
         opacity: 0,

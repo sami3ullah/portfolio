@@ -18,7 +18,7 @@ interface ProjectsProps {
 const { project, index } = Astro.props;
 ---
 
-<section class="bg-white px-pageXMobile md:px-pageX relative">
+<section class="project-section bg-white px-pageXMobile md:px-pageX relative">
   <div
     class=`border-b border-[#ccc] flex flex-col lg:flex-row items-center h-full py-[80px]`
   >
@@ -58,7 +58,7 @@ const { project, index } = Astro.props;
             <div
               class="border-black border-2 text-black px-6 py-4 w-max rounded-full text-[16px] group font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 transition-all"
             >
-              See it in action <span
+              See in action <span
                 ><Icon
                   name="gg:arrow-right"
                   class="w-[30px] group-hover:-rotate-45 transition-all"
@@ -92,28 +92,33 @@ const { project, index } = Astro.props;
   </div>
 </section>
 
-<!-- <script>
+<script>
+  import gsap from "gsap"
+  import { ScrollTrigger } from "gsap/all";
   import SplitType from 'split-type';
+  gsap.registerPlugin(ScrollTrigger)
 
   // selecting all the text with reaveal-type class
   const splitTypes = document.querySelectorAll('.reveal-type');
 
   splitTypes.forEach((char) => {
-    const text = new SplitType(char, { types: 'chars' });
+    console.log(char)
+    const text = new SplitType(char, { types: 'lines' });
 
-    gsap.from(text.chars, {
+    gsap.from(text.lines, {
       scrollTrigger: {
         trigger: char,
         start: 'top 80%',
-        end: 'top 10%',
+        end: 'top 30%',
         scrub: false,
         markers: true,
       },
+      ease: 'power4.out',
       scaleY: 0,
-      y: -20,
+      y: 30,
       transformOrigin: 'top',
-      stagger: 0.1,
+      stagger: 0.2,
       duration: 0.5,
     });
   });
-</script> -->
+</script>

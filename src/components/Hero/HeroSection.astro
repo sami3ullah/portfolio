@@ -3,16 +3,20 @@ import HeaderSection from './HeaderSection.astro';
 import MainTitle from './MainTitle.astro';
 ---
 
-<section
-  class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-1 relative"
->
-  <div class="bg-overlay-2">
-    <div class="flex flex-col h-screen px-pageXMobile md:px-pageX bg-overlay-1">
-      <HeaderSection />
-      <MainTitle />
+<div class="parallax-section">
+  <section
+    class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-1 relative"
+  >
+    <div class="bg-overlay-2">
+      <div
+        class="flex flex-col h-screen px-pageXMobile md:px-pageX bg-overlay-1"
+      >
+        <HeaderSection />
+        <MainTitle />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <style>
   .bg-overlay-1 {
@@ -41,7 +45,21 @@ import MainTitle from './MainTitle.astro';
   gsap.registerPlugin(ScrollTrigger);
 
   if (!isMobileView) {
-    gsap.from('.hero-section', {
+    const tl = gsap.timeline();
+    // add parralex effect through gsap
+    tl.to('.parallax-section', {
+      yPercent: 80,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.parallax-section',
+        start: 'top top',
+        endTrigger: '#main__story',
+        end: 'top top',
+        scrub: true,
+      },
+    });
+
+    tl.from('.hero-section', {
       scale: 4.5,
       x: -200,
       opacity: 0,
@@ -53,18 +71,4 @@ import MainTitle from './MainTitle.astro';
       },
     });
   }
-
-  // add parralex effect through gsap
-  gsap.to(".hero-section", {
-    yPercent: 80,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero-section",
-      start: "top top",
-      end: "bottom top",
-      scrub: true,
-      markers: true,
-    },
-  });
-
 </script>

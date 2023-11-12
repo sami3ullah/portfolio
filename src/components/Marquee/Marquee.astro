@@ -26,24 +26,8 @@ const { text } = Astro.props;
     height: 15vh;
     user-select: none;
     gap: 2rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    /*background-color: green;*/
-    /*transform: skewY(-3deg); */
-    /*transform: rotate(-5deg) translateY(-30px) translateX(50px);*/
+    padding: 2rem 0;
   }
-
-  /* .marquee:hover {
-    -webkit-text-stroke: 1.5px #000;
-    text-stroke: 1.5px #000;
-    -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
-    color: transparent;
-    transition: all 0.5s ease;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  } */
-
   .marquee__group {
     flex-shrink: 0;
     display: flex;
@@ -56,15 +40,13 @@ const { text } = Astro.props;
 
   .marquee__group span {
     color: #000;
-    font-size: 5vw;
+    font-size: 5rem;
     font-weight: 600;
     white-space: nowrap;
-    /* font-family: 'Syne', sans-serif !important; */
-    /*text-transform: uppercase;*/
   }
 
   .marquee__group span span {
-    font-size: 4.5vw;
+    font-size: 4.5rem;
     font-weight: 300;
   }
 
@@ -77,9 +59,19 @@ const { text } = Astro.props;
     }
   }
 
-  @media only screen and (min-width: 360px) {
+  @media only screen and (max-width: 768px) {
     .marquee__group span {
-      font-size: 6.5vw;
+      font-size: 3rem;
     }
+
+    .marquee{
+      padding: 0;
+      height: 10vh;
+    }
+
+    .marquee__group span span {
+    font-size: 2.5rem;
+    font-weight: 300;
+  }
   }
 </style>
