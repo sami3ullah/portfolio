@@ -1,43 +1,50 @@
 ---
+import Character from './Character.astro';
 import CopyRights from './CopyRights.astro';
 ---
 
 <section
-  class="fixed_footer bg-darkBackground px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full"
+  class="fixed_footer bg-darkBackground flex items-center gap-[5vw] px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full"
 >
-  <h2
-    class="text-textLightPrimary text-center md:text-left mb-[50px] text-[30px] md:text-[50px] lg:text-[4rem] leading-[1.133em] lg:leading-[1.33em] font-bold"
-  >
-    Bug Me!
-  </h2>
-  <a class="text-textLightPrimary text-center md:text-left block uppercase mb-[40px]"
-    >msami398@gmail.com</a
-  >
-  <div
-    class="interactable interactable-link text-center md:text-left mb-[20px] md:mb-[80px]"
-  >
-    <a
-      href="https://www.linkedin.com/in/sami3ullah/"
-      target="_blank"
-      class="mr-[20px] relative text-[16px] leading-[24px] text-textDullest hover:text-darkBackground2 py-[15px]"
-      >LinkedIn</a
+  <div>
+
+    <h2
+      class="text-textLightPrimary text-center md:text-left mb-[50px] text-[30px] md:text-[50px] lg:text-[4rem] leading-[1.133em] lg:leading-[1.33em] font-bold"
     >
-    <a
-      href="https://github.com/sami3ullah"
-      target="_blank"
-      class="mr-[20px] relative text-[16px] leading-[24px] transition-all text-textDullest hover:text-darkBackground2 py-[15px]"
-      >Github</a
+      Bug Me!
+    </h2>
+    <a class="text-textLightPrimary text-center md:text-left block uppercase mb-[40px]"
+      >msami398@gmail.com</a
     >
-    <a
-      href="https://stackoverflow.com/users/6900808/sami"
-      target="_blank"
-      class="mr-[20px] relative text-[16px] leading-[24px] transition-all text-textDullest hover:text-darkBackground2 py-[15px]"
-      >Stackoverflow</a
+    <div
+      class="interactable interactable-link text-center md:text-left mb-[20px] md:mb-[80px]"
     >
+      <a
+        href="https://www.linkedin.com/in/sami3ullah/"
+        target="_blank"
+        class="mr-[20px] relative text-[16px] leading-[24px] text-textDullest hover:text-darkBackground2 py-[15px]"
+        >LinkedIn</a
+      >
+      <a
+        href="https://github.com/sami3ullah"
+        target="_blank"
+        class="mr-[20px] relative text-[16px] leading-[24px] transition-all text-textDullest hover:text-darkBackground2 py-[15px]"
+        >Github</a
+      >
+      <a
+        href="https://stackoverflow.com/users/6900808/sami"
+        target="_blank"
+        class="mr-[20px] relative text-[16px] leading-[24px] transition-all text-textDullest hover:text-darkBackground2 py-[15px]"
+        >Stackoverflow</a
+      >
+    </div>
+    <!-- Moving Text -->
+    <div class="flex justify-center md:block">
+      <CopyRights text="©Muhammad. All Rights Reserved" />
+    </div>
   </div>
-  <!-- Moving Text -->
-  <div class="flex justify-center md:block">
-    <CopyRights text="©Muhammad. All Rights Reserved" />
+  <div class="flex-1 opacity-[0.35]">
+    <Character />
   </div>
 </section>
 
