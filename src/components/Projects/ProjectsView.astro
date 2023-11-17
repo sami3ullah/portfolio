@@ -102,7 +102,6 @@ const { project, index } = Astro.props;
   const splitTypes = document.querySelectorAll('.reveal-type');
 
   splitTypes.forEach((char) => {
-    console.log(char)
     const text = new SplitType(char, { types: 'lines' });
 
     gsap.from(text.lines, {

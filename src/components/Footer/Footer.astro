@@ -4,7 +4,7 @@ import CopyRights from './CopyRights.astro';
 ---
 
 <section
-  class="fixed_footer bg-darkBackground flex items-center gap-[5vw] px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full"
+  class="fixed_footer bg-darkBackground md:flex md:items-center md:gap-[5vw] px-pageXMobile md:px-pageX pt-[80px] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full"
 >
   <div>
 
@@ -43,7 +43,7 @@ import CopyRights from './CopyRights.astro';
       <CopyRights text="©Muhammad. All Rights Reserved" />
     </div>
   </div>
-  <div class="flex-1 opacity-[0.35]">
+  <div class="flex-1 opacity-[0.35] hidden md:block">
     <Character />
   </div>
 </section>
@@ -63,22 +63,24 @@ import CopyRights from './CopyRights.astro';
 
   gsap.registerPlugin(ScrollTrigger);
 
-  gsap.from('.fixed_footer', 1.3, {
-    y: 50,
-    opacity: 0,
-    ease: 'power4.inOut',
-    delay: 1,
-    stagger: {
-      amount: 0.5,
-    },
-  });
+  // gsap.from('.fixed_footer', 1.3, {
+  //   y: 50,
+  //   opacity: 0,
+  //   ease: 'power4.inOut',
+  //   delay: 1,
+  //   stagger: {
+  //     amount: 0.5,
+  //   },
+  // });
 
-  gsap.from('.fixed_footer', {
-    scrollTrigger: {
-      trigger: '.summary',
-      start: 'bottom bottom',
-      scrub: true,
-    },
-    y: -500,
-  });
+  // gsap.from('.fixed_footer', {
+  //   scrollTrigger: {
+  //     trigger: '.summary',
+  //     start: 'bottom bottom',
+  //     scrub: true,
+  //     markers: true
+  //   },
+  //   y: -500,
+  //   ease: 'power4.out',
+  // });
 </script>

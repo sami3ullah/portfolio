@@ -122,7 +122,7 @@ import Icon from 'astro-icon';
         // copy the text to clipboard on mouse click
         interactableCopy.addEventListener('click', () => {
           const text = interactableCopy.textContent;
-          navigator.clipboard.writeText(text);
+          navigator?.clipboard?.writeText(text);
           mouseTrailerCopy?.style.setProperty('display', 'none');
           mouseTrailerCopySuccessIcon?.style.setProperty('opacity', '1');
           setTimeout(() => {
