@@ -10,12 +10,12 @@ import StoryView from './StoryView.astro';
 >
   <!-- hidden on mobile, visible on other devices -->
   <div class="ml-8 absolute bottom-1/2 left-0 -translate-x-1/2 rotate-90">
-    <a href="#why-work-with-me" class="text-textDullest underline">Skip Story</a
+    <a href="#portfolio-projects" class="text-textDullest underline">Skip Story</a
     >
   </div>
   <!-- visible on mobile, hidden on other devices -->
-  <div class="w-[5rem] mobile_skip_story hidden h-[5rem] z-30 rounded-full font-[500] leading-normal bg-white fixed bottom-4 right-4 items-center justify-center">
-    <a href="#why-work-with-me" class="text-textDullest ">Skip <br> Story</a
+  <div class="w-[5rem] h-[5rem] mobile_skip_story z-30 hidden md:hidden rounded-full font-[600] leading-normal bg-textLightPrimary fixed bottom-4 right-4 items-center justify-center">
+    <a href="#portfolio-projects" class="text-darkBackground2  uppercase text-center">Skip <br> Story</a
     >
   </div>
   <div class="px-pageXMobile lg:px-pageX">
@@ -30,7 +30,7 @@ import StoryView from './StoryView.astro';
     </div>
     <StoryView id="card-one">
       <h2
-        class="text-[#b9bcad] w-full lg:w-[80%] font-[500] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
+        class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[500] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]"
       >
         I was born in a small, tech deprived town, with a dream of becoming a
         <span><StarsText>Software Engineer</StarsText></span> one day 🤩
@@ -38,7 +38,7 @@ import StoryView from './StoryView.astro';
     </StoryView>
     <StoryView id="card-two">
       <h2
-        class="text-[#b9bcad] w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
+        class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[300] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
       >
         After school, I wanted to move to a big city for college to fulfill <StarsText
         >
@@ -48,9 +48,9 @@ import StoryView from './StoryView.astro';
     </StoryView>
     <StoryView id="card-three">
       <h2
-        class="text-[#b9bcad] w-full lg:w-[80%] font-[00] md:font-[400] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
+        class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[00] md:font-[400] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]"
       >
-        Despite that, I still managed to moved out to pursure my dream, Reaching there I felt lost among tech
+        Despite that, I still managed to moved out to pursue my dream, Reaching there I felt lost among tech
         savvy folks. I didn't even know what a <StarsText>
           PlayStation
         </StarsText>
@@ -59,7 +59,7 @@ import StoryView from './StoryView.astro';
     </StoryView>
     <StoryView id="card-four">
       <h2
-        class="text-[#b9bcad] w-full lg:w-[80%] font-[600] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] text-left lg:text-left md:leading-[85px]"
+        class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[600] md:font-[300] text-[1.5rem] leading-[40px] md:text-[3rem] text-left lg:text-left md:leading-[85px]"
       >
         College was a whirlwind, and I felt <StarsText>
           lost and overwhelmed
@@ -69,10 +69,10 @@ import StoryView from './StoryView.astro';
     </StoryView>
     <StoryView id="card-five">
       <h2
-        class="text-[#b9bcad] w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[30px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
+        class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[300] md:font-[300] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]"
       >
         <StarsText>I faced countless failures</StarsText> along the way. But, I
-        never let them define me. My perseverance and hard work have brough me
+        never let them define me. My perseverance and hard work have brought me
         this far, eager to see what the future holds 😌
       </h2>
     </StoryView>
@@ -81,6 +81,7 @@ import StoryView from './StoryView.astro';
 
 <script>
   import gsap from 'gsap';
+  import SplitType from 'split-type';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   gsap.registerPlugin(ScrollTrigger);
   import { isMobileViewport } from '../../utils';
@@ -211,22 +212,66 @@ import StoryView from './StoryView.astro';
         'fifth'
       );
   }
+
+  // if the device is mobile
   if(isMobileView){
-    // change display none to flex for skip story
-    gsap.to(".mobile_skip_story", {
+    const storySections = document.querySelectorAll(".story_view");
+
+    storySections.forEach((text, index) => {
+      const splitText = new SplitType(text, { types: 'words'})
+      gsap.fromTo(
+        splitText.words,
+        {
+          opacity: 0.2,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: storySections[index],
+            start: "top 80%",
+            end: "top 40%",
+            scrub: true,
+            toggleActions: 'play play reverse reverse'
+          },
+        }
+      );
+    });
+
+    gsap.to(".mobile_skip_story",{
+      ease: 'power1.inOut',
       scrollTrigger: {
         trigger: "#main__story",
         start: "top 80%",
         end: "90% 80%",
-        scrub: 2,
-        markers: true,
+        scrub: true,
+        toggleActions: 'play play reverse reverse',
         onLeave: () => {
-          gsap.to(".mobile_skip_story", {
+          gsap.to(".mobile_skip_story",{
             display: "none",
+            duration: 0.2,
           })
-        }
+        },
+        onEnterBack: () => {
+          gsap.to(".mobile_skip_story",{
+            display: "flex",
+            duration: 0.2,
+          })
+        },
+        onEnter: () => {
+          gsap.to(".mobile_skip_story",{
+            display: "flex",
+            duration: 0.2,
+          })
+        },
+        onLeaveBack: () => {
+          gsap.to(".mobile_skip_story",{
+            display: "none",
+            duration: 0.2,
+          })
+        },
       },
-      display: "flex",
     })
   }
 </script>

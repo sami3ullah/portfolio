@@ -11,13 +11,13 @@ type Project = {
 };
 
 export async function getAllProject(): Promise<Project[]> {
-  const query = `*[_type == "projects"] {
+  const query = `*[_type == "projects"] | order(sortOrder asc) {
   _id,
   name,
   category,
   description,
   url,
-  "videoUrl": video.asset->url
+  "videoUrl": video.asset->url,
 }`;
   const projects = await sanityClient.fetch(query);
   return projects;
@@ -26,7 +26,7 @@ export async function getAllProject(): Promise<Project[]> {
 const projects: Project[] = await getAllProject();
 ---
 
-<section class="w-full dark-trailer">
+<section id="portfolio-projects" class="w-full dark-trailer">
   {
     projects.map((project: Project, index: number) => (
       <ProjectsView project={project} index={index} />

@@ -11,6 +11,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      type: 'number',
+    }),
+    defineField({
       name: 'category',
       title: 'Project Category',
       type: 'string',
