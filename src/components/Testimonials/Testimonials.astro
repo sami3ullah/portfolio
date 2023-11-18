@@ -1,3 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import Arif from "../../../public/testimonials/arif.jpeg"
+import Shannon from "../../../public/testimonials/shannon.jpeg"
+import Faizan from "../../../public/testimonials/faizan.jpeg"
+import Rahma from "../../../public/testimonials/rahma.jpeg"
+---
+
 <section class="min-h-screen bg-darkBackground px-pageXMobile md:px-pageX">
   <!-- testimonials container -->
   <div class="flex justify-between testimonials">
@@ -88,43 +96,47 @@
       <div class="flex items-center gap-4 md:gap-6">
         <span class="testimonials__indicator mb-[24px]" data-indicator="indicator1"
         ></span>
-        <img
+        <Image
           class="testimonials__image rounded-full w-[60px] md:w-[100px] mb-6 grayscale"
-          alt="testimonial image 1"
+          alt="Arif Iqbal"
+          loading="lazy"
           data-image="image1"
-          src="https://media.licdn.com/dms/image/D4D03AQHsjcSumRUUPQ/profile-displayphoto-shrink_800_800/0/1697892677143?e=1704326400&v=beta&t=f9-1GpZNvTGokaDmBbEbDGdmYCxWhhW2um4NRCqVI5w"
+          src={Arif}
         />
       </div>
       <div class="flex items-center gap-4 md:gap-6">
         <span class="testimonials__indicator mb-[24px] opacity-0" data-indicator="indicator2"
         ></span>
-        <img
+        <Image
           class="testimonials__image rounded-full w-[100px] md:w-[100px] mb-6 grayscale opacity-20"
-          alt="testimonial image 1"
+          alt="Shannon Madden"
+          loading="lazy"
           data-image="image1"
-          src="https://media.licdn.com/dms/image/C4D03AQF3LGs_Vs0-rA/profile-displayphoto-shrink_400_400/0/1606622051236?e=1704931200&v=beta&t=KjNRjJux_8O_nYqh2Ds2n6c6TNFJeTq0LcxOMflDhz4"
+          src={Shannon}
         />
       </div>
       <div class="flex items-center gap-4 md:gap-6">
         <span
           class="testimonials__indicator mb-[24px] opacity-0"
           data-indicator="indicator3"></span>
-        <img
+        <Image
           class="testimonials__image rounded-full w-[60px] md:w-[100px] mb-6 grayscale opacity-20"
-          alt="testimonial image 2"
+          alt="Faizan"
+          loading="lazy"
           data-image="image2"
-          src="https://media.licdn.com/dms/image/D4D03AQFVUkcm1dHdCw/profile-displayphoto-shrink_400_400/0/1697112257413?e=1704326400&v=beta&t=qZoUd5qwy53kgOVIbg54cHf3m2PrXdfZ7ia0JBOhA8U"
+          src={Faizan}
         />
       </div>
       <div class="flex items-center gap-4 md:gap-6">
         <span
           class="testimonials__indicator mb-[24px] opacity-0"
           data-indicator="indicator4"></span>
-        <img
+        <Image
           class="testimonials__image rounded-full w-[60px] md:w-[100px] grayscale opacity-20"
-          alt="testimonial image 3"
+          alt="Rahma Ahmed"
+          loading="lazy"
           data-image="image3"
-          src="https://media.licdn.com/dms/image/D4D03AQGhXNDZYhkIFg/profile-displayphoto-shrink_400_400/0/1699134266653?e=1704326400&v=beta&t=-aUm9Mqs_cYthoK2_EgnivoJpi8_N0mK-qkp0rrRHdY"
+          src={Rahma}
         />
       </div>
     </div>

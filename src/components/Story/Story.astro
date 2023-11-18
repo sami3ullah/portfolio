@@ -8,8 +8,14 @@ import StoryView from './StoryView.astro';
   id="main__story"
   class="relative w-full min-h-auto md:min-h-[120vh] bg-darkBackground md:bg-black min-w-full"
 >
+  <!-- hidden on mobile, visible on other devices -->
   <div class="ml-8 absolute bottom-1/2 left-0 -translate-x-1/2 rotate-90">
     <a href="#why-work-with-me" class="text-textDullest underline">Skip Story</a
+    >
+  </div>
+  <!-- visible on mobile, hidden on other devices -->
+  <div class="w-[5rem] mobile_skip_story hidden h-[5rem] z-30 rounded-full font-[500] leading-normal bg-white fixed bottom-4 right-4 items-center justify-center">
+    <a href="#why-work-with-me" class="text-textDullest ">Skip <br> Story</a
     >
   </div>
   <div class="px-pageXMobile lg:px-pageX">
@@ -204,5 +210,23 @@ import StoryView from './StoryView.astro';
         },
         'fifth'
       );
+  }
+  if(isMobileView){
+    // change display none to flex for skip story
+    gsap.to(".mobile_skip_story", {
+      scrollTrigger: {
+        trigger: "#main__story",
+        start: "top 80%",
+        end: "90% 80%",
+        scrub: 2,
+        markers: true,
+        onLeave: () => {
+          gsap.to(".mobile_skip_story", {
+            display: "none",
+          })
+        }
+      },
+      display: "flex",
+    })
   }
 </script>

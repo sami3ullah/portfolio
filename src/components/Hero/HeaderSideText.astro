@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   import { getTotalExperience } from '../../utils/index.ts';
   import gsap from 'gsap';
 
@@ -39,47 +39,75 @@
     }
   });
 
-  gsap.from('.header-side-text h3', {
-    x: 50,
-    opacity: 0,
-    ease: 'power4.inOut',
-    delay: 0.5,
-    duration: 1.3,
-    stagger: {
-      amount: 0.5,
+  gsap.fromTo(
+    '.header-side-text h3',
+    {
+      x: 50,
+      opacity: 0,
+      ease: 'power4.inOut',
+      delay: 0.5,
+      duration: 1.3,
+      stagger: {
+        amount: 0.5,
+      },
     },
-  });
+    {
+      x: 0,
+      opacity: 1,
+    }
+  );
 
-  gsap.from('.side-text-seperator', {
-    x: 300,
-    opacity: 0,
-    ease: 'power4.inOut',
-    delay: 0.5,
-    duration: 3,
-    stagger: {
-      amount: 0.5,
+  gsap.fromTo(
+    '.side-text-seperator',
+    {
+      x: 300,
+      opacity: 0,
+      ease: 'power4.inOut',
+      delay: 0.5,
+      duration: 3,
+      stagger: {
+        amount: 0.5,
+      },
     },
-  });
+    {
+      x: 0,
+      opacity: 1,
+    }
+  );
 
-  gsap.from('.header-side-text p', {
-    x: 50,
-    opacity: 0,
-    ease: 'power4.inOut',
-    delay: 0.7,
-    duration: 1.3,
-    stagger: {
-      amount: 0.5,
+  gsap.fromTo(
+    '.header-side-text p',
+    {
+      x: 50,
+      opacity: 0,
+      ease: 'power4.inOut',
+      delay: 0.7,
+      duration: 1.3,
+      stagger: {
+        amount: 0.5,
+      },
     },
-  });
+    {
+      x: 0,
+      opacity: 1,
+    }
+  );
 
-  gsap.from('.header-side-text .contact-info', {
-    x: 100,
-    opacity: 0,
-    ease: 'power4.inOut',
-    duration: 1.3,
-    delay: 1,
-    stagger: {
-      amount: 0.3,
+  gsap.fromTo(
+    '.header-side-text .contact-info',
+    {
+      x: 100,
+      opacity: 0,
+      ease: 'power4.inOut',
+      duration: 1.3,
+      delay: 1,
+      stagger: {
+        amount: 0.3,
+      },
     },
-  });
-</script>
+    {
+      x: 0,
+      opacity: 1,
+    }
+  );
+</script> -->
