@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import ogImage from "../../public/og-image.webp";
 ---
 
 <!doctype html>
@@ -12,6 +13,10 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
+    <meta property="og:title" content="Muhammad Samiullah" />
+    <meta property="og:description" content="I’m a Pakistani, Software engineer. I love what I do and have done, as an engineer, I bring my passion for creative problem-solving, design, and effective teamwork. Bug me to collaborate!" 
+    />
+    <meta property="og:image" content="/og-image.webp" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,9 +28,17 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <!-- <link href="https://fonts.cdnfonts.com/css/fivo-sans-modern?styles=25051,25042,25046" rel="stylesheet"> -->
     <meta name="generator" content="{Astro.generator}" />
     <title>{title}</title>
+    <!-- Google tag (gtag.js) -->
+    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-ZQC1XS2QWG"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZQC1XS2QWG');
+    </script>
   </head>
   <body>
     <slot />
