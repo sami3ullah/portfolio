@@ -3,7 +3,7 @@ import HeaderSection from './HeaderSection.astro';
 import MainTitle from './MainTitle.astro';
 ---
 
-<div class="parallax-section">
+<div class="parallax-section w-full bg-darkBackground">
   <section
     class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-1 relative"
   >
@@ -44,9 +44,9 @@ import MainTitle from './MainTitle.astro';
   const isMobileView = isMobileViewport();
   gsap.registerPlugin(ScrollTrigger);
 
+  const tl = gsap.timeline();
+  // add parralex effect through gsap
   if (!isMobileView) {
-    const tl = gsap.timeline();
-    // add parralex effect through gsap
     tl.to('.parallax-section', {
       yPercent: 80,
       ease: 'none',
