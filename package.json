@@ -23,6 +23,7 @@
     "sanity": "^3.16.7",
     "split-type": "^0.3.4",
     "tailwindcss": "^3.3.3",
+    "vanilla-lazyload": "^17.8.5",
     "vite": "^4.4.9"
   },
   "devDependencies": {

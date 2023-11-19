@@ -68,22 +68,22 @@ const { project, index } = Astro.props;
           </a>
         </div>
         <!-- project video -->
-        <div>
+        <div class="w-full">
           <a
             href={project.url}
             class="interactable interactable-link"
             target="_blank"
           >
             <video
-              class="w-full h-[auto]"
+              class="lazy w-full h-[auto]"
               loop
-              preload="none"
+              data-src={project.videoUrl}
               muted
               autoplay
               playsinline
               preload="none"
             >
-              <source src={project.videoUrl} type="video/mp4" />
+              <source data-src={project.videoUrl} type="video/mp4" />
                Your browser does not support the video tag.
             </video>
           </a>
@@ -95,10 +95,13 @@ const { project, index } = Astro.props;
 
 <script>
   import gsap from "gsap"
+  import LazyLoad from "vanilla-lazyload";
   import { ScrollTrigger } from "gsap/all";
   import SplitType from 'split-type';
   gsap.registerPlugin(ScrollTrigger)
 
+  const lazy = new LazyLoad();
+  lazy.update();
   // selecting all the text with reaveal-type class
   const splitTypes = document.querySelectorAll('.reveal-type');
 
