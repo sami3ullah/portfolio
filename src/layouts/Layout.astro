@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import Preloader from '../components/Preloader/Preloader.astro';
 ---
 
 <!doctype html>
@@ -86,4 +87,5 @@ const { title } = Astro.props;
     requestAnimationFrame(raf);
   };
   requestAnimationFrame(raf);
+
 </script>

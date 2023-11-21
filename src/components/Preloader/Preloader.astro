@@ -1,0 +1,88 @@
+<div class="preloder-container">
+  <div class="preloder-text-wrapper fixed h-[100vh] text-[4rem] md:text-[7rem] lg:text-[8rem] w-full z-30 flex items-center justify-center">
+    <div class="preloader-text-inner opacity-0 text-textLightPrimary">
+      <p>Curios</p>
+      <p>Creative</p>
+      <p>Passionate</p>
+      <p>Thinker</p>
+      <p class="text-primary">Engineer</p>
+    </div>
+  </div>
+  <div class="preloader-overlay fixed w-full h-[100vh] z-10 flex">
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#191919]"></div>
+  </div>
+</div>
+
+<style>
+  .preloder-container p{
+    text-align: center;
+    margin: 0;
+    line-height: 0;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap'
+  import SplitType from 'split-type';
+
+  const titles = gsap.utils.toArray(".preloder-container p")
+  const preloaderWrapper = document.querySelector(".preloder-text-wrapper")
+  const preloadInner = document.querySelector(".preloader-text-inner")
+  const tl = gsap.timeline({repeat: -1})
+
+  gsap.to(preloadInner,{
+    delay: 0.2,
+    opacity: 1
+  })
+  // Staggering 3D Effect
+  titles.forEach(title => {
+    const splitTitle = new SplitType(title, {type: "chars"})
+    tl
+    .from(splitTitle.chars, {
+      opacity: 0,
+      y: 80,
+      rotateX: -90,
+      stagger: 0.02
+    }, "<")
+    .to(splitTitle.chars, {
+      opacity: 0,
+      y: -80,
+      rotateX: 90,
+      stagger: 0.01
+    }, "<1")
+  })
+
+  gsap.to(preloaderWrapper, 0.1, {
+    delay: 5,
+    opacity: 0,
+    height: 0,
+    width: 0,
+    display: "none"
+  })
+
+  gsap.to(".preloader-overlay", 0.1, {
+    delay: 6,
+    opacity: 0,
+    height: 0,
+    width: 0,
+    display: "none"
+  })
+
+  gsap.to(".bar", 1.5, {
+    delay: 4.5,
+    height: 0,
+    stagger: {
+      amount: 0.5
+    },
+    ease: "power4.inOut"
+  })
+</script>

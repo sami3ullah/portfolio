@@ -36,11 +36,12 @@
 <script>
   import gsap from 'gsap';
 
-  gsap.from('.header-social-icons', 1.3, {
+  gsap.from('.header-social-icons', {
     x: 50,
     opacity: 0,
+    duration: 1.3,
     ease: 'power4.inOut',
-    delay: 1,
+    delay: 6,
     stagger: {
       amount: 0.5,
     },
