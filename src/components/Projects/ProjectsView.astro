@@ -68,13 +68,14 @@ const { project, index } = Astro.props;
           </a>
         </div>
         <!-- project video -->
-        <div class="w-full">
+        <div class="w-full flex-1">
           <a
             href={project.url}
             class="interactable interactable-link"
             target="_blank"
           >
             <video
+              poster={project.posterImage}
               class="lazy w-full h-[auto]"
               loop
               data-src={project.videoUrl}
@@ -100,8 +101,6 @@ const { project, index } = Astro.props;
   import SplitType from 'split-type';
   gsap.registerPlugin(ScrollTrigger)
 
-  const lazy = new LazyLoad();
-  lazy.update();
   // selecting all the text with reaveal-type class
   const splitTypes = document.querySelectorAll('.reveal-type');
 
@@ -123,4 +122,7 @@ const { project, index } = Astro.props;
       duration: 0.5,
     });
   });
+
+  const lazy = new LazyLoad();
+  lazy.update();
 </script>

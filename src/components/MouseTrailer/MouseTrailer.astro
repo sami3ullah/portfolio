@@ -1,25 +1,23 @@
----
-import Icon from 'astro-icon';
----
-
 <div
   id="mouse-trailer"
   class="hidden relative lg:flex items-center justify-center"
 >
-  <Icon
-    name="icon-park-outline:arrow-right-up"
+  <span 
     id="mouse-trailer__icon"
-    class="hidden text-black p-1"
-  />
+    class="hidden text-black p-1 w-[25px]"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 11h18v18m-25.456 7.456L37 11"/></svg>
+  </span>
   <span
     id="mouse-trailer__copy"
     class="hidden absolute z-2 bg-primary text-[6px] font-[500]">Copy</span
   >
-  <Icon
-    name="mdi:tick"
+  <span
     id="mouse-trailer__copy-success-icon"
-    class="opacity-0 -z-10 absolute text-black p-1"
-  />
+    class="opacity-0 -z-10 absolute text-black p-1 w-[25px]"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"/></svg>
+  </span>
 </div>
 
 <style>

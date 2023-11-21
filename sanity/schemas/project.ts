@@ -31,6 +31,11 @@ export default defineType({
       type: 'url',
     }),
     defineField({
+      name: 'posterImage',
+      title: 'Poster Image',
+      type: 'image',
+    }),
+    defineField({
       name: 'video',
       title: 'Project Video',
       type: 'file',

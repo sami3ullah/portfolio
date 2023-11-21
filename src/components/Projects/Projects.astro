@@ -17,6 +17,7 @@ export async function getAllProject(): Promise<Project[]> {
   category,
   description,
   url,
+  "posterImage":posterImage.asset->url,
   "videoUrl": video.asset->url,
 }`;
   const projects = await sanityClient.fetch(query);
