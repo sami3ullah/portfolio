@@ -1,5 +1,5 @@
 <section
-  class="py-[70px] md:py-[80px] lg:py-[100px] flex flex-col lg:flex-row justify-between border-b border-darkBorder"
+  class="about-me-section py-[70px] md:py-[80px] lg:py-[100px] flex flex-col lg:flex-row justify-between border-b border-darkBorder"
 >
   <div>
     <h2
@@ -8,7 +8,7 @@
       About Me
     </h2>
     <div
-      class="max-w-none lg:max-w-[310px] text-textDullest text-[0.889rem] leading-[1.5em] mb-[40px]"
+      class="max-w-none lg:max-w-[310px] text-textDullest text-[1rem] leading-[1.5em] mb-[40px]"
     >
       I’m a Pakistani, Software engineer based currently in Lahore, Pakistan. I
       love what I do and have done, so for the last <span id="experience"
@@ -39,3 +39,19 @@
     </div>
   </div>
 </section>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.to(".fixed_footer", {
+    scrollTrigger: {
+      trigger: ".about-me-section",
+      start: "top top%",
+      end: "bottom 80%",
+      scrub: true,
+    },
+    zIndex: 2
+  })
+</script>

@@ -9,7 +9,7 @@ module.exports = {
         tertiary: '#95997e',
         secondaryOpacity: '#131313',
         textLightPrimary: '#b9bcad',
-        textDullest: '#5e6051',
+        textDullest: '#666857',
         textLight: '#FFFFFF',
         hr: '#2F2F2FB2',
         darkBackground: '#101110',

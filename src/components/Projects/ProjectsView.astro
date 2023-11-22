@@ -13,14 +13,24 @@ type Project = {
 interface ProjectsProps {
   project: Project;
   index: number;
+  totalLength: number;
 }
 
-const { project, index } = Astro.props;
+const { project, index, totalLength } = Astro.props;
 ---
 
-<section class="project-section bg-white px-pageXMobile md:px-pageX relative">
+<section
+  class:list={[
+    'project-section bg-white px-pageXMobile md:px-pageX relative',
+    { 'pt-[40px] md:pt-[0px]': index === 0 },
+    { 'pb-[40px] md:pb-[0px]': index == totalLength - 1 },
+  ]}
+>
   <div
-    class=`border-b border-[#ccc] flex flex-col lg:flex-row items-center h-full py-[80px]`
+    class:list={[
+      `flex flex-col lg:flex-row items-center h-full py-[40px] md:py-[80px]`,
+      { 'md:border-b md:border-[#efefef]': index !== totalLength - 1 },
+    ]}
   >
     <div>
       <!-- project section -->
@@ -36,17 +46,17 @@ const { project, index } = Astro.props;
           </div>
           <div
             class="reveal-type text-background text-[35px] md:text-[50px] lg:text-[4rem]
-             font-bold uppercase leading-[40px] md:leading-[65px] mb-0 mb:mb-[10px]"
+             font-bold uppercase leading-[40px] md:leading-[65px] mb-[30px] md:mb-[20px] lg:mb-8"
           >
             {project.name}
           </div>
           <div
-            class="reveal-type text-background text-[16px] capitalize mb-[30px] md:mb-[20px] lg:mb-8"
+            class="hidden reveal-type text-background text-[16px] capitalize mb-[30px] md:mb-[20px] lg:mb-8"
           >
             {project.category}
           </div>
           <div
-            class="reveal-type md:text-[20px] hidden md:block lg:text-[22px] md:leading[30px] lg:leading-[27px] mb-8 text-background"
+            class="reveal-type text-[1rem] md:text-[20px] block lg:text-[22px] md:leading[30px] lg:leading-[27px] mb-8 text-background"
           >
             {project.description}
           </div>
@@ -95,11 +105,11 @@ const { project, index } = Astro.props;
 </section>
 
 <script>
-  import gsap from "gsap"
-  import LazyLoad from "vanilla-lazyload";
-  import { ScrollTrigger } from "gsap/all";
+  import gsap from 'gsap';
+  import LazyLoad from 'vanilla-lazyload';
+  import { ScrollTrigger } from 'gsap/all';
   import SplitType from 'split-type';
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 
   // selecting all the text with reaveal-type class
   const splitTypes = document.querySelectorAll('.reveal-type');
@@ -123,6 +133,8 @@ const { project, index } = Astro.props;
     });
   });
 
-  const lazy = new LazyLoad();
+  const lazy = new LazyLoad({
+    threshold: 1500,
+  });
   lazy.update();
 </script>

@@ -30,7 +30,7 @@ const projects: Project[] = await getAllProject();
 <section id="portfolio-projects" class="w-full dark-trailer">
   {
     projects.map((project: Project, index: number) => (
-      <ProjectsView project={project} index={index} />
+      <ProjectsView project={project} index={index} totalLength={projects.length} />
     ))
   }
 </section>
