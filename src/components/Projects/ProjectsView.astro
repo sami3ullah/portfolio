@@ -86,13 +86,12 @@ const { project, index, totalLength } = Astro.props;
           >
             <video
               poster={project.posterImage}
-              class="lazy w-full h-[auto]"
+              class="project-video lazy w-full h-[auto]"
               loop
               data-src={project.videoUrl}
               muted
-              autoplay
               playsinline
-              preload="none"
+              preload="auto"
             >
               <source data-src={project.videoUrl} type="video/mp4" />
                Your browser does not support the video tag.
@@ -137,4 +136,28 @@ const { project, index, totalLength } = Astro.props;
     threshold: 1500,
   });
   lazy.update();
+
+  // only play the video when it is in the viewport
+  document.addEventListener('DOMContentLoaded', () => {
+    const videos = document.querySelectorAll('.project-video');
+
+    const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    };
+
+    const videoObserver = new IntersectionObserver(handleIntersection, {
+      threshold: 0.2, // Adjust the threshold as needed (between 0 and 1)
+    });
+
+    videos.forEach((video) => {
+      videoObserver.observe(video);
+    });
+  });
 </script>
