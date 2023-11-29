@@ -64,6 +64,8 @@ const { project, index, totalLength } = Astro.props;
             href={project.url}
             class="interactable interactable-link"
             target="_blank"
+            role="button"
+            aria-label="See in action"
           >
             <div
               class="border-black border-2 text-black px-6 py-4 w-max rounded-full text-[16px] group font-bold uppercase leading-[1.5rem] hidden lg:flex items-center gap-2 transition-all"
@@ -81,6 +83,7 @@ const { project, index, totalLength } = Astro.props;
         <div class="w-full flex-1">
           <a
             href={project.url}
+            aria-label={project.name}
             class="interactable interactable-link"
             target="_blank"
           >

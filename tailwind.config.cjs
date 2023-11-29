@@ -3,7 +3,7 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      screens:{
+      screens: {
         // "xs": "320px",
         // "sm": "380px",
       },
@@ -13,7 +13,7 @@ module.exports = {
         tertiary: '#95997e',
         secondaryOpacity: '#131313',
         textLightPrimary: '#b9bcad',
-        textDullest: '#666857',
+        textDullest: '#A2A290',
         textLight: '#FFFFFF',
         hr: '#2F2F2FB2',
         darkBackground: '#101110',
