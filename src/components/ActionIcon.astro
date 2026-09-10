@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: 'resume' | 'contact' | 'playful' | 'focused';
+}
+const { name } = Astro.props;
+---
+
+<svg
+  data-icon={name}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true">
+  {name === 'resume' && <path d="M12 4v16m-6-6 6 6 6-6" />}
+  {name === 'contact' && <path d="m5 19 14-14M5 5h14v14" />}
+  {name === 'playful' && (
+    <>
+      <path d="m12 2 2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z" />
+      <path d="m19 3 2 2M3 19l2 2" />
+    </>
+  )}
+  {name === 'focused' && (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+    </>
+  )}
+</svg>
+<style>
+  svg {
+    width: 1.3em;
+    height: 1.3em;
+    flex: none;
+  }
+</style>

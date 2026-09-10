@@ -1,0 +1,27 @@
+---
+import profile from '../data/profile.json';
+import { wholeYearsSince } from '../utils/dates.mjs';
+---
+
+<span data-career-start={profile.careerStart}>
+  {wholeYearsSince(profile.careerStart)}+ years of experience
+</span>
+
+<script>
+  import { wholeYearsSince } from '../utils/dates.mjs';
+  function updateExperience() {
+    document
+      .querySelectorAll<HTMLElement>('[data-career-start]')
+      .forEach((element) => {
+        const years = wholeYearsSince(element.dataset.careerStart!);
+        element.textContent = `${years}+ years of experience`;
+      });
+  }
+  updateExperience();
+  document.addEventListener('astro:page-load', updateExperience);
+  window.addEventListener('pageshow', updateExperience);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) updateExperience();
+  });
+  setInterval(updateExperience, 60_000);
+</script>

@@ -1,0 +1,142 @@
+{
+  "name": "Muhammad Samiullah",
+  "title": "Senior Frontend Engineer",
+  "location": "Munich, Germany",
+  "email": "msami398@gmail.com",
+  "phone": "+49 1771875826",
+  "careerStart": "2019-06-01",
+  "availabilityMessage": "Reach out for availability",
+  "site": "https://www.samidev.me/",
+  "links": {
+    "LinkedIn": "https://www.linkedin.com/in/samidev/",
+    "GitHub": "https://github.com/sami3ullah",
+    "Stack Overflow": "https://stackoverflow.com/users/6900808/sami"
+  },
+  "summary": "Senior Frontend Engineer building production web applications since June 2019. Strongest in TypeScript, React, frontend architecture, design systems, and complex data-heavy interfaces. Experience owning a shared component library and delivering enterprise microfrontend applications at Innoscripta. Comfortable using Claude and Codex in development, with prior backend experience supporting a primary focus on frontend engineering.",
+  "roles": [
+    {
+      "company": "Innoscripta AG",
+      "title": "Senior Frontend Engineer",
+      "location": "Germany",
+      "start": "2024-07",
+      "end": "2026-09-07",
+      "highlights": [
+        "Owned the company-wide UI component library consumed by every microfrontend application, including design tokens, theming, accessibility, and Storybook documentation, eliminating duplicated component code and accelerating feature delivery across teams.",
+        "Built the frontend for a transfer pricing platform covering multi-entity intercompany data models, validation-heavy forms, calculation results, and audit trails, replacing a spreadsheet-based process.",
+        "Delivered an asset management application covering registration, assignment, depreciation, and disposal, with role-based permissions and reporting views.",
+        "Shipped a Jira-style task management application with boards, drag-and-drop, filtering, and real-time updates.",
+        "Built a risk management module with a risk register, scoring matrices, mitigation workflows, and dashboards for tracking and reporting active organizational risks."
+      ]
+    },
+    {
+      "company": "Tkxel",
+      "title": "Senior Software Engineer",
+      "location": "Lahore, Pakistan",
+      "start": "2023-04",
+      "end": "2024-06",
+      "highlights": [
+        "Built a design system with design tokens that standardized UI across multiple products and raised component reuse to approximately 60%.",
+        "Delivered a core module of an enterprise application, cutting a key user workflow's completion time by approximately 50% through a redesigned UI and improved data fetching.",
+        "Introduced the team's first automated test suite using Jest and React Testing Library, reducing production defects by approximately 30% and enabling safer refactoring."
+      ]
+    },
+    {
+      "company": "Emerald Labs",
+      "title": "Senior Software Engineer",
+      "location": "Lahore, Pakistan",
+      "start": "2022-06",
+      "end": "2023-04",
+      "highlights": [
+        "Led delivery of three client-facing web applications from architecture through launch.",
+        "Refactored legacy code and introduced linting, typing, and review standards, reducing recurring bug reports by approximately 30%.",
+        "Designed database schemas and Node.js/Express APIs with MongoDB, improving API response times under concurrent load."
+      ]
+    },
+    {
+      "company": "LAAM",
+      "title": "Software Engineer",
+      "location": "Lahore, Pakistan",
+      "start": "2019-06",
+      "end": "2022-06",
+      "highlights": [
+        "Built LAAM's system from scratch, working directly with leadership to help the business reach PKR 2 million+ in daily sales.",
+        "Built internal analytics dashboards that replaced manual reporting and halved sales-analysis turnaround time.",
+        "Mentored junior engineers and helped establish frontend conventions as the team scaled."
+      ]
+    }
+  ],
+  "assistant": {
+    "name": "Personal AI Assistant",
+    "status": "Runs locally on my computer for my own use. No external users or public deployment.",
+    "highlights": [
+      "Built a personal assistant that accepts spoken input and responds by voice.",
+      "Added on-screen drawing to help explain how to use software.",
+      "Enabled actions such as controlling Spotify and changing system settings, alongside research assistance.",
+      "Connected the assistant to Google Sheets, Calendar, Docs, and Obsidian, with support for connecting additional apps."
+    ]
+  },
+  "education": {
+    "degree": "Bachelor of Computer Science (BSCS)",
+    "institution": "FCCU, A Chartered University",
+    "start": "2015-07",
+    "end": "2019-07"
+  },
+  "skills": [
+    {
+      "name": "Frontend",
+      "items": [
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "React",
+        "Next.js",
+        "Redux",
+        "Zustand",
+        "TanStack Query",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Chakra UI",
+        "Ant Design",
+        "Storybook",
+        "Module Federation"
+      ]
+    },
+    {
+      "name": "Testing and tooling",
+      "items": [
+        "Jest",
+        "React Testing Library",
+        "Playwright",
+        "SonarQube",
+        "Git",
+        "Docker",
+        "CI/CD",
+        "AWS"
+      ]
+    },
+    {
+      "name": "AI development tools",
+      "items": ["Claude", "Codex"]
+    },
+    {
+      "name": "Prior backend and database exposure",
+      "items": [
+        "Node.js",
+        "Express",
+        "REST APIs",
+        "GraphQL",
+        "Drizzle ORM",
+        "Prisma",
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "DynamoDB",
+        "Firebase",
+        "SQL",
+        "Python"
+      ]
+    }
+  ],
+  "languages": ["English: fluent", "Urdu: native"]
+}

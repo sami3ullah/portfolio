@@ -1,57 +1,50 @@
+---
+import profile from '../../data/profile.json';
+interface Props {
+  showStory?: boolean;
+}
+const { showStory = true } = Astro.props;
+---
+
 <section
-  class="about-me-section py-[70px] md:py-[80px] lg:py-[100px] flex flex-col lg:flex-row justify-between border-b border-darkBorder"
->
+  id="about"
+  class="section container about-section"
+  aria-labelledby="about-title">
   <div>
-    <h2
-      class="text-[30px] md:text-[50px] lg:text-[4rem] leading-[70px] lg:leading-[80px] font-bold mb-[30px] text-textLightPrimary"
-    >
-      About Me
+    <p class="eyebrow">05 / A little about me</p>
+    <h2 id="about-title">
+      A builder. <br />
+      <span class="muted">Always learning.</span>
     </h2>
-    <div
-      class="max-w-none lg:max-w-[310px] text-textDullest text-[1rem] leading-[1.5em] mb-[40px]"
-    >
-      I’m a Pakistani, Software engineer based currently in Lahore, Pakistan. I
-      love what I do and have done, so for the last <span id="experience"
-        >{new Date().getFullYear() - 2019}</span
-      >+ years working on various projects, brands and companies around the
-      world. As an engineer, I bring my passion for creative problem-solving,
-      design, and effective teamwork to every project. I'm always excited to
-      collaborate and bring fresh ideas to the table!
-    </div>
   </div>
-  <div
-    class="ml-0 lg:ml-[80px] max-w-none md:max-w-[80%] lg:max-w-[61%] w-full"
-  >
-    <h3
-      class="text-[22px] md:text-[24px] leading-[30px] md:leading-[34px] mb-[30px] text-textLightPrimary"
-    >
-      I've developed and worked for:
-    </h3>
-    <div
-      class="text-[30px] md:text-[50px] lg:text-[4rem] leading-[40px] md:leading-[60px] lg:leading-[80px] text-textLightPrimary"
-    >
-      Tkxel <br />
-       Laam <br />
-       Ali Xeeshan <br />
-       Emerald Labs <br />
-       Mohsin Naveed Ranjha <br />
-       Shamsha Hashwani <br />
-    </div>
+  <div class="about-copy">
+    <p>
+      I’m {profile.name}, a {profile.title.toLowerCase()} based in{' '}
+      {profile.location}. Since June 2019, I’ve worked on e-commerce tools,
+      design systems, and enterprise applications.
+    </p>
+    <p>
+      I enjoy making complicated workflows easier to use and giving teams
+      reliable components to build with. Alongside frontend work, I use Claude
+      and Codex in development and explore voice interaction through my local
+      personal assistant.
+    </p>
+    {showStory && (
+      <details id="main__story">
+        <summary>The story behind the work</summary>
+        <p>
+          I grew up in a small town with limited access to technology and wanted
+          to become a software engineer. Moving to a larger city for college was
+          a big adjustment. Learning to code helped me find my direction.
+        </p>
+        <p>
+          That experience still shapes how I work: ask questions, learn
+          deliberately, and keep building.
+        </p>
+        <a class="text-link" href="#portfolio-projects">
+          Skip Story <span aria-hidden="true">↑</span>
+        </a>
+      </details>
+    )}
   </div>
 </section>
-
-<script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.to(".fixed_footer", {
-    scrollTrigger: {
-      trigger: ".about-me-section",
-      start: "top top%",
-      end: "bottom 80%",
-      scrub: true,
-    },
-    zIndex: 2
-  })
-</script>

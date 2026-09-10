@@ -1,0 +1,398 @@
+<div class="component-scene" data-component-artwork aria-hidden="true">
+  <div class="scene-orbit"></div>
+  <div class="floating-tile tile-grid">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="foundation-card">
+    <div class="palette">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="foundation-title">A shared foundation</div>
+    <div class="component-controls">
+      <span class="component-button">
+        Components
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 18 18 6M6 6h12v12" />
+        </svg>
+      </span>
+      <span class="component-check">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="m6 12 4 4 8-9" pathLength="1" />
+        </svg>
+      </span>
+    </div>
+    <div class="component-lines">
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+    <div class="component-tags">
+      <span>Tokens</span>
+      <span>Theming</span>
+      <span>Storybook</span>
+    </div>
+  </div>
+  <div class="floating-tile tile-toggle">
+    <span></span>
+  </div>
+</div>
+
+<style>
+  .component-scene {
+    --art-play-state: paused;
+    container-type: inline-size;
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1.25;
+    overflow: hidden;
+    border: 1px solid #dce4d1;
+    border-radius: 24px;
+    color: #243021;
+    background:
+      radial-gradient(ellipse at 85% 8%, #d5ff3f45, transparent 50%),
+      radial-gradient(ellipse at 5% 100%, #b3c4a359, transparent 65%), #edf1e6;
+  }
+  .component-scene[data-playing] {
+    --art-play-state: running;
+  }
+  .component-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(#87987310 1px, transparent 1px),
+      linear-gradient(90deg, #87987310 1px, transparent 1px);
+    background-size: 36px 36px;
+    mask-image: radial-gradient(ellipse, black, transparent 75%);
+  }
+  .scene-orbit {
+    position: absolute;
+    width: 88%;
+    aspect-ratio: 1;
+    border: 1px solid #8d9e7730;
+    border-radius: 50%;
+    transform: rotate(-25deg) scaleY(0.7);
+  }
+  .foundation-card {
+    position: relative;
+    z-index: 1;
+    width: 70%;
+    padding: 6cqi;
+    border: 1px solid #fff;
+    border-radius: 4cqi;
+    background: linear-gradient(145deg, #ffffff, #f5f8ef);
+    box-shadow:
+      0 2px 2px #30461c08,
+      0 12px 24px -12px #30461c29,
+      0 36px 60px -28px #30461c40,
+      inset 0 0 0 1px #84976b0d;
+    transform: translateY(0) rotate(-4deg);
+  }
+  .palette {
+    display: flex;
+    margin-bottom: 5cqi;
+  }
+  .palette span {
+    width: 7.8cqi;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 0.6cqi solid #fff;
+    background: #243021;
+  }
+  .palette span + span {
+    margin-left: -1.8cqi;
+  }
+  .palette span:nth-child(2) {
+    background: #6c8053;
+  }
+  .palette span:nth-child(3) {
+    background: #b1cb86;
+  }
+  .palette span:nth-child(4) {
+    background: #d5ff3f;
+  }
+  .foundation-title {
+    font-size: 4.1cqi;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    margin-bottom: 4cqi;
+    white-space: nowrap;
+  }
+  .component-controls {
+    display: flex;
+    align-items: center;
+    gap: 2cqi;
+  }
+  .component-button,
+  .component-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8cqi;
+    border-radius: 100px;
+  }
+  .component-button {
+    gap: 2cqi;
+    padding-inline: 3.2cqi;
+    background: #273721;
+    color: #f7f9f1;
+    font-size: 2.6cqi;
+  }
+  .component-button svg {
+    width: 3.2cqi;
+  }
+  .component-check {
+    width: 8cqi;
+    background: #d5ff3f;
+  }
+  .component-check svg {
+    width: 4cqi;
+  }
+  .component-lines {
+    display: grid;
+    gap: 1.4cqi;
+    margin-block: 5cqi;
+  }
+  .component-lines i {
+    height: 1.5cqi;
+    border-radius: 100px;
+    background: #d7e0cc;
+    transform-origin: left;
+  }
+  .component-lines i:nth-child(2) {
+    width: 85%;
+  }
+  .component-lines i:nth-child(3) {
+    width: 60%;
+  }
+  .component-tags {
+    display: flex;
+    gap: 1.3cqi;
+  }
+  .component-tags span {
+    padding: 1.6cqi 2cqi;
+    border: 1px solid #cfdbc2;
+    border-radius: 1cqi;
+    font-size: 2.2cqi;
+    line-height: 1.4;
+    background: #f9fbf5;
+  }
+  .floating-tile {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    place-content: center;
+    border: 1px solid #ffffffbd;
+    border-radius: 3cqi;
+    background: #f9fcf3;
+    box-shadow: 0 8px 28px -8px #30461c30;
+  }
+  .tile-grid {
+    top: 13%;
+    right: 8%;
+    grid-template-columns: repeat(2, 4.2cqi);
+    gap: 1.1cqi;
+    padding: 2.7cqi;
+    transform: rotate(9deg);
+  }
+  .tile-grid span {
+    aspect-ratio: 1;
+    border-radius: 0.8cqi;
+    background: #b5c69e;
+  }
+  .tile-grid span:last-child {
+    background: #d5ff3f;
+  }
+  .tile-toggle {
+    bottom: 14%;
+    left: 7%;
+    padding: 2.8cqi;
+    transform: rotate(-10deg);
+  }
+  .tile-toggle > span {
+    width: 10cqi;
+    height: 5.6cqi;
+    padding: 0.7cqi;
+    border-radius: 100px;
+    background: #cfed9b;
+  }
+  .tile-toggle > span::after {
+    content: '';
+    display: block;
+    width: 4.2cqi;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px #24302124;
+    transform: translateX(4.4cqi);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .foundation-card {
+      animation: card-float 8s ease-in-out infinite var(--art-play-state);
+    }
+    .tile-grid {
+      animation: grid-float 8s ease-in-out infinite var(--art-play-state);
+    }
+    .tile-toggle {
+      animation: toggle-float 8s ease-in-out infinite var(--art-play-state);
+    }
+    .palette span {
+      animation: palette-wave 8s ease-in-out infinite var(--art-play-state);
+    }
+    .palette span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .palette span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .palette span:nth-child(4) {
+      animation-delay: 0.45s;
+    }
+    .component-lines i {
+      animation: line-reveal 8s ease-in-out infinite var(--art-play-state);
+    }
+    .component-lines i:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .component-lines i:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .component-check path {
+      animation: check-draw 8s ease-in-out infinite var(--art-play-state);
+    }
+    .tile-toggle > span::after {
+      animation: toggle-slide 8s ease-in-out infinite var(--art-play-state);
+    }
+  }
+  @keyframes card-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-4deg);
+    }
+    50% {
+      transform: translateY(-1.4cqi) rotate(-1deg);
+    }
+  }
+  @keyframes grid-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(9deg);
+    }
+    50% {
+      transform: translateY(1.8cqi) rotate(4deg);
+    }
+  }
+  @keyframes toggle-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-10deg);
+    }
+    50% {
+      transform: translateY(-1.8cqi) rotate(-5deg);
+    }
+  }
+  @keyframes palette-wave {
+    0%,
+    8%,
+    32%,
+    100% {
+      transform: translateY(0);
+    }
+    20% {
+      transform: translateY(-1cqi);
+    }
+  }
+  @keyframes line-reveal {
+    0%,
+    38%,
+    80%,
+    100% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    48% {
+      transform: scaleX(0.72);
+      opacity: 0.55;
+    }
+  }
+  @keyframes check-draw {
+    0%,
+    45%,
+    80%,
+    100% {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+    }
+    52% {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    68% {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes toggle-slide {
+    0%,
+    35%,
+    85%,
+    100% {
+      transform: translateX(4.4cqi);
+    }
+    45%,
+    70% {
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<script>
+  import { onPageReady } from '../../../utils/page-lifecycle';
+
+  onPageReady('playful', ({ signal }) => {
+    const artwork = document.querySelector<HTMLElement>(
+      '[data-component-artwork]'
+    );
+    if (!artwork) return;
+    let visible = false;
+    const update = () => {
+      artwork.toggleAttribute('data-playing', visible && !document.hidden);
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+        update();
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(artwork);
+    document.addEventListener('visibilitychange', update, { signal });
+    return () => {
+      observer.disconnect();
+      artwork.removeAttribute('data-playing');
+    };
+  });
+</script>

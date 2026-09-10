@@ -1,0 +1,136 @@
+{
+  "lcp": 484,
+  "cls": 0,
+  "navigation": {
+    "name": "http://127.0.0.1:4321/",
+    "entryType": "navigation",
+    "startTime": 0,
+    "duration": 922.7999999523163,
+    "navigationId": 3463,
+    "initiatorType": "navigation",
+    "deliveryType": "",
+    "nextHopProtocol": "http/1.1",
+    "renderBlockingStatus": "non-blocking",
+    "contentType": "text/html",
+    "contentEncoding": "gzip",
+    "workerStart": 0,
+    "workerRouterEvaluationStart": 0,
+    "workerCacheLookupStart": 0,
+    "workerMatchedSourceType": "",
+    "workerFinalSourceType": "",
+    "redirectStart": 0,
+    "redirectEnd": 0,
+    "fetchStart": 0.10000002384185791,
+    "domainLookupStart": 0.5,
+    "domainLookupEnd": 0.6000000238418579,
+    "connectStart": 0.6000000238418579,
+    "secureConnectionStart": 0,
+    "connectEnd": 0.7999999523162842,
+    "requestStart": 0.7999999523162842,
+    "responseStart": 1.6999999284744263,
+    "firstInterimResponseStart": 0,
+    "finalResponseHeadersStart": 1.6999999284744263,
+    "responseEnd": 183.5,
+    "transferSize": 6495,
+    "encodedBodySize": 6195,
+    "decodedBodySize": 21169,
+    "responseStatus": 200,
+    "serverTiming": [],
+    "unloadEventStart": 0,
+    "unloadEventEnd": 0,
+    "domInteractive": 187.79999995231628,
+    "domContentLoadedEventStart": 482.89999997615814,
+    "domContentLoadedEventEnd": 482.89999997615814,
+    "domComplete": 922.7999999523163,
+    "loadEventStart": 922.7999999523163,
+    "loadEventEnd": 922.7999999523163,
+    "type": "navigate",
+    "redirectCount": 0,
+    "activationStart": 0,
+    "criticalCHRestart": 0,
+    "notRestoredReasons": null,
+    "confidence": {
+      "randomizedTriggerRate": 0.4994798,
+      "value": "high"
+    }
+  },
+  "resources": [
+    {
+      "name": "http://127.0.0.1:4321/_astro/index.D5Gn15mz.css",
+      "bytes": 4296,
+      "duration": 220.80000007152557
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/Preloader.astro_astro_type_script_index_0_lang.CXnvNCvT.js",
+      "bytes": 1113,
+      "duration": 161.29999995231628
+    },
+    {
+      "name": "http://127.0.0.1:4321/logo.svg",
+      "bytes": 1034,
+      "duration": 169.19999992847443
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/ExperienceText.astro_astro_type_script_index_0_lang.C8GzWu-z.js",
+      "bytes": 877,
+      "duration": 180.20000004768372
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/hero-image.xrFavOXM_oDaHg.webp",
+      "bytes": 7850,
+      "duration": 246.29999995231628
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/CopyRights.astro_astro_type_script_index_0_lang.BKPG9jr4.js",
+      "bytes": 538,
+      "duration": 177.20000004768372
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/manrope-latin-400-normal.PaqtzbVb.woff2",
+      "bytes": 14408,
+      "duration": 496.8000000715256
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/manrope-latin-800-normal.BfWYOv1c.woff2",
+      "bytes": 13948,
+      "duration": 503.89999997615814
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/manrope-latin-700-normal.BZp_XxE4.woff2",
+      "bytes": 14512,
+      "duration": 510.39999997615814
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/manrope-latin-600-normal.4f0koTD-.woff2",
+      "bytes": 14472,
+      "duration": 517.9000000953674
+    },
+    {
+      "name": "http://127.0.0.1:4321/_astro/manrope-latin-500-normal.BYYD-dBL.woff2",
+      "bytes": 14344,
+      "duration": 526.1000000238419
+    }
+  ],
+  "profile": {
+    "viewport": "390x844",
+    "deviceScaleFactor": 1,
+    "network": "1.6 Mbps down, 750 kbps up, 150 ms latency",
+    "cpuSlowdown": 4,
+    "cache": "disabled",
+    "source": "local production preview; one lab run, not field Core Web Vitals"
+  },
+  "requests": [
+    "http://127.0.0.1:4321/",
+    "http://127.0.0.1:4321/_astro/index.D5Gn15mz.css",
+    "http://127.0.0.1:4321/logo.svg",
+    "http://127.0.0.1:4321/_astro/Preloader.astro_astro_type_script_index_0_lang.CXnvNCvT.js",
+    "http://127.0.0.1:4321/_astro/ExperienceText.astro_astro_type_script_index_0_lang.C8GzWu-z.js",
+    "http://127.0.0.1:4321/_astro/hero-image.xrFavOXM_oDaHg.webp",
+    "http://127.0.0.1:4321/_astro/CopyRights.astro_astro_type_script_index_0_lang.BKPG9jr4.js",
+    "http://127.0.0.1:4321/_astro/manrope-latin-400-normal.PaqtzbVb.woff2",
+    "http://127.0.0.1:4321/_astro/manrope-latin-800-normal.BfWYOv1c.woff2",
+    "http://127.0.0.1:4321/_astro/manrope-latin-700-normal.BZp_XxE4.woff2",
+    "http://127.0.0.1:4321/_astro/manrope-latin-600-normal.4f0koTD-.woff2",
+    "http://127.0.0.1:4321/_astro/manrope-latin-500-normal.BYYD-dBL.woff2"
+  ]
+}

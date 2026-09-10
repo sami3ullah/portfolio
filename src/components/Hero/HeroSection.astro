@@ -1,64 +1,70 @@
 ---
-import HeaderSection from './HeaderSection.astro';
-import MainTitle from './MainTitle.astro';
+import { Image } from 'astro:assets';
+import Portrait from '../../../public/hero-image.webp';
+import ExperienceText from '../ExperienceText.astro';
+import ActionIcon from '../ActionIcon.astro';
+import { profile, resumeUrl } from '../../data/site';
 ---
 
-<div class="parallax-section h-screen w-full bg-darkBackground">
-  <div class="fixed top-0 h-screen w-full">
-    <section
-      class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-[1]"
-    >
-      <div class="bg-overlay-2">
-        <div
-          class="flex flex-col h-screen px-pageXMobile md:px-pageX bg-overlay-1"
-        >
-          <HeaderSection />
-          <MainTitle />
-        </div>
-      </div>
-    </section>
+<section class="hero container" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <div class="hero-eyebrow">
+      <span class="eyebrow">{profile.location}</span>
+      <span class="hero-experience">
+        <ExperienceText />
+      </span>
+    </div>
+    <h1 id="hero-title">
+      <span>Senior </span>
+      <span class="lime">Frontend </span>
+      <span>Engineer</span>
+    </h1>
+    <p class="hero-description">
+      I develop web applications and shared UI systems with React and
+      TypeScript, with a focus on accessibility, maintainability, and complex
+      business workflows.
+    </p>
+    <div class="actions">
+      <a class="button button-primary" href={resumeUrl} download data-resume>
+        <span>Resume</span>
+        <span class="button-icon" aria-hidden="true">
+          <ActionIcon name="resume" />
+        </span>
+      </a>
+      <a class="button" href="#contact">
+        <span>Contact</span>
+        <span class="button-icon" aria-hidden="true">
+          <ActionIcon name="contact" />
+        </span>
+      </a>
+    </div>
   </div>
-</div>
-
-<style>
-  .bg-overlay-1 {
-    background: linear-gradient(
-      180deg,
-      #0d0d0d 0%,
-      rgba(13, 13, 13, 0.88) 8.03%,
-      rgba(13, 13, 13, 0) 100%
-    );
-  }
-  .bg-overlay-2 {
-    background: linear-gradient(
-      360deg,
-      #0d0d0d 0%,
-      rgba(13, 13, 13, 0.88) 13.06%,
-      rgba(13, 13, 13, 0) 100%
-    );
-  }
-</style>
-
-<script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/all';
-  import { isMobileViewport } from '../../utils';
-  const isMobileView = isMobileViewport();
-  gsap.registerPlugin(ScrollTrigger);
-
-  const tl = gsap.timeline();
-  // add parralex effect through gsap
-  if (!isMobileView) {
-    tl.to('.hero-section', {
-      yPercent: -20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.parallax-section',
-        start: 'top top',
-        endTrigger: '#main__story',
-        end: 'top top',
-        scrub: true,
-      },
-    });
-  }
-</script>
+  <div class="hero-portrait">
+    <Image
+      src={Portrait}
+      alt="Muhammad Samiullah"
+      widths={[480, 720, 960]}
+      sizes="(max-width: 700px) 0px, 45vw"
+      width={720}
+      height={680}
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <div class="portrait-caption">
+      <span class="portrait-description">
+        Reusable components. <br />
+        Reliable, accessible applications.
+      </span>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <a class="availability-link" href="#contact">
+      {profile.availabilityMessage}
+    </a>
+    <span>
+      React <span aria-hidden="true">/</span> TypeScript{' '}
+      <span aria-hidden="true">/</span> UI architecture
+    </span>
+  </div>
+</section>

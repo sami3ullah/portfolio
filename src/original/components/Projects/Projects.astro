@@ -1,0 +1,115 @@
+---
+import ProjectsView from './ProjectsView.astro';
+import VideoProject from './VideoProject.astro';
+import { caseStudies } from '../../../data/case-studies';
+import { getSanityProjects } from '../../../data/sanity-projects';
+import './projects.css';
+
+const projects = await getSanityProjects();
+const innoscripta = caseStudies[0];
+// Lead with the same featured projects as the focused view. Keep the
+// remaining videos in their published order.
+const featuredOrder = new Map(
+  caseStudies.map((project, index) => [project.employer.toLowerCase(), index])
+);
+projects.sort(
+  (a, b) =>
+    (featuredOrder.get(a.name.toLowerCase()) ?? caseStudies.length) -
+    (featuredOrder.get(b.name.toLowerCase()) ?? caseStudies.length)
+);
+---
+
+<section id="portfolio-projects" class="w-full dark-trailer">
+  <ProjectsView project={innoscripta} />
+  {projects.map((project) => {
+    const caseStudy = caseStudies.find(
+      ({ employer }) => employer.toLowerCase() === project.name.toLowerCase()
+    );
+    return (
+      <VideoProject
+        project={{
+          ...project,
+          description: caseStudy?.contribution ?? project.description,
+        }}
+      />
+    );
+  })}
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import SplitType from 'split-type';
+  import { playfulEffect } from '../../utils/page-effects';
+
+  playfulEffect(({ signal }) => {
+    const gallery = document.querySelector<HTMLElement>('#portfolio-projects')!;
+    const motion = gsap.matchMedia();
+    const revealed = new WeakSet<HTMLElement>();
+
+    // Every project uses the same line reveal, measured after fonts settle.
+    void document.fonts.ready.then(() => {
+      if (signal.aborted) return;
+      motion.add('(prefers-reduced-motion: no-preference)', () => {
+        let reveals: gsap.Context | undefined;
+        let resizeFrame: number;
+        let width = gallery.clientWidth;
+
+        const setupReveals = () => {
+          reveals?.revert();
+          reveals = gsap.context(() => {
+            const splits: SplitType[] = [];
+            gallery
+              .querySelectorAll<HTMLElement>('.reveal-type')
+              .forEach((element) => {
+                if (revealed.has(element)) return;
+                const split = new SplitType(element, { types: 'lines' });
+                splits.push(split);
+                gsap.from(split.lines, {
+                  scrollTrigger: {
+                    trigger: element,
+                    start: 'top 80%',
+                    once: true,
+                  },
+                  ease: 'power4.out',
+                  scaleY: 0,
+                  y: 50,
+                  transformOrigin: 'top',
+                  stagger: 0.2,
+                  duration: 0.5,
+                  onStart: () => {
+                    revealed.add(element);
+                  },
+                });
+              });
+            return () => splits.forEach((split) => split.revert());
+          });
+          ScrollTrigger.sort();
+          ScrollTrigger.refresh();
+        };
+
+        // Reflow unseen lines on resize without replaying revealed text.
+        const resize = new ResizeObserver(() => {
+          if (gallery.clientWidth === width) return;
+          width = gallery.clientWidth;
+          cancelAnimationFrame(resizeFrame);
+          resizeFrame = requestAnimationFrame(setupReveals);
+        });
+        setupReveals();
+        resize.observe(gallery);
+        return () => {
+          cancelAnimationFrame(resizeFrame);
+          resize.disconnect();
+          reveals?.revert();
+        };
+      });
+    });
+
+    gallery.querySelectorAll('[data-case-details]').forEach((details) => {
+      details.addEventListener('toggle', () => ScrollTrigger.refresh(), {
+        signal,
+      });
+    });
+    return () => motion.revert();
+  });
+</script>

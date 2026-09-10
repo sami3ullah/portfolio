@@ -19,3 +19,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# local verification output
+test-results/
+playwright-report/
+tmp/
+output/

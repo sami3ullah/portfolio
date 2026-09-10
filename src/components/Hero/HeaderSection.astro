@@ -1,39 +1,68 @@
 ---
-import HeaderSideText from './HeaderSideText.astro';
-import Logo from '../../../public/logo.svg';
-import { Image } from 'astro:assets';
+import { profile, resumeUrl } from '../../data/site';
+import EmailLink from '../EmailLink.astro';
+import BrandMark from './BrandMark.astro';
+import ActionIcon from '../ActionIcon.astro';
+import '../../styles/glass.css';
 ---
 
-<header class="w-full h-[10rem] relative flex justify-between">
-  <!-- logo -->
-  <a href="/">
-    <Image
-      src={Logo}
-      id="logo"
-      class="interactable header-logo self-start mt-[70px] w-[60px] h-[60px] md:w-[82px] md:h-[82px]"
-      alt="Muhammad Samiullah Website Logo"
-      width="72"
-      height="72"
-    />
-  </a>
-  <HeaderSideText />
+<header class="site-header">
+  <div class="header-inner container liquid-glass">
+    <a href="#top" class="brand" aria-label={`${profile.name}, home`}>
+      <BrandMark />
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#portfolio-projects">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a
+        class="button button-primary header-resume"
+        href={resumeUrl}
+        download
+        data-resume>
+        <span class="header-resume-label">Resume</span>
+        <span class="button-icon" aria-hidden="true">
+          <ActionIcon name="resume" />
+        </span>
+      </a>
+      <EmailLink class="header-email" />
+    </div>
+  </div>
 </header>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/all';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.header-logo', {
-    scale: 2.5,
-    rotate: -360,
-    opacity: 0,
-    duration: 1.3,
-    ease: 'power4.inOut',
-    delay: 6.5,
-    stagger: {
-      amount: 0.5,
-    },
+  import { onPageReady } from '../../utils/page-lifecycle';
+  onPageReady('focused', ({ signal }) => {
+    const root = document.documentElement;
+    const header = document.querySelector<HTMLElement>('.site-header')!;
+    const bar = header.querySelector<HTMLElement>('.header-inner')!;
+    const hero = document.querySelector<HTMLElement>('.hero')!;
+    const update = () => {
+      const compact = scrollY > 24;
+      if (compact !== header.hasAttribute('data-scrolled')) {
+        header.toggleAttribute('data-scrolled', compact);
+        root.style.setProperty(
+          '--anchor-header-height',
+          compact ? 'var(--compact-header-height)' : 'var(--header-height)'
+        );
+      }
+      header.toggleAttribute(
+        'data-past-hero',
+        hero.getBoundingClientRect().bottom <=
+          bar.getBoundingClientRect().bottom
+      );
+    };
+    window.addEventListener('scroll', update, { passive: true, signal });
+    window.addEventListener('resize', update, { signal });
+    const resize = new ResizeObserver(update);
+    resize.observe(bar);
+    resize.observe(hero);
+    update();
+    return () => {
+      resize.disconnect();
+      root.style.removeProperty('--anchor-header-height');
+    };
   });
 </script>

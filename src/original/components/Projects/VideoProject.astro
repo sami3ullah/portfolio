@@ -1,0 +1,133 @@
+---
+import type { SanityProject } from '../../../data/sanity-projects';
+import ActionIcon from '../../../components/ActionIcon.astro';
+
+interface Props {
+  project: SanityProject;
+}
+const { project } = Astro.props;
+const dimensions = project.posterImage?.match(/-(\d+)x(\d+)\./);
+const aspectRatio = dimensions
+  ? `${dimensions[1]} / ${dimensions[2]}`
+  : '16 / 10';
+---
+
+<section
+  class="project-section video-project"
+  aria-labelledby={`project-${project._id}`}>
+  <div class="video-project-row project-content project-row">
+    <div class="video-project-copy project-copy">
+      <p class="project-label reveal-type">Project</p>
+      <h3 id={`project-${project._id}`} class="project-title reveal-type">
+        {project.name}
+      </h3>
+      <p class="project-description reveal-type">{project.description}</p>
+      <a
+        class="project-link interactable interactable-link"
+        href={project.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`See ${project.name} in action`}>
+        See in action <ActionIcon name="contact" />
+      </a>
+    </div>
+    <video
+      class="project-video project-visual"
+      style={`aspect-ratio: ${aspectRatio}`}
+      aria-label={`${project.name} website walkthrough`}
+      poster={project.posterImage}
+      data-src={project.videoUrl}
+      controls
+      loop
+      muted
+      playsinline
+      preload="none">
+      Your browser does not support this video.
+    </video>
+  </div>
+</section>
+
+<style>
+  .project-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: transparent;
+  }
+</style>
+
+<script>
+  import { playfulEffect } from '../../utils/page-effects';
+
+  playfulEffect(({ signal }) => {
+    const videos = [
+      ...document.querySelectorAll<HTMLVideoElement>('.project-video'),
+    ];
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const visible = new Set<HTMLVideoElement>();
+    const manuallyPaused = new Set<HTMLVideoElement>();
+    const load = (video: HTMLVideoElement) => {
+      if (video.hasAttribute('src')) return;
+      video.src = video.dataset.src!;
+      video.load();
+    };
+    const update = (video: HTMLVideoElement) => {
+      if (!visible.has(video) || document.hidden) {
+        video.pause();
+      } else if (!reducedMotion.matches && !manuallyPaused.has(video)) {
+        void video.play().catch(() => {});
+      }
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            load(video);
+            visible.add(video);
+          } else {
+            visible.delete(video);
+          }
+          update(video);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    for (const video of videos) {
+      observer.observe(video);
+      video.addEventListener(
+        'pause',
+        () => {
+          if (visible.has(video) && !document.hidden && !video.ended)
+            manuallyPaused.add(video);
+        },
+        { signal }
+      );
+      video.addEventListener('play', () => manuallyPaused.delete(video), {
+        signal,
+      });
+    }
+    document.addEventListener(
+      'visibilitychange',
+      () => videos.forEach(update),
+      { signal }
+    );
+    reducedMotion.addEventListener(
+      'change',
+      () => {
+        videos.forEach((video) =>
+          reducedMotion.matches ? video.pause() : update(video)
+        );
+      },
+      { signal }
+    );
+    return () => {
+      observer.disconnect();
+      videos.forEach((video) => {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      });
+    };
+  });
+</script>

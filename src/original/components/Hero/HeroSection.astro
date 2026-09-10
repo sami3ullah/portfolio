@@ -1,0 +1,63 @@
+---
+import HeaderSection from './HeaderSection.astro';
+import MainTitle from './MainTitle.astro';
+---
+
+<div class="parallax-section h-screen w-full bg-darkBackground">
+  <div class="fixed top-0 h-screen w-full">
+    <section class="hero-section min-w-full bg-hero-image bg-cover bg-no-repeat bg-top bg-black w-full z-[1]">
+      <div class="bg-overlay-2">
+        <div class="flex flex-col h-screen px-pageXMobile md:px-pageX bg-overlay-1">
+          <HeaderSection />
+          <MainTitle />
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style>
+  .bg-overlay-1 {
+    background: linear-gradient(
+      180deg,
+      #0d0d0d 0%,
+      rgba(13, 13, 13, 0.88) 8.03%,
+      rgba(13, 13, 13, 0) 100%
+    );
+  }
+  .bg-overlay-2 {
+    background: linear-gradient(
+      360deg,
+      #0d0d0d 0%,
+      rgba(13, 13, 13, 0.88) 13.06%,
+      rgba(13, 13, 13, 0) 100%
+    );
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { isMobileViewport } from '../../utils';
+  import { playfulEffect } from '../../utils/page-effects';
+  playfulEffect(() => {
+    const isMobileView = isMobileViewport();
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tl = gsap.timeline();
+    // add parralex effect through gsap
+    if (!isMobileView) {
+      tl.to('.hero-section', {
+        yPercent: -20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.parallax-section',
+          start: 'top top',
+          endTrigger: '#main__story',
+          end: 'top top',
+          scrub: true,
+        },
+      });
+    }
+  });
+</script>

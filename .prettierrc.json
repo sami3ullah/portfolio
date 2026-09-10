@@ -1,6 +1,5 @@
 {
   "singleQuote": true,
-  "jsxBracketSameLine": true,
   "printWidth": 80,
   "trailingComma": "es5",
   "tabWidth": 2,
@@ -11,5 +10,7 @@
         "parser": "astro"
       }
     }
-  ]
+  ],
+  "plugins": ["prettier-plugin-astro"],
+  "bracketSameLine": true
 }

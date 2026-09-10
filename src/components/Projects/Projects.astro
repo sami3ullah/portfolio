@@ -1,36 +1,48 @@
 ---
+import { caseStudies } from '../../data/case-studies';
+import profile from '../../data/profile.json';
 import ProjectsView from './ProjectsView.astro';
-import { sanityClient } from 'sanity:client';
-
-type Project = {
-  _id: string;
-  name: string;
-  category: string;
-  description: string;
-  videoUrl: string;
-};
-
-export async function getAllProject(): Promise<Project[]> {
-  const query = `*[_type == "projects"] | order(sortOrder asc) {
-  _id,
-  name,
-  category,
-  description,
-  url,
-  "posterImage":posterImage.asset->url,
-  "videoUrl": video.asset->url,
-}`;
-  const projects = await sanityClient.fetch(query);
-  return projects;
-}
-
-const projects: Project[] = await getAllProject();
 ---
 
-<section id="portfolio-projects" class="w-full dark-trailer">
-  {
-    projects.map((project: Project, index: number) => (
-      <ProjectsView project={project} index={index} totalLength={projects.length} />
-    ))
-  }
+<section
+  id="portfolio-projects"
+  class="section work-section"
+  aria-labelledby="work-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / Selected work</p>
+        <h2 id="work-title">
+          Built for real <br />
+          <span class="muted">product challenges.</span>
+        </h2>
+      </div>
+      <p>
+        Shared foundations, complex workflows, and the frontend decisions behind
+        them.
+      </p>
+    </div>
+    <div class="case-studies">
+      {caseStudies.map((project) => (
+        <ProjectsView project={project} />
+      ))}
+    </div>
+    <article class="assistant-card">
+      <div>
+        <p class="eyebrow">Personal exploration</p>
+        <h3>{profile.assistant.name}</h3>
+        <p class="project-status">{profile.assistant.status}</p>
+      </div>
+      <div>
+        <p>
+          A small space to explore how software can help with everyday tasks.
+        </p>
+        <ul>
+          {profile.assistant.highlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  </div>
 </section>

@@ -1,0 +1,169 @@
+<div
+  id="mouse-trailer"
+  class="hidden relative lg:flex items-center justify-center">
+  <span id="mouse-trailer__icon" class="hidden text-black p-1 w-[25px]">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="4"
+        d="M19 11h18v18m-25.456 7.456L37 11"
+      />
+    </svg>
+  </span>
+  <span
+    id="mouse-trailer__copy"
+    class="hidden absolute z-2 bg-primary text-[6px] font-[500] pb-[1px]">
+    Copy
+  </span>
+  <span
+    id="mouse-trailer__copy-success-icon"
+    class="opacity-0 -z-10 absolute text-black p-1 w-[25px]">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path
+        fill="currentColor"
+        d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"
+      />
+    </svg>
+  </span>
+</div>
+
+<style>
+  div#mouse-trailer {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    position: fixed;
+    border-radius: 50%;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+
+  body:hover > div#mouse-trailer {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  import { onPageReady } from '../../../utils/page-lifecycle';
+  onPageReady('playful', ({ signal }) => {
+    let copyTimer: number;
+    const mouseTrailer = document.getElementById('mouse-trailer');
+    const mouseTrailerIcon = document.getElementById('mouse-trailer__icon');
+    const mouseTrailerCopy = document.getElementById('mouse-trailer__copy');
+    const mouseTrailerCopySuccessIcon = document.getElementById(
+      'mouse-trailer__copy-success-icon'
+    );
+
+    /**
+     * @param e MouseEvent, typical mouse event
+     * @param interacting boolean, true if mouse is interacting with an element
+     * @param simpleInteraction boolean, make it true if it's just a simple hover interaction
+     */
+    const animateMouseTrailer = (
+      e: MouseEvent,
+      interacting: boolean,
+      simpleInteraction = true,
+      darkTrailer = false
+    ) => {
+      // TODO: cater interactions which are simple
+      // TODO: cater for interactions which are links, copy
+      if (!mouseTrailer) return;
+      const x = e.clientX - mouseTrailer.offsetWidth / 2 + 'px';
+      const y = e.clientY - mouseTrailer.offsetHeight / 2 + 'px';
+
+      const keyFrames = {
+        transform: `translate(${x}, ${y}) scale(${
+          interacting ? (simpleInteraction ? 3 : 10) : 1
+        })`,
+        backgroundColor:
+          interacting && simpleInteraction
+            ? '#D5FF3F'
+            : darkTrailer
+              ? 'black'
+              : 'white',
+        mixBlendMode:
+          interacting && !simpleInteraction ? 'difference' : 'normal',
+      };
+
+      mouseTrailer.animate(keyFrames, {
+        duration: 800,
+        fill: 'forwards',
+      });
+    };
+    document.addEventListener(
+      'mousemove',
+      (e) => {
+        if (!(e.target instanceof Element)) return;
+        // get all interactive classes that are defined in HTML
+        const interactableLink = e?.target?.closest('.interactable-link'),
+          interactingLink = interactableLink !== null;
+        const interactableCopy = e?.target?.closest('.interactable-copy'),
+          interactingCopy = interactableCopy !== null;
+        const interactable = e?.target?.closest('.interactable'),
+          interacting = interactable !== null;
+        const lightBackground = e?.target?.closest('.dark-trailer'),
+          darkTrailer = lightBackground !== null;
+
+        // call mouse trailer function to animate trailer
+        animateMouseTrailer(
+          e,
+          interacting,
+          !!interacting && (interactingLink || interactingCopy),
+          darkTrailer
+        );
+
+        if (!interacting) {
+          mouseTrailerIcon?.style.setProperty('display', 'none');
+          mouseTrailerCopy?.style.setProperty('display', 'none');
+          return;
+        } else {
+          // check if element has link class
+          if (interactingLink) {
+            mouseTrailerIcon?.style.setProperty('display', 'block');
+            mouseTrailerCopy?.style.setProperty('display', 'none');
+            return;
+          }
+          // check if element has copy class
+          if (interactingCopy) {
+            mouseTrailerIcon?.style.setProperty('display', 'none');
+            mouseTrailerCopy?.style.setProperty('display', 'block');
+            return;
+          }
+        }
+      },
+      { signal }
+    );
+    document.addEventListener(
+      'click',
+      async (event) => {
+        const target = (event.target as Element).closest('.interactable-copy');
+        if (!target) return;
+        try {
+          await navigator.clipboard.writeText(target.textContent ?? '');
+          if (signal.aborted) return;
+          mouseTrailerCopy?.style.setProperty('display', 'none');
+          mouseTrailerCopySuccessIcon?.style.setProperty('opacity', '1');
+          clearTimeout(copyTimer);
+          copyTimer = window.setTimeout(() => {
+            mouseTrailerCopySuccessIcon?.style.setProperty('opacity', '0');
+            mouseTrailerCopy?.style.setProperty('display', 'block');
+          }, 2000);
+        } catch {
+          /* Keep the email link usable if clipboard access is unavailable. */
+        }
+      },
+      { signal }
+    );
+    return () => {
+      clearTimeout(copyTimer);
+      mouseTrailer?.getAnimations().forEach((animation) => animation.cancel());
+    };
+  });
+</script>

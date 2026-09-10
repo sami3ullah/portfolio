@@ -1,0 +1,32 @@
+---
+import { wholeYearsSince } from '../../../utils/dates.mjs';
+import { profile } from '../../../data/site';
+---
+
+<div class="flex flex-col relative flex-1">
+  <!-- TODO: fix mobile content shifting issue with animation -->
+  <div class="header-side-text absolute right-0 mt-[65px]">
+    <div class="w-full">
+      <h3 class="text-[18px] md:text-[36px] text-right font-bold text-textLight">
+        Software Engineer
+      </h3>
+      <p class="text-xs hidden md:block md:text-lg text-right text-textDullest">
+        <span data-experience-years data-experience-start={profile.careerStart}>
+          {wholeYearsSince(profile.careerStart)}
+        </span>
+        + Years of development experience
+      </p>
+      <p class="text-xs block md:hidden md:text-lg text-right text-textDullest">
+        <span data-experience-years data-experience-start={profile.careerStart}>
+          {wholeYearsSince(profile.careerStart)}
+        </span>
+        + Years of experience
+      </p>
+    </div>
+    <hr class="side-text-seperator my-[16px] w-16 md:w-20 lg:w-[100%] border-0 h-[1px] ml-auto bg-darkBackground2" />
+    <!-- contact info -->
+    <div class="interactable contact-info text-textDullest text-right text-xs md:text-lg">
+      <div class="interactable-copy">msami398@gmail.com</div>
+    </div>
+  </div>
+</div>

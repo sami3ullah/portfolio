@@ -1,0 +1,199 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import ViewTransition from '../../components/ViewTransition.astro';
+import '@fontsource/manrope/latin-300.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/latin-600.css';
+import '@fontsource/manrope/latin-700.css';
+import '@fontsource/manrope/latin-800.css';
+import '../styles.css';
+import { profile, description } from '../../data/site';
+import PortfolioSwitch from '../../components/PortfolioSwitch.astro';
+const mode = 'playful';
+const canonical = new URL('/', profile.site).href;
+const title = `${profile.name} | ${profile.title}`;
+const image = new URL('/og-image.png', profile.site).href;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: profile.site,
+  jobTitle: profile.title,
+  description,
+  email: `mailto:${profile.email}`,
+  homeLocation: { '@type': 'Place', name: profile.location },
+  sameAs: [profile.links.LinkedIn, profile.links.GitHub],
+};
+---
+
+<!doctype html>
+<html lang="en" data-portfolio-mode={mode}>
+  <head>
+    <ClientRouter fallback="swap" />
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.sanity.io; media-src 'self' https://cdn.sanity.io; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#101110" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content={`${profile.name}, ${profile.title}. React, TypeScript, design systems. ${profile.location}.`}
+    />
+    <meta property="og:site_name" content={`${profile.name}'s Portfolio`} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="generator" content={Astro.generator} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(person).replace(/</g, '\\u003c')}></script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <PortfolioSwitch mode={mode} />
+    <ViewTransition />
+  </body>
+</html>
+
+<style is:global>
+  *,
+  body,
+  html {
+    font-family: 'Manrope', sans-serif;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    /* scroll-behavior: smooth; */
+    scroll-margin: 15vh;
+  }
+
+  body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background: #000;
+  }
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .interactable {
+    cursor: none;
+  }
+
+  html[data-intro-active],
+  html[data-intro-active] body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  html[data-intro-active] .portfolio-controls {
+    visibility: hidden;
+  }
+</style>
+
+<script>
+  import Lenis from '@studio-freight/lenis';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { onPageReady } from '../../utils/page-lifecycle';
+  onPageReady('playful', ({ initial, signal }) => {
+    const root = document.documentElement;
+    const lenis = new Lenis();
+    const background: { element: HTMLElement; inert: boolean }[] = [];
+    const restoreBackground = () => {
+      background.forEach(({ element, inert }) => {
+        element.inert = inert;
+      });
+    };
+    const raf = (time: number) => lenis.raf(time * 1000);
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(raf);
+
+    const releaseIntro = () => {
+      root.removeAttribute('data-intro-active');
+      restoreBackground();
+      lenis.start();
+    };
+    if (initial) {
+      root.setAttribute('data-intro-active', '');
+      lenis.stop();
+      // Focus must not scroll a link behind the intro into view.
+      for (const element of document.body.children) {
+        if (
+          element instanceof HTMLElement &&
+          !element.matches('.preloder-container, script, style')
+        ) {
+          background.push({ element, inert: element.inert });
+          element.inert = true;
+        }
+      }
+      document.addEventListener('portfolio:intro-complete', releaseIntro, {
+        once: true,
+        signal,
+      });
+      document.addEventListener(
+        'keydown',
+        (event) => {
+          if (
+            root.hasAttribute('data-intro-active') &&
+            [
+              'ArrowUp',
+              'ArrowDown',
+              'ArrowLeft',
+              'ArrowRight',
+              'PageUp',
+              'PageDown',
+              'Home',
+              'End',
+              ' ',
+            ].includes(event.key)
+          )
+            event.preventDefault();
+        },
+        { signal }
+      );
+    }
+    return () => {
+      root.removeAttribute('data-intro-active');
+      restoreBackground();
+      gsap.ticker.remove(raf);
+      lenis.off('scroll', ScrollTrigger.update);
+      lenis.destroy();
+    };
+  });
+</script>
+
+<script>
+  import { wholeYearsSince } from '../../utils/dates.mjs';
+  const updateExperience = () => {
+    document
+      .querySelectorAll<HTMLElement>('[data-experience-years]')
+      .forEach((element) => {
+        element.textContent = String(
+          wholeYearsSince(element.dataset.experienceStart)
+        );
+      });
+  };
+  updateExperience();
+  document.addEventListener('astro:page-load', updateExperience);
+  window.addEventListener('pageshow', updateExperience);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) updateExperience();
+  });
+  setInterval(updateExperience, 60_000);
+</script>

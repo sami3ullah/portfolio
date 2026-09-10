@@ -1,0 +1,82 @@
+[
+  {
+    "mode": "desktop",
+    "status": 200,
+    "date": "Thu, 10 Sep 2026 11:48:10 GMT",
+    "sha256": "59db6529b86f34650510adc31260975f42847fd46d3f635068f864548b7f1530",
+    "server": "cloudflare",
+    "scripts": [
+      {
+        "attributes": " type=\"text/partytown\" async src=\"https://www.googletagmanager.com/gtag/js?id=G-ZQC1XS2QWG\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": " type=\"text/partytown\"",
+        "bytes": 190,
+        "sha256": "48111cb57eebda3f50f8df17e7bcae26fc46f2bcd6735f2ef6b1693c5635571e"
+      },
+      {
+        "attributes": " type=\"module\" src=\"/_astro/hoisted.c2a6aaf2.js\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": "",
+        "bytes": 1756,
+        "sha256": "5668ae56d0d81cc9a9681803c9b280692d3f15157258786cd4455eca7ee63459"
+      },
+      {
+        "attributes": " data-cfasync=\"false\" src=\"/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": " type=\"module\" src=\"https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495\" integrity=\"sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==\" data-cf-beacon='{\"version\":\"2024.11.0\",\"token\":\"4cc184d8026340078d3025b266338d34\",\"r\":1,\"spa\":2}' crossorigin=\"anonymous\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "indicators": []
+  },
+  {
+    "mode": "mobile",
+    "status": 200,
+    "date": "Thu, 10 Sep 2026 11:48:11 GMT",
+    "sha256": "7baafbd9d67670d6b742f51fca19b5b9d2210167601b5c4d2351c4abba8055d7",
+    "server": "cloudflare",
+    "scripts": [
+      {
+        "attributes": " type=\"text/partytown\" async src=\"https://www.googletagmanager.com/gtag/js?id=G-ZQC1XS2QWG\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": " type=\"text/partytown\"",
+        "bytes": 190,
+        "sha256": "48111cb57eebda3f50f8df17e7bcae26fc46f2bcd6735f2ef6b1693c5635571e"
+      },
+      {
+        "attributes": " type=\"module\" src=\"/_astro/hoisted.c2a6aaf2.js\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": "",
+        "bytes": 1756,
+        "sha256": "5668ae56d0d81cc9a9681803c9b280692d3f15157258786cd4455eca7ee63459"
+      },
+      {
+        "attributes": " data-cfasync=\"false\" src=\"/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "attributes": " type=\"module\" src=\"https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495\" integrity=\"sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==\" data-cf-beacon='{\"version\":\"2024.11.0\",\"token\":\"4cc184d8026340078d3025b266338d34\",\"r\":1,\"spa\":2}' crossorigin=\"anonymous\"",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "indicators": []
+  }
+]

@@ -1,0 +1,100 @@
+<div class="view-curtain" transition:persist="view-curtain" aria-hidden="true">
+  {Array.from({ length: 10 }, () => (
+    <span />
+  ))}
+</div>
+<style is:global>
+  .view-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .view-curtain[data-active] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .view-curtain > span {
+    flex: 1;
+    height: 100%;
+    background: #181818;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  /* Keep the body in the root snapshot so glass can sample page content. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+</style>
+<script>
+  import type { TransitionBeforePreparationEvent } from 'astro:transitions/client';
+  let animations: Animation[] = [];
+  let generation = 0;
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const curtain = () => document.querySelector<HTMLElement>('.view-curtain')!;
+  const clear = () => {
+    animations.forEach((animation) => animation.cancel());
+    animations = [];
+    curtain().removeAttribute('data-active');
+  };
+  async function animate(cover: boolean) {
+    if (motion.matches) return;
+    const overlay = curtain();
+    overlay.setAttribute('data-active', '');
+    animations.forEach((animation) => animation.cancel());
+    animations = [...overlay.children].map((bar, index) =>
+      bar.animate(
+        [
+          { transform: `scaleY(${cover ? 0 : 1})` },
+          { transform: `scaleY(${cover ? 1 : 0})` },
+        ],
+        {
+          duration: cover ? 380 : 650,
+          delay: index * (cover ? 24 : 35),
+          easing: 'cubic-bezier(.76,0,.24,1)',
+          fill: 'both',
+        }
+      )
+    );
+    await Promise.all(
+      animations.map((animation) => animation.finished.catch(() => {}))
+    );
+  }
+  document.addEventListener('astro:before-preparation', (rawEvent) => {
+    const event = rawEvent as TransitionBeforePreparationEvent;
+    if (event.from.pathname === event.to.pathname) return;
+    const current = ++generation;
+    const loader = event.loader;
+    event.signal.addEventListener(
+      'abort',
+      () => {
+        if (current === generation) clear();
+      },
+      { once: true }
+    );
+    event.loader = async () => {
+      try {
+        await Promise.all([loader(), animate(true)]);
+        if (event.defaultPrevented && current === generation) clear();
+      } catch (error) {
+        if (current === generation) clear();
+        throw error;
+      }
+    };
+  });
+  document.addEventListener('astro:page-load', async () => {
+    if (!curtain().hasAttribute('data-active')) return;
+    const current = generation;
+    await animate(false);
+    if (current === generation) {
+      clear();
+      document.dispatchEvent(new Event('portfolio:revealed'));
+    }
+  });
+  motion.addEventListener('change', () => {
+    if (motion.matches) clear();
+  });
+</script>

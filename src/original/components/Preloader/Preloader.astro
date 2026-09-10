@@ -1,0 +1,121 @@
+<div class="preloder-container">
+  <div class="preloder-text-wrapper fixed h-[100vh] text-[4rem] md:text-[7rem] lg:text-[8rem] w-full z-30 flex items-center justify-center">
+    <div class="preloader-text-inner opacity-0 text-white">
+      <p>Curious</p>
+      <p>Creative</p>
+      <p>Adaptive</p>
+      <p>Passionate</p>
+      <p class="text-primary">Engineer</p>
+    </div>
+  </div>
+  <div class="preloader-overlay fixed w-full h-[100vh] z-10 flex">
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+  </div>
+</div>
+
+<style>
+  .preloder-container {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    touch-action: none;
+  }
+  .preloder-text-wrapper,
+  .preloader-overlay {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+  .bar {
+    height: 100%;
+    transform-origin: top;
+  }
+  .preloder-container p {
+    text-align: center;
+    margin: 0;
+    line-height: 0;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import SplitType from 'split-type';
+  import { playfulEffect } from '../../utils/page-effects';
+  playfulEffect(({ initial }) => {
+    const splits: SplitType[] = [];
+    if (!initial) {
+      gsap.set('.preloder-container', { display: 'none' });
+      return;
+    }
+    gsap.set('.preloder-container', { display: 'block' });
+
+    const titles = gsap.utils.toArray<HTMLElement>('.preloder-container p');
+    const preloaderWrapper = document.querySelector('.preloder-text-wrapper');
+    const preloadInner = document.querySelector('.preloader-text-inner');
+    const tl = gsap.timeline({ repeat: -1 });
+
+    gsap.to(preloadInner, {
+      delay: 0.2,
+      opacity: 1,
+    });
+    // Staggering 3D Effect
+    titles.forEach((title) => {
+      const splitTitle = new SplitType(title, { types: 'chars' });
+      splits.push(splitTitle);
+      tl.from(
+        splitTitle.chars,
+        {
+          opacity: 0,
+          y: 80,
+          rotateX: -90,
+          stagger: 0.02,
+        },
+        '<'
+      ).to(
+        splitTitle.chars,
+        {
+          opacity: 0,
+          y: -80,
+          rotateX: 90,
+          stagger: 0.01,
+        },
+        '<1'
+      );
+    });
+
+    gsap.to(preloaderWrapper, {
+      duration: 0.1,
+      delay: 5,
+      opacity: 0,
+      height: 0,
+      width: 0,
+      display: 'none',
+    });
+
+    gsap.to('.bar', {
+      duration: 1.5,
+      delay: 4.5,
+      scaleY: 0,
+      stagger: {
+        amount: 0.5,
+      },
+      ease: 'power4.inOut',
+      onComplete: () => {
+        tl.kill();
+        gsap.set('.preloder-container', { display: 'none' });
+        document.dispatchEvent(new Event('portfolio:intro-complete'));
+      },
+    });
+    return () => splits.forEach((split) => split.revert());
+  });
+</script>

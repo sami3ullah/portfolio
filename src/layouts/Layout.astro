@@ -1,97 +1,78 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+import ViewTransition from '../components/ViewTransition.astro';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/latin-600.css';
+import '@fontsource/manrope/latin-700.css';
+import '@fontsource/manrope/latin-800.css';
+import '../styles/global.css';
+import { profile, description } from '../data/site';
+import PortfolioSwitch from '../components/PortfolioSwitch.astro';
 interface Props {
-  title: string;
+  mode?: 'focused' | 'playful';
 }
-
-const { title } = Astro.props;
+const { mode = 'focused' } = Astro.props;
+const canonical = new URL('/focused/', profile.site).href;
+const title = `${profile.name} | ${profile.title}${mode === 'playful' ? ' | Playful portfolio' : ''}`;
+const image = new URL('/og-image.png', profile.site).href;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: profile.site,
+  jobTitle: profile.title,
+  description,
+  email: `mailto:${profile.email}`,
+  homeLocation: { '@type': 'Place', name: profile.location },
+  sameAs: [profile.links.LinkedIn, profile.links.GitHub],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-portfolio-mode={mode}>
   <head>
+    <ClientRouter fallback="swap" />
     <meta charset="UTF-8" />
     <meta
-      name="description"
-      content="A passionate software engineer who loves creative problem-solving, design and teamwork. I adore what I do & excited to bring fresh ideas to the table. Let's connect!"
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.sanity.io; media-src 'self' https://cdn.sanity.io; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
     />
-    <meta name="viewport" content="width=device-width" />
-    <meta property="og:title" content="Muhammad Samiullah" />
-    <meta property="og:url" content="https://www.samidev.me" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#101110" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:description"
-      content="A passionate software engineer who loves creative problem-solving, design and teamwork. I adore what I do & excited to bring fresh ideas to the table. Let's connect!"
+      property="og:image:alt"
+      content={`${profile.name}, ${profile.title}. React, TypeScript, design systems. ${profile.location}.`}
     />
-    <meta property="og:image" content="/og-image.webp" />
-    <meta property="og:site_name" content="Muhammad Samiullah's Portfolio" />
+    <meta property="og:site_name" content={`${profile.name}'s Portfolio`} />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@samistories" />
-    <meta name="twitter:creator" content="@samistories" />
-
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <meta name="generator" content="{Astro.generator}" />
-    <title>{title}</title>
-    <!-- Google tag (gtag.js) -->
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="generator" content={Astro.generator} />
     <script
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-ZQC1XS2QWG"></script>
-    <script type="text/partytown">
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'G-ZQC1XS2QWG');
-    </script>
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(person).replace(/</g, '\\u003c')}></script>
+    <title>{title}</title>
   </head>
-  <body>
+  <body id="top">
+    <a class="skip-link" href="#main">
+      Skip to main content
+    </a>
     <slot />
+    <PortfolioSwitch mode={mode} />
+    <ViewTransition />
   </body>
 </html>
-<style is:global>
-  *,
-  body,
-  html {
-    font-family: 'Manrope', sans-serif;
-    box-sizing: border-box;
-    scrollbar-width: none;
-    /* scroll-behavior: smooth; */
-    scroll-margin: 15vh;
-  }
-
-  body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    background: #000;
-  }
-  body::-webkit-scrollbar {
-    display: none;
-  }
-
-  .interactable {
-    cursor: none;
-  }
-</style>
-
-<script>
-  import Lenis from '@studio-freight/lenis';
-
-  // ======== lenis scroll initialization =======
-  const lenis = new Lenis();
-
-  const raf = (time: number) => {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  };
-  requestAnimationFrame(raf);
-</script>

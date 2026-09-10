@@ -1,0 +1,15 @@
+---
+import profile from '../data/profile.json';
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<!-- Keep contact usable without Cloudflare's JavaScript email decoder. -->
+<Fragment set:html={'<!--email_off-->'} />
+<a class={className} href={`mailto:${profile.email}`}>
+  {profile.email}
+  <slot />
+</a>
+<Fragment set:html={'<!--/email_off-->'} />

@@ -1,0 +1,47 @@
+{
+  "headings": [
+    "Senior Frontend Engineer",
+    "Built for real product challenges.",
+    "One component library. Every microfrontend.",
+    "Less friction. More reusable UI.",
+    "From manual reports to useful dashboards.",
+    "Personal AI Assistant",
+    "The work behind the craft.",
+    "Innoscripta AG",
+    "Tkxel",
+    "Emerald Labs",
+    "LAAM",
+    "Frontend first. Solid foundations.",
+    "Frontend",
+    "Testing and tooling",
+    "AI development tools",
+    "Prior backend and database exposure",
+    "People I’ve worked with.",
+    "A builder. Always learning.",
+    "Let’s build something useful."
+  ],
+  "scripts": [
+    {
+      "src": "",
+      "type": "application/ld+json",
+      "bytes": 513
+    },
+    {
+      "src": "http://127.0.0.1:4321/_astro/Preloader.astro_astro_type_script_index_0_lang.CXnvNCvT.js",
+      "type": "module",
+      "bytes": 0
+    },
+    {
+      "src": "http://127.0.0.1:4321/_astro/ExperienceText.astro_astro_type_script_index_0_lang.C8GzWu-z.js",
+      "type": "module",
+      "bytes": 0
+    },
+    {
+      "src": "http://127.0.0.1:4321/_astro/CopyRights.astro_astro_type_script_index_0_lang.BKPG9jr4.js",
+      "type": "module",
+      "bytes": 0
+    }
+  ],
+  "duplicateIds": false,
+  "cloudflareEmailExemptions": true
+}

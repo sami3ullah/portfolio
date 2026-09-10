@@ -1,0 +1,131 @@
+---
+import type { caseStudies } from '../../../data/case-studies';
+import CaseArtwork from '../../../components/Projects/CaseArtwork.astro';
+import ComponentArtwork from './ComponentArtwork.astro';
+import ActionIcon from '../../../components/ActionIcon.astro';
+
+interface Props {
+  project: (typeof caseStudies)[number];
+}
+
+const { project } = Astro.props;
+---
+
+<section aria-labelledby={`showcase-${project.number}`} class="project-section">
+  <div class="project-content">
+    <div class="showcase-row project-row">
+      <div class="showcase-copy project-copy">
+        <div class="project-label reveal-type">
+          Case study / {project.number}
+        </div>
+        <h3 id={`showcase-${project.number}`} class="project-title reveal-type">
+          {project.employer}
+        </h3>
+        <p class="project-description reveal-type">{project.contribution}</p>
+      </div>
+      <figure class="showcase-visual project-visual">
+        {project.graphic === 'components' ? (
+          <ComponentArtwork />
+        ) : (
+          <CaseArtwork project={project} showcase />
+        )}
+      </figure>
+    </div>
+    <details class="case-details" data-case-details>
+      <summary class="project-link interactable interactable-link">
+        <span class="read-case">Read case study</span>
+        <span class="close-case">Close case study</span>
+        <span class="sr-only">for {project.employer}</span>
+        <ActionIcon name="contact" />
+      </summary>
+      <div class="case-detail-content">
+        <h4>{project.title}</h4>
+        <dl>
+          <div>
+            <dt>Problem</dt>
+            <dd>{project.problem}</dd>
+          </div>
+          <div>
+            <dt>Engineering decisions</dt>
+            <dd>{project.decisions}</dd>
+          </div>
+          <div>
+            <dt>Outcome</dt>
+            <dd>{project.outcome}</dd>
+          </div>
+        </dl>
+        <ul aria-label={`${project.employer} focus areas`}>
+          {project.stack.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<style>
+  .showcase-copy h3 {
+    white-space: nowrap;
+  }
+  .case-details {
+    margin-top: 28px;
+    color: #0d0d0d;
+  }
+  .case-details summary {
+    list-style: none;
+    max-width: 100%;
+  }
+  .case-details summary::-webkit-details-marker {
+    display: none;
+  }
+  .close-case,
+  .case-details[open] .read-case {
+    display: none;
+  }
+  .case-details[open] .close-case {
+    display: inline;
+  }
+  .case-details[open] summary :global(svg) {
+    transform: rotate(-90deg);
+  }
+  .case-detail-content {
+    padding-top: 36px;
+  }
+  .case-detail-content h4 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .case-detail-content dl {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+  .case-detail-content dt {
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .case-detail-content dd {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .case-detail-content ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .case-detail-content li {
+    border: 1px solid #b8bbaf;
+    border-radius: 30px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  @media (max-width: 700px) {
+    .case-detail-content dl {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

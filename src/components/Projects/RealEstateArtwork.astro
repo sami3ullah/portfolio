@@ -1,0 +1,361 @@
+---
+import type { caseStudies } from '../../data/case-studies';
+
+interface Props {
+  project: (typeof caseStudies)[number];
+  showcase?: boolean;
+}
+
+const { project, showcase = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'case-art',
+    'case-art-real-estate',
+    { 'showcase-art': showcase },
+  ]}
+  aria-hidden="true">
+  <div class="art-heading">
+    <span class="art-wordmark">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="m3 10 9-7 9 7M6 8v12h12V8M10 20v-7h4v7" />
+      </svg>
+      {project.employer}
+    </span>
+    <span class="art-edition">RE / {project.number}</span>
+  </div>
+
+  <div class="art-body">
+    <p class="art-kicker">A more connected way to work</p>
+    <strong>
+      Many moving parts.
+      <br />
+      <span>One workspace.</span>
+    </strong>
+
+    <div class="workflow-diagram">
+      <div class="workflow-inputs">
+        <div class="workflow-input">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="3" />
+              <path d="M6 20v-2a6 6 0 0 1 12 0v2M5 6a3 3 0 0 0 0 6M19 6a3 3 0 0 1 0 6" />
+            </svg>
+          </span>
+          <span>Investors</span>
+        </div>
+        <div class="workflow-input">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <path d="M14 17.5h7M17.5 14v7" />
+            </svg>
+          </span>
+          <span>Business tools</span>
+        </div>
+        <div class="workflow-input">
+          <span class="input-icon">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="6" height="6" rx="1.5" />
+              <rect x="15" y="15" width="6" height="6" rx="1.5" />
+              <path d="M15 6h1a2 2 0 0 1 2 2v7M9 18H8a2 2 0 0 1-2-2V9m6-6 3 3-3 3" />
+            </svg>
+          </span>
+          <span>Daily workflows</span>
+        </div>
+      </div>
+
+      <svg
+        class="workflow-connectors"
+        viewBox="0 0 360 54"
+        preserveAspectRatio="none"
+        fill="none">
+        <path d="M60 0v12a12 12 0 0 0 12 12h96a12 12 0 0 1 12 12v18M300 0v12a12 12 0 0 1-12 12h-96a12 12 0 0 0-12 12M180 0v54" />
+        <circle cx="60" cy="2" r="2.5" />
+        <circle cx="180" cy="2" r="2.5" />
+        <circle cx="300" cy="2" r="2.5" />
+      </svg>
+
+      <div class="platform-hub">
+        <div class="hub-heading">
+          <span class="hub-mark">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="m3 10 9-7 9 7M6 8v12h12V8M10 20v-7h4v7" />
+            </svg>
+          </span>
+          <div>
+            <span class="hub-label">The shared foundation</span>
+            <span class="hub-name">{project.employer}</span>
+          </div>
+          <span class="hub-status"></span>
+        </div>
+        <div class="hub-footer">
+          <span>One connected platform</span>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="m7 12 3 3 7-7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="art-caption">
+    <span>Real estate / SaaS</span>
+    <span>Platform concept</span>
+  </div>
+</div>
+
+<style>
+  .case-art-real-estate {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    min-width: 0;
+    min-height: 530px;
+    padding: 30px;
+    overflow: hidden;
+    border: 1px solid #f4e5d2;
+    border-radius: 14px;
+    background: #efdbc4;
+    color: #263323;
+  }
+  .case-art-real-estate::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: '';
+    background-image:
+      linear-gradient(#8063460a 1px, transparent 1px),
+      linear-gradient(90deg, #8063460a 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(transparent 15%, #000 80%);
+  }
+  svg {
+    display: block;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .art-heading,
+  .art-wordmark,
+  .art-caption,
+  .hub-heading,
+  .hub-footer {
+    display: flex;
+    align-items: center;
+  }
+  .art-heading,
+  .art-caption {
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .art-wordmark {
+    gap: 9px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .art-wordmark svg {
+    width: 20px;
+    height: 20px;
+  }
+  .art-edition {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+  }
+  .art-kicker {
+    margin: 0 0 12px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .art-body > strong {
+    display: block;
+    font-size: clamp(1.75rem, 2.65vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 1.15;
+  }
+  .art-body > strong > span {
+    color: #5c704d;
+  }
+  .workflow-diagram {
+    width: min(100%, 360px);
+    margin: 28px auto 10px;
+  }
+  .workflow-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .workflow-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.61rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .input-icon {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #bdcbb0;
+    border-radius: 14px;
+    background: #f3f6ed;
+    box-shadow: 0 3px 0 #c5d1ba80;
+  }
+  .workflow-connectors {
+    width: 100%;
+    height: 40px;
+    margin-top: 8px;
+    color: #8eaa74;
+    stroke-width: 1.2;
+  }
+  .workflow-connectors circle {
+    fill: #5c704d;
+    stroke: none;
+  }
+  .platform-hub {
+    position: relative;
+    padding: 20px 20px 0;
+    border: 1px solid #394a2e;
+    border-radius: 14px;
+    background: #263323;
+    color: #f1f5e9;
+    box-shadow:
+      0 8px 0 -3px #b9c8a9,
+      0 16px 0 -6px #ced9c1,
+      0 20px 28px -16px #26332340;
+  }
+  .hub-heading {
+    gap: 14px;
+    padding-bottom: 16px;
+  }
+  .hub-mark {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    background: #d5ff3f;
+    color: #263323;
+  }
+  .hub-label,
+  .hub-name {
+    display: block;
+  }
+  .hub-label {
+    margin-bottom: 5px;
+    color: #b6c4a9;
+    font-size: 0.59rem;
+  }
+  .hub-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+  }
+  .hub-status {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    margin-left: auto;
+    border-radius: 50%;
+    background: #d5ff3f;
+    box-shadow: 0 0 0 4px #d5ff3f10;
+  }
+  .hub-footer {
+    justify-content: space-between;
+    gap: 8px;
+    padding-block: 10px;
+    border-top: 1px solid #46563b;
+    color: #d0ddc2;
+    font-size: 0.62rem;
+  }
+  .hub-footer svg {
+    width: 18px;
+    height: 18px;
+    color: #d5ff3f;
+  }
+  .art-caption {
+    border-top: 1px solid #26332326;
+    padding-top: 12px;
+    color: #546448;
+    font-size: 0.6rem;
+  }
+  .showcase-art {
+    border-radius: 0;
+  }
+  @media (max-width: 1050px) {
+    .case-art-real-estate {
+      padding: 24px;
+    }
+  }
+  @media (max-width: 700px) {
+    .case-art-real-estate {
+      min-height: 0;
+      gap: 20px;
+      padding: 20px;
+    }
+    .art-body > strong {
+      font-size: clamp(1.65rem, 6.2vw, 2.5rem);
+    }
+    .art-kicker {
+      margin-bottom: 8px;
+    }
+    .workflow-diagram {
+      margin-block: 20px 8px;
+    }
+    .input-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+    }
+    .workflow-connectors {
+      height: 32px;
+    }
+    .platform-hub {
+      padding: 16px 16px 0;
+    }
+    .hub-mark {
+      width: 38px;
+      height: 38px;
+    }
+    .hub-heading {
+      padding-bottom: 12px;
+    }
+  }
+  @media (max-width: 360px) {
+    .art-wordmark {
+      font-size: 0.7rem;
+    }
+    .art-kicker {
+      font-size: 0.55rem;
+    }
+    .platform-hub {
+      padding: 16px 14px 0;
+    }
+    .hub-heading {
+      gap: 10px;
+      padding-bottom: 16px;
+    }
+    .hub-name {
+      font-size: 0.9rem;
+    }
+  }
+</style>

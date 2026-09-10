@@ -1,0 +1,262 @@
+---
+import type { caseStudies } from '../../data/case-studies';
+import RealEstateArtwork from './RealEstateArtwork.astro';
+interface Props {
+  project: (typeof caseStudies)[number];
+  showcase?: boolean;
+}
+const { project, showcase = false } = Astro.props;
+---
+
+{project.graphic === 'real-estate' ? (
+  <RealEstateArtwork project={project} showcase={showcase} />
+) : (
+  <div
+    class:list={[
+      'case-art',
+      `case-art-${project.graphic}`,
+      { 'showcase-art': showcase },
+    ]}
+    aria-hidden="true">
+    <div class="art-header">
+      <span>{project.employer}</span>
+      <span>{project.number}</span>
+    </div>
+    {project.graphic === 'components' && (
+      <div class="component-art">
+        <div class="swatches">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="sample-label">A shared foundation</div>
+        <div class="sample-controls">
+          <span>Components ↗</span>
+          <span>✓</span>
+        </div>
+        <div class="sample-lines">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+        <div class="sample-tags">
+          <span>Tokens</span>
+          <span>Theming</span>
+          <span>Storybook</span>
+        </div>
+      </div>
+    )}
+    {project.graphic === 'analytics' && (
+      <div class="analytics-art">
+        <span class="art-kicker">Daily sales supported</span>
+        <strong>
+          2M+ <span>PKR</span>
+        </strong>
+        <div class="chart-bars">
+          {[25, 43, 36, 58, 68, 57, 83, 100].map((height) => (
+            <span style={`--bar-height: ${height}%`}></span>
+          ))}
+        </div>
+        <span class="chart-note">Illustrative graphic</span>
+      </div>
+    )}
+    <span class="art-footer">{project.focus}</span>
+  </div>
+)}
+
+<style>
+  .case-art {
+    border-radius: 8px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 470px;
+    background: #d9e1cb;
+    color: #243021;
+  }
+  .art-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .art-header span:last-child {
+    border: 1px solid #66735b;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+  }
+  .art-footer {
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+  }
+  .case-art-analytics {
+    background: #c4c1e5;
+    color: #302c4c;
+  }
+  .component-art {
+    background: #f3f7eb;
+    border: 1px solid #b1bda2;
+    border-radius: 12px;
+    padding: 30px;
+    width: min(100%, 330px);
+    margin: 30px auto;
+    transform: rotate(-4deg);
+    box-shadow: 9px 12px 0 #9caa8838;
+  }
+  .swatches {
+    display: flex;
+    margin-bottom: 24px;
+  }
+  .swatches span {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #243021;
+    border: 2px solid #f3f7eb;
+  }
+  .swatches span + span {
+    margin-left: -7px;
+  }
+  .swatches span:nth-child(2) {
+    background: #6c8053;
+  }
+  .swatches span:nth-child(3) {
+    background: #b1cb86;
+  }
+  .swatches span:nth-child(4) {
+    background: var(--lime, #d5ff3f);
+  }
+  .sample-label {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  .sample-controls {
+    display: flex;
+    gap: 10px;
+  }
+  .sample-controls span {
+    display: block;
+    background: #263321;
+    color: #f3f7eb;
+    padding: 10px 15px;
+    font-size: 0.65rem;
+    border-radius: 30px;
+  }
+  .sample-controls span:last-child {
+    background: var(--lime, #d5ff3f);
+    color: #263321;
+  }
+  .sample-lines {
+    display: grid;
+    gap: 7px;
+    margin-block: 24px;
+  }
+  .sample-lines i {
+    height: 7px;
+    background: #cfd9c0;
+    border-radius: 2px;
+  }
+  .sample-lines i:nth-child(2) {
+    width: 85%;
+  }
+  .sample-lines i:nth-child(3) {
+    width: 60%;
+  }
+  .sample-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .sample-tags span {
+    font-size: 0.6rem;
+    border: 1px solid #b1bda2;
+    padding: 5px 8px;
+    border-radius: 4px;
+  }
+  .analytics-art {
+    padding: 30px 10px;
+  }
+  .art-kicker {
+    font-size: 0.75rem;
+    display: block;
+  }
+  .analytics-art strong {
+    font-size: 5rem;
+    letter-spacing: -0.08em;
+    display: block;
+    margin-top: 12px;
+  }
+  .analytics-art strong span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+  .chart-bars {
+    height: 105px;
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    border-bottom: 1px solid #8f89b5;
+    margin-top: 15px;
+  }
+  .chart-bars span {
+    width: 100%;
+    height: var(--bar-height);
+    background: #575072;
+    border-radius: 5px 5px 0 0;
+  }
+  .chart-bars span:nth-last-child(-n + 3) {
+    background: #3b3258;
+  }
+  .chart-note {
+    font-size: 0.6rem;
+    display: block;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 1050px) {
+    .case-art {
+      padding: 20px;
+    }
+    .component-art {
+      padding: 20px;
+    }
+  }
+  @media (max-width: 700px) {
+    .case-art {
+      min-height: 355px;
+      padding: 24px;
+    }
+    .component-art {
+      width: 250px;
+      margin-block: 22px;
+    }
+    .analytics-art {
+      padding: 20px 12px;
+    }
+    .analytics-art strong {
+      font-size: 4rem;
+    }
+  }
+
+  .showcase-art {
+    border-radius: 0;
+    min-height: 470px;
+    padding: 40px;
+  }
+  @media (max-width: 700px) {
+    .showcase-art {
+      min-height: 355px;
+      padding: 24px;
+    }
+    .showcase-art .component-art {
+      max-width: 100%;
+    }
+  }
+</style>

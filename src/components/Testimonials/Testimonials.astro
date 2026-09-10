@@ -1,219 +1,66 @@
 ---
-import { Image } from 'astro:assets';
-import Arif from "../../../public/testimonials/arif.jpeg"
-import Shannon from "../../../public/testimonials/shannon.jpeg"
-import Faizan from "../../../public/testimonials/faizan.jpeg"
-import Rahma from "../../../public/testimonials/rahma.jpeg"
+const testimonials = [
+  {
+    quote:
+      'I worked closely with Sami during the early stages of LAAM, and his impact was nothing short of transformative.',
+    name: 'Arif Iqbal',
+    role: 'Chief Executive Officer at LAAM',
+    image: '/testimonials/arif.jpeg',
+  },
+  {
+    quote:
+      'Sami is results-oriented, and a true team player who always puts his best effort needed to deliver projects.',
+    name: 'Shannon Madden',
+    role: 'Senior Project Manager at REI Blackbook',
+    image: '/testimonials/shannon.jpeg',
+  },
+  {
+    quote:
+      'Sami is a straight forward and honest guy who also has critical thinking skills. Most importantly he is friendly to work with.',
+    name: 'Mian Faizan Mahmood',
+    role: 'Chief Executive Officer at Emerald Labs',
+    image: '/testimonials/faizan.jpeg',
+  },
+  {
+    quote:
+      "Sami's excellent communication skills and collaborative nature greatly enriched our team's dynamics.",
+    name: 'Rahma Ahmed',
+    role: 'Senior Marketing Manager at FOR',
+    image: '/testimonials/rahma.jpeg',
+  },
+];
 ---
 
-<section class="min-h-screen relative z-30 bg-darkBackground px-pageXMobile md:px-pageX">
-  <!-- testimonials container -->
-  <div class="flex justify-between testimonials">
-    <!-- text -->
-    <div class="max-w-[70%]">
-      <!-- testimonial 1 -->
-      <div
-        class="testimonials__text py-[60px] md:py-[100px] lg:py-[140px] text-textLightPrimary text-[1.5rem] md:text-[2rem] lg:text-[3rem] border-b border-darkBorder flex gap-4"
-        data-scroll="testimonial1"
-      >
-        <strong class="text-[2rem] md:text-[8rem] text-primary leading-none">“</strong>
-        <div class="flex flex-col">
-          <div class="mb-[3rem] font-bold">
-            I worked closely with Sami during the early stages of LAAM, and his
-            impact was nothing short of transformative.
-          </div>
-          <div class="text-textLightPrimary text-[0.8rem] md:text-[1rem] mb-[0.7rem] uppercase">
-            Arif Iqbal
-          </div>
-          <div class="text-textDullest text-[0.8rem] md:text-[1rem]">
-            Chief Executive Officer at LAAM
-          </div>
-        </div>
-      </div>
-
-      <!-- testimonial 2 -->
-      <div
-        class="testimonials__text py-[60px] md:py-[100px] lg:py-[140px] text-textLightPrimary text-[1.5rem] md:text-[2rem] lg:text-[3rem] border-b border-darkBorder flex gap-4"
-        data-scroll="testimonial1"
-      >
-        <strong class="text-[2rem] md:text-[8rem] text-primary leading-none">“</strong>
-        <div class="flex flex-col">
-          <div class="mb-[3rem] font-bold">
-            Sami is results-oriented, and a true team player who always puts his
-            best effort needed to deliver projects.
-          </div>
-          <div class="text-textLightPrimary text-[0.8rem] md:text-[1rem] mb-[0.7rem] uppercase">
-            Shannon Madden
-          </div>
-          <div class="text-textDullest text-[0.8rem] md:text-[1rem]">
-            Senior Project Manager at REI Blackbook
-          </div>
-        </div>
-      </div>
-
-      <!-- testimonial 3 -->
-      <div
-        class="testimonials__text py-[60px] md:py-[100px] lg:py-[140px] text-textLightPrimary text-[1.5rem] md:text-[2rem] lg:text-[3rem] border-b border-darkBorder flex gap-4"
-        data-scroll="testimonial2"
-      >
-        <strong class="text-[2rem] md:text-[8rem] text-primary leading-none">“</strong>
-        <div class="flex flex-col">
-          <div class="mb-[3rem] font-bold">
-            Sami is a straight forward and honest guy who also has critical
-            thinking skills. Most importantly he is friendly to work with.
-          </div>
-          <div class="text-textLightPrimary text-[0.8rem] md:text-[1rem] mb-[0.7rem] uppercase">
-            Mian Faizan Mahmood
-          </div>
-          <div class="text-textDullest text-[0.8rem] md:text-[1rem]">
-            Chief Executive Officer at Emerald Labs
-          </div>
-        </div>
-      </div>
-
-      <!-- testimonial 4 -->
-      <div
-        class="testimonials__text py-[60px] md:py-[100px] lg:py-[140px] text-textLightPrimary text-[1.5rem] md:text-[2rem] lg:text-[3rem] border-b border-darkBorder flex gap-4"
-        data-scroll="testimonial3"
-      >
-        <strong class="text-[2rem] md:text-[8rem] text-primary leading-none">“</strong>
-        <div class="flex flex-col">
-          <div class="mb-[3rem] font-bold">
-            Sami's excellent communication skills and collaborative nature
-            greatly enriched our team's dynamics.
-          </div>
-          <div class="text-textLightPrimary text-[0.8rem] md:text-[1rem] mb-[0.7rem] uppercase">
-            Rahma Ahmed
-          </div>
-          <div class="text-textDullest text-[0.8rem] md:text-[1rem]">
-            Senior Marketing Manager at FOR
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- images -->
-    <div class="py-[60px] md:py-[100px] lg:py-[140px] pl-[1rem] md:pl-[3rem] lg:pl-[0px] pr-[20px] md:pr-[4rem] lg:pr-[10rem] testimonials__image-pin">
-      <div class="flex items-center gap-4 md:gap-6">
-        <span class="testimonials__indicator mb-[24px]" data-indicator="indicator1"
-        ></span>
-        <Image
-          class="testimonials__image rounded-full w-[80px] md:w-[100px] mb-6 grayscale"
-          alt="Arif Iqbal"
-          loading="lazy"
-          data-image="image1"
-          src={Arif}
-        />
-      </div>
-      <div class="flex items-center gap-4 md:gap-6">
-        <span class="testimonials__indicator mb-[24px] opacity-0" data-indicator="indicator2"
-        ></span>
-        <Image
-          class="testimonials__image rounded-full w-[70px] md:w-[100px] mb-6 grayscale opacity-20"
-          alt="Shannon Madden"
-          loading="lazy"
-          data-image="image1"
-          src={Shannon}
-        />
-      </div>
-      <div class="flex items-center gap-4 md:gap-6">
-        <span
-          class="testimonials__indicator mb-[24px] opacity-0"
-          data-indicator="indicator3"></span>
-        <Image
-          class="testimonials__image rounded-full w-[70px] md:w-[100px] mb-6 grayscale opacity-20"
-          alt="Faizan"
-          loading="lazy"
-          data-image="image2"
-          src={Faizan}
-        />
-      </div>
-      <div class="flex items-center gap-4 md:gap-6">
-        <span
-          class="testimonials__indicator mb-[24px] opacity-0"
-          data-indicator="indicator4"></span>
-        <Image
-          class="testimonials__image rounded-full w-[70px] md:w-[100px] grayscale opacity-20"
-          alt="Rahma Ahmed"
-          loading="lazy"
-          data-image="image3"
-          src={Rahma}
-        />
-      </div>
+<section class="section container" aria-labelledby="testimonials-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">04 / In their words</p>
+      <h2 id="testimonials-title">
+        People I’ve <br />
+        <span class="muted">worked with.</span>
+      </h2>
     </div>
   </div>
+  <div class="testimonials-grid">
+    {testimonials.map((testimonial) => (
+      <figure>
+        <blockquote>
+          <p>{testimonial.quote}</p>
+        </blockquote>
+        <figcaption>
+          <img
+            src={testimonial.image}
+            alt=""
+            width="48"
+            height="48"
+            loading="lazy"
+          />
+          <div>
+            <span>{testimonial.name}</span>
+            <small>{testimonial.role}</small>
+          </div>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
 </section>
-
-<style>
-  .testimonials__indicator {
-    border-bottom-color: rgba(0, 0, 0, 0);
-    border-bottom-style: solid;
-    border-bottom-width: 10.5px;
-    border-right-color: #d5ff3f;
-    border-right-style: solid;
-    border-right-width: 10.5px;
-    border-top-color: rgba(0, 0, 0, 0);
-    border-top-style: solid;
-    border-top-width: 10.5px;
-  }
-</style>
-
-<script>
-  import gsap from 'gsap';
-  import ScrollTrigger from 'gsap/ScrollTrigger';
-  import { isMobileViewport } from '../../utils';
-  const isMobile = isMobileViewport();
-  gsap.registerPlugin(ScrollTrigger);
-
-  const testimonials = document.querySelectorAll('.testimonials__text');
-  const images = document.querySelectorAll('.testimonials__image');
-  const indicators = document.querySelectorAll('.testimonials__indicator');
-  let currentTestimonial = 0; // Initialize with the first testimonial
-
-  testimonials.forEach((testimonial, index) => {
-    const image = images[index];
-    const indicator = indicators[index];
-
-    // Create ScrollTriggers for scrolling down
-    ScrollTrigger.create({
-      trigger: testimonial,
-      start: 'top center',
-      end: 'bottom center',
-      onEnter: () => {
-        if (currentTestimonial !== index) {
-          currentTestimonial = index;
-          gsap.to(images, { opacity: 0.2 });
-          gsap.to(indicators, { opacity: 0 });
-          gsap.to(image, { opacity: 1 });
-          gsap.to(indicator, { opacity: 1 });
-        }
-      },
-      // markers: true,
-    });
-
-    // Create ScrollTriggers for scrolling up
-    ScrollTrigger.create({
-      trigger: testimonial,
-      start: 'top center',
-      end: 'bottom center',
-      onEnterBack: () => {
-        if (currentTestimonial !== index) {
-          currentTestimonial = index;
-          gsap.to(images, { opacity: 0.2 });
-          gsap.to(indicators, { opacity: 0 });
-          gsap.to(image, { opacity: 1 });
-          gsap.to(indicator, { opacity: 1 });
-        }
-      },
-    });
-  });
-
-  gsap.from('.testimonials', {
-    scrollTrigger: {
-      trigger: '.testimonials__image-pin',
-      start: 'top 20%',
-      end: isMobile ?'76% 20%' :'68% 20%',
-      pin: true,
-      pinSpacing: false,
-    },
-  });
-</script>
