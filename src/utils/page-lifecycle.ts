@@ -1,3 +1,5 @@
+import type { TransitionBeforeSwapEvent } from 'astro:transitions/client';
+
 type Mode = 'focused' | 'playful';
 type Setup = (page: {
   initial: boolean;
@@ -14,9 +16,14 @@ export function onPageReady(mode: Mode, setup: Setup) {
   effects.push({ mode, setup });
 }
 
-document.addEventListener('astro:before-swap', () => {
+document.addEventListener('astro:before-swap', (event) => {
   cleanups.reverse().forEach((cleanup) => cleanup());
   cleanups = [];
+  // Only a fresh document plays the intro. Clear its server-rendered lock
+  // before a client navigation swaps in the playful page.
+  (
+    event as TransitionBeforeSwapEvent
+  ).newDocument.documentElement.removeAttribute('data-intro-active');
 });
 
 document.addEventListener('astro:page-load', () => {

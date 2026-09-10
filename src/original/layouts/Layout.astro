@@ -10,6 +10,12 @@ import '@fontsource/manrope/latin-800.css';
 import '../styles.css';
 import { profile, description } from '../../data/site';
 import PortfolioSwitch from '../../components/PortfolioSwitch.astro';
+import {
+  introMotion,
+  introRevealAt,
+  introControlsAt,
+  introCompleteAt,
+} from '../../data/intro';
 const mode = 'playful';
 const canonical = new URL('/', profile.site).href;
 const title = `${profile.name} | ${profile.title}`;
@@ -28,15 +34,85 @@ const person = {
 ---
 
 <!doctype html>
-<html lang="en" data-portfolio-mode={mode}>
+<html
+  lang="en"
+  data-portfolio-mode={mode}
+  data-intro-active="pending"
+  style={`--intro-reveal-at: ${introRevealAt}s; --intro-controls-at: ${introControlsAt}s; --intro-controls-duration: ${introMotion.controlsDuration}s; --intro-complete-at: ${introCompleteAt}s;`}>
   <head>
-    <ClientRouter fallback="swap" />
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style is:inline>
+      html[data-intro-active] {
+        --intro-overflow: hidden;
+        --intro-content-visibility: hidden;
+        --intro-controls-visibility: hidden;
+        --intro-controls-opacity: 0;
+        --intro-controls-offset: 18px;
+        --intro-display: block;
+        animation:
+          portfolio-intro-reveal 0s var(--intro-reveal-at) forwards,
+          portfolio-intro-controls 0s var(--intro-controls-at) forwards,
+          portfolio-intro-complete 0s var(--intro-complete-at) forwards;
+      }
+      html[data-intro-active],
+      html[data-intro-active] body {
+        overflow: var(--intro-overflow);
+        overscroll-behavior: none;
+      }
+      html[data-intro-active] body > :not(.preloder-container) {
+        visibility: var(--intro-content-visibility);
+      }
+      html[data-intro-active] body > .portfolio-controls {
+        visibility: var(--intro-controls-visibility);
+      }
+      @keyframes portfolio-intro-reveal {
+        to {
+          --intro-content-visibility: visible;
+        }
+      }
+      @keyframes portfolio-intro-controls {
+        to {
+          --intro-controls-visibility: visible;
+          --intro-controls-opacity: 1;
+          --intro-controls-offset: 0px;
+        }
+      }
+      /* The intro and scroll lock finish even if page scripts never arrive. */
+      @keyframes portfolio-intro-complete {
+        to {
+          --intro-overflow: auto;
+          --intro-content-visibility: visible;
+          --intro-controls-visibility: visible;
+          --intro-display: none;
+        }
+      }
+    </style>
+    <noscript>
+      <style is:inline>
+        html[data-intro-active],
+        html[data-intro-active] body {
+          overflow: auto;
+        }
+        html[data-intro-active] {
+          --intro-controls-opacity: 1;
+          --intro-controls-offset: 0px;
+        }
+        html[data-intro-active]:not([data-intro-active='revealing'])
+          body
+          > :not(.preloder-container) {
+          visibility: visible;
+        }
+        html[data-intro-active] .preloder-container {
+          display: none;
+        }
+      </style>
+    </noscript>
+    <ClientRouter fallback="swap" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.sanity.io; media-src 'self' https://cdn.sanity.io; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#101110" />
     <link rel="canonical" href={canonical} />
@@ -65,7 +141,7 @@ const person = {
       set:html={JSON.stringify(person).replace(/</g, '\\u003c')}></script>
     <title>{title}</title>
   </head>
-  <body>
+  <body id="top" tabindex="-1">
     <slot />
     <PortfolioSwitch mode={mode} />
     <ViewTransition />
@@ -95,15 +171,6 @@ const person = {
   .interactable {
     cursor: none;
   }
-
-  html[data-intro-active],
-  html[data-intro-active] body {
-    overflow: hidden;
-    overscroll-behavior: none;
-  }
-  html[data-intro-active] .portfolio-controls {
-    visibility: hidden;
-  }
 </style>
 
 <script>
@@ -111,6 +178,7 @@ const person = {
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { onPageReady } from '../../utils/page-lifecycle';
+  import { isIntroActive } from '../../utils/intro';
   onPageReady('playful', ({ initial, signal }) => {
     const root = document.documentElement;
     const lenis = new Lenis();
@@ -124,13 +192,37 @@ const person = {
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(raf);
 
+    document
+      .querySelector<HTMLAnchorElement>('.fixed_footer .back-to-top')
+      ?.addEventListener(
+        'click',
+        (event) => {
+          if (
+            event.defaultPrevented ||
+            event.button !== 0 ||
+            event.metaKey ||
+            event.ctrlKey ||
+            event.shiftKey ||
+            event.altKey
+          )
+            return;
+          event.preventDefault();
+          lenis.scrollTo(0, {
+            duration: 1.4,
+            immediate: matchMedia('(prefers-reduced-motion: reduce)').matches,
+            onComplete: () => document.body.focus({ preventScroll: true }),
+          });
+        },
+        { signal }
+      );
+
     const releaseIntro = () => {
       root.removeAttribute('data-intro-active');
       restoreBackground();
       lenis.start();
     };
-    if (initial) {
-      root.setAttribute('data-intro-active', '');
+    if (initial && isIntroActive()) {
+      root.setAttribute('data-intro-active', 'running');
       lenis.stop();
       // Focus must not scroll a link behind the intro into view.
       for (const element of document.body.children) {
@@ -146,6 +238,19 @@ const person = {
         once: true,
         signal,
       });
+      root.addEventListener(
+        'animationend',
+        (event) => {
+          if (event.target !== root) return;
+          if (event.animationName === 'portfolio-intro-reveal') {
+            root.setAttribute('data-intro-active', 'revealing');
+            document.dispatchEvent(new Event('portfolio:intro-reveal'));
+          } else if (event.animationName === 'portfolio-intro-complete') {
+            document.dispatchEvent(new Event('portfolio:intro-complete'));
+          }
+        },
+        { signal }
+      );
       document.addEventListener(
         'keydown',
         (event) => {
@@ -167,7 +272,7 @@ const person = {
         },
         { signal }
       );
-    }
+    } else releaseIntro();
     return () => {
       root.removeAttribute('data-intro-active');
       restoreBackground();

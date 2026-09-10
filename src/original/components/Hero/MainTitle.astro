@@ -55,27 +55,32 @@ import SocialIcon from './SocialIcon.astro';
 <script>
   import gsap from 'gsap';
   import { playfulEffect } from '../../utils/page-effects';
-  playfulEffect(({ initial }) => {
-    gsap.from('h1.main-title', {
+  import { afterIntroReveal } from '../../../utils/intro';
+  playfulEffect(({ initial, signal }) => {
+    const entrance = gsap.timeline({ paused: true });
+    entrance.from('h1.main-title', {
       y: 50,
       opacity: 0,
       ease: 'power4.inOut',
-      delay: initial ? 6 : 0,
       duration: 1.3,
       stagger: {
         amount: 0.5,
       },
     });
 
-    gsap.from('h1.main-title .tagline', {
-      x: -100,
-      opacity: 0,
-      ease: 'power3.inOut',
-      delay: initial ? 6.2 : 0,
-      duration: 1.3,
-      stagger: {
-        amount: 0.3,
+    entrance.from(
+      'h1.main-title .tagline',
+      {
+        x: -100,
+        opacity: 0,
+        ease: 'power3.inOut',
+        duration: 1.3,
+        stagger: {
+          amount: 0.3,
+        },
       },
-    });
+      initial ? 0.2 : 0
+    );
+    afterIntroReveal(() => entrance.play(), signal);
   });
 </script>

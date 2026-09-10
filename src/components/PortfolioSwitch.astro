@@ -39,6 +39,13 @@ const { mode = 'focused' } = Astro.props;
     max-width: calc(100vw - 24px);
   }
   .switch-pod.liquid-glass {
+    opacity: var(--intro-controls-opacity, 1);
+    transform: translateY(var(--intro-controls-offset, 0px));
+    transition:
+      opacity var(--intro-controls-duration, 0.6s)
+        cubic-bezier(0.22, 1, 0.36, 1),
+      transform var(--intro-controls-duration, 0.6s)
+        cubic-bezier(0.22, 1, 0.36, 1);
     padding: 5px;
     border-radius: 999px;
     color: #c4ccbd;
@@ -102,6 +109,7 @@ const { mode = 'focused' } = Astro.props;
     color: #10170a;
   }
   @media (prefers-reduced-motion: reduce) {
+    .switch-pod.liquid-glass,
     nav a,
     nav::before {
       transition: none;

@@ -16,8 +16,6 @@ for (const width of [390, 1440]) {
     );
     await expect(page.locator('.preloder-container p')).toHaveText([
       'Curious',
-      'Creative',
-      'Adaptive',
       'Passionate',
       'Engineer',
     ]);

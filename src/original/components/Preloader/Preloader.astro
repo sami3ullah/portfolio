@@ -1,34 +1,61 @@
-<div class="preloder-container">
-  <div class="preloder-text-wrapper fixed h-[100vh] text-[4rem] md:text-[7rem] lg:text-[8rem] w-full z-30 flex items-center justify-center">
-    <div class="preloader-text-inner opacity-0 text-white">
-      <p>Curious</p>
-      <p>Creative</p>
-      <p>Adaptive</p>
-      <p>Passionate</p>
-      <p class="text-primary">Engineer</p>
+---
+import { introWords, introMotion, introRevealAt } from '../../../data/intro';
+
+const panelCount = 10;
+---
+
+<div
+  class="preloder-container"
+  aria-hidden="true"
+  style={`--character-duration: ${introMotion.characterDuration}s; --panel-duration: ${introMotion.panelDuration}s;`}>
+  <div class="preloder-text-wrapper text-[4rem] md:text-[7rem] lg:text-[8rem] w-full z-30 flex items-center justify-center">
+    <div class="preloader-text-inner text-white">
+      {introWords.map((word, wordIndex) => {
+        const start = wordIndex * introMotion.wordInterval;
+        const exit =
+          wordIndex === introWords.length - 1
+            ? introRevealAt
+            : start + introMotion.wordInterval;
+        const end =
+          exit +
+          introMotion.characterDuration +
+          (word.length - 1) * introMotion.exitStagger;
+        return (
+          <p
+            class:list={{ 'text-primary': wordIndex === introWords.length - 1 }}
+            style={`--word-start: ${start}s; --word-end: ${end}s;`}>
+            {[...word].map((character, index) => (
+              <span
+                class="char"
+                style={`--enter-at: ${start + index * introMotion.enterStagger}s; --exit-at: ${exit + index * introMotion.exitStagger}s;`}>
+                {character}
+              </span>
+            ))}
+          </p>
+        );
+      })}
     </div>
   </div>
-  <div class="preloader-overlay fixed w-full h-[100vh] z-10 flex">
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
-    <div class="bar w-[10vw] h-[105vh] bg-[#181818] leading-0 text-center m-0 p-0"></div>
+  <div class="preloader-overlay w-full z-10 flex">
+    {Array.from({ length: panelCount }, (_, index) => (
+      <div
+        class="bar bg-[#181818]"
+        style={`--panel-start: ${introRevealAt + (index * introMotion.panelStagger) / (panelCount - 1)}s;`}
+      />
+    ))}
   </div>
 </div>
 
 <style>
   .preloder-container {
-    display: none;
+    display: var(--intro-display, block);
     position: fixed;
     inset: 0;
     z-index: 10000;
     touch-action: none;
+  }
+  :global(html:not([data-intro-active])) .preloder-container {
+    display: none;
   }
   .preloder-text-wrapper,
   .preloader-overlay {
@@ -37,85 +64,68 @@
     height: 100%;
   }
   .bar {
+    flex: 1;
     height: 100%;
     transform-origin: top;
+    /* Start moving immediately, then gather speed and settle gently. */
+    animation: intro-panel-exit var(--panel-duration)
+      cubic-bezier(0.4, 0.15, 0.4, 1) var(--panel-start) forwards;
+  }
+  .preloader-text-inner {
+    display: grid;
   }
   .preloder-container p {
+    grid-area: 1 / 1;
+    visibility: hidden;
     text-align: center;
     margin: 0;
-    line-height: 0;
+    line-height: 1.1;
+    animation:
+      intro-word-show 0s var(--word-start) forwards,
+      intro-word-hide 0s var(--word-end) forwards;
+  }
+  .char {
+    display: inline-block;
+    /* Matching curves keep outgoing and incoming letters flowing together. */
+    animation:
+      intro-character-enter var(--character-duration)
+        cubic-bezier(0.3, 0.2, 0.35, 1) var(--enter-at) both,
+      intro-character-exit var(--character-duration)
+        cubic-bezier(0.3, 0.2, 0.35, 1) var(--exit-at) forwards;
+  }
+  @keyframes intro-word-show {
+    to {
+      visibility: visible;
+    }
+  }
+  @keyframes intro-word-hide {
+    to {
+      visibility: hidden;
+    }
+  }
+  @keyframes intro-character-enter {
+    from {
+      opacity: 0;
+      transform: translateY(80px) rotateX(-90deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+  }
+  @keyframes intro-character-exit {
+    from {
+      opacity: 1;
+      transform: translateY(0) rotateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-80px) rotateX(90deg);
+    }
+  }
+  @keyframes intro-panel-exit {
+    to {
+      transform: scaleY(0);
+    }
   }
 </style>
-
-<script>
-  import gsap from 'gsap';
-  import SplitType from 'split-type';
-  import { playfulEffect } from '../../utils/page-effects';
-  playfulEffect(({ initial }) => {
-    const splits: SplitType[] = [];
-    if (!initial) {
-      gsap.set('.preloder-container', { display: 'none' });
-      return;
-    }
-    gsap.set('.preloder-container', { display: 'block' });
-
-    const titles = gsap.utils.toArray<HTMLElement>('.preloder-container p');
-    const preloaderWrapper = document.querySelector('.preloder-text-wrapper');
-    const preloadInner = document.querySelector('.preloader-text-inner');
-    const tl = gsap.timeline({ repeat: -1 });
-
-    gsap.to(preloadInner, {
-      delay: 0.2,
-      opacity: 1,
-    });
-    // Staggering 3D Effect
-    titles.forEach((title) => {
-      const splitTitle = new SplitType(title, { types: 'chars' });
-      splits.push(splitTitle);
-      tl.from(
-        splitTitle.chars,
-        {
-          opacity: 0,
-          y: 80,
-          rotateX: -90,
-          stagger: 0.02,
-        },
-        '<'
-      ).to(
-        splitTitle.chars,
-        {
-          opacity: 0,
-          y: -80,
-          rotateX: 90,
-          stagger: 0.01,
-        },
-        '<1'
-      );
-    });
-
-    gsap.to(preloaderWrapper, {
-      duration: 0.1,
-      delay: 5,
-      opacity: 0,
-      height: 0,
-      width: 0,
-      display: 'none',
-    });
-
-    gsap.to('.bar', {
-      duration: 1.5,
-      delay: 4.5,
-      scaleY: 0,
-      stagger: {
-        amount: 0.5,
-      },
-      ease: 'power4.inOut',
-      onComplete: () => {
-        tl.kill();
-        gsap.set('.preloder-container', { display: 'none' });
-        document.dispatchEvent(new Event('portfolio:intro-complete'));
-      },
-    });
-    return () => splits.forEach((split) => split.revert());
-  });
-</script>

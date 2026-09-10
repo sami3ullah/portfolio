@@ -49,6 +49,22 @@ import CopyRights from './CopyRights.astro';
         Resume
       </a>
     </div>
+    <div class="footer-return">
+      <a class="back-to-top interactable" href="#top">
+        Back to top
+        <span aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M6 4h12M12 20V9m-5 5 5-5 5 5" />
+          </svg>
+        </span>
+      </a>
+    </div>
     <!-- Moving Text -->
     <div class="flex justify-center md:block">
       <CopyRights text="©Muhammad. All Rights Reserved" />
@@ -65,5 +81,57 @@ import CopyRights from './CopyRights.astro';
     bottom: 0;
     left: 0;
     z-index: -100;
+  }
+  .footer-return {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 46px;
+    padding: 6px 6px 6px 16px;
+    border: 1px solid #666d5c;
+    border-radius: 999px;
+    color: #b9bcad;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .back-to-top span {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #d5ff3f;
+    color: #101110;
+  }
+  .back-to-top svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 180ms ease;
+  }
+  .back-to-top:hover {
+    border-color: #d5ff3f;
+  }
+  .back-to-top:hover svg {
+    transform: translateY(-2px);
+  }
+  .back-to-top:focus-visible {
+    outline: 2px solid #d5ff3f;
+    outline-offset: 4px;
+  }
+  @media (min-width: 768px) {
+    .footer-return {
+      text-align: left;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top svg,
+    .back-to-top:hover svg {
+      transition: none;
+      transform: none;
+    }
   }
 </style>
