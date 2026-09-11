@@ -4,7 +4,7 @@ import Character from './Character.astro';
 import CopyRights from './CopyRights.astro';
 ---
 
-<section class="fixed_footer bg-darkBackground md:flex md:items-center md:gap-[5vw] px-pageXMobile md:px-pageX pt-[60%] pb-[60px] md:pb-[90px] lg:pt-[110px] w-full">
+<section class="fixed_footer bg-darkBackground md:flex md:items-center md:gap-[5vw] px-pageXMobile md:px-pageX pb-[60px] md:pb-[90px] w-full">
   <div>
     <h2 class="text-textLightPrimary text-center md:text-left mb-[50px] text-[30px] md:text-[50px] lg:text-[4rem] leading-[1.133em] lg:leading-[1.33em] font-bold">
       Bug Me!
@@ -49,22 +49,6 @@ import CopyRights from './CopyRights.astro';
         Resume
       </a>
     </div>
-    <div class="footer-return">
-      <a class="back-to-top interactable" href="#top">
-        Back to top
-        <span aria-hidden="true">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M6 4h12M12 20V9m-5 5 5-5 5 5" />
-          </svg>
-        </span>
-      </a>
-    </div>
     <!-- Moving Text -->
     <div class="flex justify-center md:block">
       <CopyRights text="©Muhammad. All Rights Reserved" />
@@ -72,6 +56,22 @@ import CopyRights from './CopyRights.astro';
   </div>
   <div class="flex-1 opacity-[0.35] hidden md:block">
     <Character />
+  </div>
+  <div class="footer-return">
+    <a class="back-to-top interactable" href="#top">
+      Back to top
+      <span aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M6 4h12M12 20V9m-5 5 5-5 5 5" />
+        </svg>
+      </span>
+    </a>
   </div>
 </section>
 
@@ -81,10 +81,13 @@ import CopyRights from './CopyRights.astro';
     bottom: 0;
     left: 0;
     z-index: -100;
+    min-height: 100svh;
+    padding-top: 110px;
   }
   .footer-return {
-    margin-bottom: 24px;
-    text-align: center;
+    position: absolute;
+    right: 20px;
+    bottom: calc(124px + env(safe-area-inset-bottom, 0px));
   }
   .back-to-top {
     display: inline-flex;
@@ -124,7 +127,18 @@ import CopyRights from './CopyRights.astro';
   }
   @media (min-width: 768px) {
     .footer-return {
-      text-align: left;
+      right: 70px;
+    }
+  }
+  @media (max-width: 767px) {
+    .fixed_footer {
+      padding-top: 64px;
+      padding-bottom: calc(194px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+  @media (max-height: 799px) {
+    .fixed_footer {
+      position: relative;
     }
   }
   @media (prefers-reduced-motion: reduce) {

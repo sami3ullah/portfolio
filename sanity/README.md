@@ -1,5 +1,7 @@
 # Sanity Blogging Content Studio
 
+Use Node.js 24 LTS, matching the root `.nvmrc`. From this directory, run `nvm install`, `nvm use`, `npm ci`, and `npm run dev`. Run `npm run build` to verify the production build.
+
 Congratulations, you have now installed the Sanity Content Studio, an open source real-time content editing environment connected to the Sanity backend.
 
 Now you can do the following things:

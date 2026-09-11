@@ -3,23 +3,24 @@ import StarsText from '../StarsText.astro';
 import StoryView from './StoryView.astro';
 ---
 
-<!-- 1st paragraph -->
 <section
   id="main__story"
-  class="relative w-full min-h-auto md:min-h-[120vh] bg-darkBackground md:bg-black min-w-full">
+  class="story-section relative w-full bg-darkBackground md:bg-black">
   <!-- hidden on mobile, visible on other devices -->
-  <div class="hidden md:block ml-8 absolute bottom-1/2 left-0 -translate-x-1/2 rotate-90">
+  <div class="hidden md:block ml-8 absolute top-[25vh] left-0 -translate-x-1/2 rotate-90">
     <a href="#portfolio-projects" class="text-textDullest underline">
       Skip Story
     </a>
   </div>
-  <div class="px-pageXMobile lg:px-pageX">
-    <div class="hidden md:block story-heading text-textLightPrimary absolute top-[30%] translate-y-[-30%] md:text-[3rem] lg:text-[5rem] font-[500] uppercase">
+  <div class="story-intro hidden md:flex px-pageXMobile lg:px-pageX">
+    <div class="story-heading text-textLightPrimary md:text-[3rem] lg:text-[5rem] font-[500] uppercase">
       The <StarsText showStars={true}>Story</StarsText> I Told My{' '}
       <StarsText showStars={true}>Wife</StarsText>
     </div>
-    <StoryView id="card-one">
-      <h2 class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[400] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left md:leading-[85px]">
+  </div>
+  <div class="story-cards px-pageXMobile lg:px-pageX">
+    <StoryView id="card-one" index={0}>
+      <h2 class="story_text font-[400]">
         I was born in a small, tech deprived town, with a dream of becoming a{' '}
         <span>
           <StarsText>Software Engineer</StarsText>
@@ -27,30 +28,30 @@ import StoryView from './StoryView.astro';
         one day 🥹
       </h2>
     </StoryView>
-    <StoryView id="card-two">
-      <h2 class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[600] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]">
+    <StoryView id="card-two" index={1}>
+      <h2 class="story_text font-[600]">
         After school, I wanted to move to a big city for college to fulfill{' '}
         <StarsText>my dream</StarsText>, but my parents thought I was too young
         to move out 🙁
       </h2>
     </StoryView>
-    <StoryView id="card-three">
-      <h2 class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[400] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]">
+    <StoryView id="card-three" index={2}>
+      <h2 class="story_text font-[400]">
         Despite that, I still managed to move out to pursue my dream, Reaching
         there I felt lost among tech savvy folks. I didn't even know what a{' '}
         <StarsText>PlayStation</StarsText> was 🤯
       </h2>
     </StoryView>
-    <StoryView id="card-four">
-      <h2 class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[600] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[3.5rem] text-left lg:text-left md:leading-[85px]">
+    <StoryView id="card-four" index={3}>
+      <h2 class="story_text font-[600]">
         College was a whirlwind, and I felt{' '}
         <StarsText>lost and overwhelmed</StarsText> most of the time. But I
         refused to give up. As I taught myself coding, everything slowly started
         to fall into place 🥰
       </h2>
     </StoryView>
-    <StoryView id="card-five">
-      <h2 class="text-[#b9bcad] story_text w-full lg:w-[80%] font-[400] text-[1.5rem] leading-[40px] md:text-[3rem] lg:text-[4rem] text-left lg:text-left md:leading-[85px]">
+    <StoryView id="card-five" index={4}>
+      <h2 class="story_text font-[400]">
         <StarsText>I faced countless failures</StarsText> along the way. But, I
         never let them define me. My perseverance and hard work have brought me
         this far, eager to see what the future holds 😌
@@ -59,171 +60,17 @@ import StoryView from './StoryView.astro';
   </div>
 </section>
 
-<script>
-  import gsap from 'gsap';
-  import SplitType from 'split-type';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  import { isMobileViewport } from '../../utils';
-  import { playfulEffect } from '../../utils/page-effects';
-  playfulEffect(() => {
-    const splits: SplitType[] = [];
-    gsap.registerPlugin(ScrollTrigger);
-
-    const isMobileView = isMobileViewport();
-    // don't animate if it's a mobile device
-    if (!isMobileView) {
-      var tl = gsap.timeline({
-        ease: 'ease-in-out',
-        scrollTrigger: {
-          trigger: '#main__story',
-          start: 'top top',
-          end: '100% 50%',
-          scrub: 2,
-          pin: true,
-        },
-      });
-
-      tl.to(
-        '#card-one',
-        {
-          background: '#101010',
-          borderRadius: '1.25rem',
-          top: '35%',
-        },
-        'first'
-      )
-        .to('.story-heading', {
-          x: '10%',
-          opacity: 0,
-        })
-        .to(
-          '#card-two',
-          {
-            top: '130%',
-            background: '#101010',
-            borderRadius: '1.25rem',
-          },
-          'first'
-        )
-        .to(
-          '#card-two',
-          {
-            top: '42%',
-          },
-          'second'
-        )
-        .to(
-          '#card-one',
-          {
-            width: '70%',
-            height: '75vh',
-          },
-          'second'
-        )
-        .to(
-          '#card-three',
-          {
-            top: '130%',
-            background: '#101010',
-            borderRadius: '1.25rem',
-          },
-          'second'
-        )
-        .to(
-          '#card-three',
-          {
-            top: '49%',
-          },
-          'third'
-        )
-        .to(
-          '#card-two',
-          {
-            width: '75%',
-            height: '75vh',
-          },
-          'third'
-        )
-        .to(
-          '#card-four',
-          {
-            top: '130%',
-            background: '#101010',
-            borderRadius: '1.25rem',
-          },
-          'third'
-        )
-        .to(
-          '#card-four',
-          {
-            top: '56%',
-          },
-          'fourth'
-        )
-        .to(
-          '#card-three',
-          {
-            width: '80%',
-            height: '75vh',
-          },
-          'fourth'
-        )
-        .to(
-          '#card-five',
-          {
-            top: '130%',
-            background: '#101010',
-            borderRadius: '1.25rem',
-          },
-          'fourth'
-        )
-        .to(
-          '#card-five',
-          {
-            top: '63%',
-            width: '90%',
-            height: '75vh',
-          },
-          'fifth'
-        )
-        .to(
-          '#card-four',
-          {
-            width: '85%',
-            height: '75vh',
-          },
-          'fifth'
-        );
-    }
-
-    // if the device is mobile
-    if (isMobileView) {
-      const storySections =
-        document.querySelectorAll<HTMLElement>('.story_view');
-
-      storySections.forEach((text, index) => {
-        const splitText = new SplitType(text, { types: 'words' });
-        splits.push(splitText);
-        gsap.fromTo(
-          splitText.words,
-          {
-            opacity: 0.2,
-          },
-          {
-            opacity: 1,
-            duration: 0.5,
-            stagger: 0.2,
-            scrollTrigger: {
-              trigger: storySections[index],
-              start: 'top 80%',
-              end: 'top 40%',
-              scrub: true,
-              toggleActions: 'play play reverse reverse',
-            },
-          }
-        );
-      });
-    }
-    return () => splits.forEach((split) => split.revert());
-  });
-</script>
+<style>
+  .story-section {
+    padding-bottom: 120px;
+  }
+  .story-intro {
+    min-height: 55svh;
+    align-items: center;
+    padding-block: 80px;
+  }
+  .story-cards {
+    display: grid;
+    gap: clamp(24px, 8vh, 80px);
+  }
+</style>

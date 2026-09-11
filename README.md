@@ -10,7 +10,7 @@ The switch stays at the bottom center in both views, with Playful on the left an
 
 ## Run locally
 
-Use Node 22.19 or newer. From this project directory:
+Use Node.js 24 LTS (the latest available 24.x release). The `.nvmrc` and package engine requirements keep local development and hosting on this LTS line. From this project directory:
 
 ```sh
 nvm install

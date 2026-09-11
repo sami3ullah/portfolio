@@ -5,12 +5,21 @@ import Experience from './Experience.astro';
 import Achievements from './Achievements.astro';
 ---
 
-<!-- Reserve room for the fixed footer, including its Back to top row. -->
-<section class="summary z-30 relative bg-black px-pageXMobile md:px-pageX mb-[39rem] md:mb-[48rem] lg:mb-[50rem]">
+<!-- Reserve a full viewport for the footer reveal and its bottom controls. -->
+<section class="summary z-30 relative bg-black px-pageXMobile md:px-pageX">
   <AboutMe />
   <Experience />
   <Skills />
   <Achievements />
 </section>
 
-<!-- #EBF5CF -->
+<style>
+  .summary {
+    margin-bottom: 100svh;
+  }
+  @media (max-height: 799px) {
+    .summary {
+      margin-bottom: 0;
+    }
+  }
+</style>
