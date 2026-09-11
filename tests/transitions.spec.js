@@ -1,51 +1,28 @@
 import { test, expect } from '@playwright/test';
 
-test('switch catches up when its script loads after the first navigation', async ({
+test('switch selection follows each page without a switch script', async ({
   page,
 }) => {
-  let releaseScript;
-  const scriptReady = new Promise((resolve) => {
-    releaseScript = resolve;
-  });
-  await page.route('**/PortfolioSwitch.*.js', async (route) => {
-    await scriptReady;
-    await route.continue();
-  });
-
-  try {
-    await page.goto('/', { waitUntil: 'commit' });
-    const dock = page.locator('.portfolio-controls');
-    const focused = dock.getByRole('link', {
-      name: 'To the point',
-      exact: true,
-    });
-    const playful = dock.getByRole('link', {
-      name: 'Playful side',
-      exact: true,
-    });
-    await focused.click();
-    await expect(page).toHaveURL(/\/focused\/$/);
+  await page.route('**/PortfolioSwitch.*.js', (route) => route.abort());
+  await page.goto('/focused/');
+  const dock = page.locator('.portfolio-controls');
+  for (const { name, mode, path } of [
+    { name: 'Playful side', mode: 'playful', path: '/' },
+    { name: 'To the point', mode: 'focused', path: '/focused/' },
+    { name: 'Playful side', mode: 'playful', path: '/' },
+  ]) {
+    await dock.getByRole('link', { name, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.locator('html')).toHaveAttribute(
       'data-portfolio-mode',
-      'focused'
+      mode
     );
-
-    releaseScript();
-    await page.waitForLoadState('load');
-    await expect(dock).toHaveAttribute('data-view', 'focused');
-    await expect(focused).toHaveAttribute('aria-current', 'page');
-    await expect(playful).not.toHaveAttribute('aria-current', 'page');
-
-    await playful.click();
-    await expect(page).toHaveURL(/:\d+\/$/);
-    await expect(playful).toHaveAttribute('aria-current', 'page');
-    await expect(dock).toHaveAttribute('data-view', 'playful');
+    await expect(dock).toHaveAttribute('data-view', mode);
+    await expect(dock.locator('[aria-current="page"]')).toHaveText(name);
     await expect(page.locator('.view-curtain')).not.toHaveAttribute(
       'data-active',
       ''
     );
-  } finally {
-    releaseScript();
   }
 });
 
@@ -68,7 +45,7 @@ for (const width of [390, 1440]) {
     ]);
     const initial = await dock.boundingBox();
     await page.evaluate(() => {
-      window.originalDock = document.querySelector('.portfolio-controls');
+      window.originalSurface = document.querySelector('.switch-surface');
     });
     for (const name of [
       'Playful side',
@@ -91,8 +68,7 @@ for (const width of [390, 1440]) {
       expect(
         await page.evaluate(
           () =>
-            window.originalDock ===
-            document.querySelector('.portfolio-controls')
+            window.originalSurface === document.querySelector('.switch-surface')
         )
       ).toBe(true);
       const next = await dock.boundingBox();
@@ -330,7 +306,7 @@ for (const width of [390, 1440]) {
       expect(arrow.y + arrow.height).toBeCloseTo(heading.y + heading.height, 0);
       expect(arrow.x - (heading.x + heading.width)).toBeLessThanOrEqual(40);
     }
-    await expect(page.locator('.back-to-top svg')).toBeVisible();
+    await expect(page.locator('.back-to-top-icon')).toBeVisible();
     await page.getByRole('link', { name: 'Back to top', exact: true }).click();
     await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
     await expect

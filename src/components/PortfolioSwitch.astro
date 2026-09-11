@@ -9,10 +9,15 @@ const { mode = 'focused' } = Astro.props;
 
 <aside
   data-view={mode}
-  transition:persist="portfolio-switch"
   class="portfolio-controls"
   aria-label="Choose your portfolio experience">
-  <div class="switch-pod liquid-glass">
+  <div class="switch-pod">
+    <div
+      class="switch-surface liquid-glass"
+      transition:persist="portfolio-switch"
+      aria-hidden="true">
+      <div class="switch-track"></div>
+    </div>
     <nav aria-label="Portfolio style">
       <a href="/" aria-current={mode === 'playful' ? 'page' : undefined}>
         <ActionIcon name="playful" /> Playful side
@@ -38,7 +43,10 @@ const { mode = 'focused' } = Astro.props;
     width: var(--portfolio-switch-width, 344px);
     max-width: calc(100vw - 24px);
   }
-  .switch-pod.liquid-glass {
+  .switch-pod {
+    position: relative;
+    padding: 6px;
+    color: #c4ccbd;
     opacity: var(--intro-controls-opacity, 1);
     transform: translateY(var(--intro-controls-offset, 0px));
     transition:
@@ -46,9 +54,12 @@ const { mode = 'focused' } = Astro.props;
         cubic-bezier(0.22, 1, 0.36, 1),
       transform var(--intro-controls-duration, 0.6s)
         cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .switch-surface.liquid-glass {
+    position: absolute;
+    inset: 0;
     padding: 5px;
     border-radius: 999px;
-    color: #c4ccbd;
     background: rgb(18 23 17 / 0.86);
     border-color: rgb(235 255 221 / 0.2);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
@@ -64,7 +75,11 @@ const { mode = 'focused' } = Astro.props;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4px;
   }
-  nav::before {
+  .switch-track {
+    position: relative;
+    height: 100%;
+  }
+  .switch-track::before {
     content: '';
     position: absolute;
     inset: 0 auto 0 0;
@@ -74,7 +89,7 @@ const { mode = 'focused' } = Astro.props;
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.35);
     transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .portfolio-controls[data-view='focused'] nav::before {
+  :global(html[data-portfolio-mode='focused']) .switch-track::before {
     transform: translateX(calc(100% + 4px));
   }
   nav a {
@@ -109,14 +124,14 @@ const { mode = 'focused' } = Astro.props;
     color: #10170a;
   }
   @media (prefers-reduced-motion: reduce) {
-    .switch-pod.liquid-glass,
+    .switch-pod,
     nav a,
-    nav::before {
+    .switch-track::before {
       transition: none;
     }
   }
   @media (prefers-reduced-transparency: reduce) {
-    .switch-pod.liquid-glass {
+    .switch-surface.liquid-glass {
       background: #121711;
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
@@ -134,34 +149,3 @@ const { mode = 'focused' } = Astro.props;
     }
   }
 </style>
-
-<script>
-  const updateSwitch = () => {
-    const control = document.querySelector<HTMLElement>('.portfolio-controls');
-    if (!control) return;
-    control.dataset.view = document.documentElement.dataset.portfolioMode;
-    control.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
-      if (link.pathname === location.pathname)
-        link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
-    });
-  };
-  // Navigation can finish before this module arrives on a slow connection.
-  updateSwitch();
-  document.addEventListener('astro:after-swap', updateSwitch);
-  document.addEventListener(
-    'click',
-    (event) => {
-      const link = (event.target as Element).closest<HTMLAnchorElement>(
-        '.portfolio-controls a'
-      );
-      if (
-        link &&
-        link.pathname === location.pathname &&
-        !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
-      )
-        event.preventDefault();
-    },
-    { capture: true }
-  );
-</script>

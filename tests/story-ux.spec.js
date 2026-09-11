@@ -121,7 +121,7 @@ for (const { width, height } of [
   { width: 1024, height: 600 },
   { width: 1440, height: 900 },
 ]) {
-  test(`playful back to top stays at the lower right and returns focus at ${width}x${height}`, async ({
+  test(`playful back to top closes the footer and returns focus at ${width}x${height}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height });
@@ -136,7 +136,16 @@ for (const { width, height } of [
     });
     const box = await backToTop.boundingBox();
     const controls = await page.locator('.portfolio-controls').boundingBox();
-    expect(box.x + box.width).toBeCloseTo(width - (width >= 768 ? 70 : 20), 0);
+    if (width >= 768) {
+      expect(box.x + box.width).toBeCloseTo(width - 70, 0);
+      const signoff = await page.locator('.footer-signoff').boundingBox();
+      expect(box.y + box.height / 2).toBeCloseTo(
+        signoff.y + signoff.height / 2,
+        0
+      );
+    } else {
+      expect(box.x + box.width / 2).toBeCloseTo(width / 2, 0);
+    }
     expect(box.y).toBeGreaterThan(height * 0.65);
     expect(box.y + box.height + 24).toBeLessThan(controls.y);
     if (width < 768) {

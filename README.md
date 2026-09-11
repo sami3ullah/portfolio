@@ -6,7 +6,7 @@ Two portfolio views, connected by a floating switch:
 - `/focused/`: **To the point**, the concise version with case studies and career history.
 - `/playful/` redirects to `/` for existing links.
 
-The switch stays at the bottom center in both views, with Playful on the left and To the point on the right. It uses a dark glass surface, a sliding lime active pill, and sparkle and target icons. Switching uses a staggered charcoal curtain and client navigation, keeping the same document session and switch element. Without JavaScript, the links still navigate normally. There is no motion control.
+The switch stays at the bottom center in both views, with Playful on the left and To the point on the right. It uses a dark glass surface, a sliding lime active pill, and sparkle and target icons. Switching uses a staggered charcoal curtain and client navigation, keeping the same document session and glass surface. Each page renders its own links and current-page marker, and the highlight follows the document's mode directly in CSS. No separate switch script is needed. Without JavaScript, the links still navigate normally. There is no motion control.
 
 ## Run locally
 

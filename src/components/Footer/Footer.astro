@@ -2,6 +2,7 @@
 import { profile } from '../../data/site';
 import CopyRights from './CopyRights.astro';
 import EmailLink from '../EmailLink.astro';
+import BackToTop from '../BackToTop.astro';
 ---
 
 <footer id="contact" class="section contact-section">
@@ -37,20 +38,7 @@ import EmailLink from '../EmailLink.astro';
           </a>
         ))}
       </nav>
-      <a class="back-to-top" href="#top">
-        Back to top
-        <span class="back-to-top-icon" aria-hidden="true">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M6 4h12M12 20V9m-5 5 5-5 5 5" />
-          </svg>
-        </span>
-      </a>
+      <BackToTop />
     </div>
   </div>
 </footer>
