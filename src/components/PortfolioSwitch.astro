@@ -140,21 +140,24 @@ const { mode = 'focused' } = Astro.props;
     const control = document.querySelector<HTMLElement>('.portfolio-controls');
     if (!control) return;
     control.dataset.view = document.documentElement.dataset.portfolioMode;
-    control.querySelectorAll('a').forEach((link) => {
-      if (new URL(link.href).pathname === location.pathname)
+    control.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      if (link.pathname === location.pathname)
         link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
   };
+  // Navigation can finish before this module arrives on a slow connection.
+  updateSwitch();
   document.addEventListener('astro:after-swap', updateSwitch);
   document.addEventListener(
     'click',
     (event) => {
-      const link = (event.target as Element).closest(
-        '.portfolio-controls a[aria-current="page"]'
+      const link = (event.target as Element).closest<HTMLAnchorElement>(
+        '.portfolio-controls a'
       );
       if (
         link &&
+        link.pathname === location.pathname &&
         !(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
       )
         event.preventDefault();

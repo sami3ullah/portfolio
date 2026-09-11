@@ -1,5 +1,54 @@
 import { test, expect } from '@playwright/test';
 
+test('switch catches up when its script loads after the first navigation', async ({
+  page,
+}) => {
+  let releaseScript;
+  const scriptReady = new Promise((resolve) => {
+    releaseScript = resolve;
+  });
+  await page.route('**/PortfolioSwitch.*.js', async (route) => {
+    await scriptReady;
+    await route.continue();
+  });
+
+  try {
+    await page.goto('/', { waitUntil: 'commit' });
+    const dock = page.locator('.portfolio-controls');
+    const focused = dock.getByRole('link', {
+      name: 'To the point',
+      exact: true,
+    });
+    const playful = dock.getByRole('link', {
+      name: 'Playful side',
+      exact: true,
+    });
+    await focused.click();
+    await expect(page).toHaveURL(/\/focused\/$/);
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-portfolio-mode',
+      'focused'
+    );
+
+    releaseScript();
+    await page.waitForLoadState('load');
+    await expect(dock).toHaveAttribute('data-view', 'focused');
+    await expect(focused).toHaveAttribute('aria-current', 'page');
+    await expect(playful).not.toHaveAttribute('aria-current', 'page');
+
+    await playful.click();
+    await expect(page).toHaveURL(/:\d+\/$/);
+    await expect(playful).toHaveAttribute('aria-current', 'page');
+    await expect(dock).toHaveAttribute('data-view', 'playful');
+    await expect(page.locator('.view-curtain')).not.toHaveAttribute(
+      'data-active',
+      ''
+    );
+  } finally {
+    releaseScript();
+  }
+});
+
 for (const width of [390, 1440]) {
   test(`curtain switching preserves the session and dock at ${width}px`, async ({
     page,
